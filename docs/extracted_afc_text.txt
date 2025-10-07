@@ -1,0 +1,4486 @@
+--- Page 1 ---
+Copyright © 2025 The Software Defined Radio Forum Inc - All Rights Reserved 
+ 
+ 
+Functional Requirements for the U.S. 6 GHz 
+Band under the Control of an AFC System 
+ 
+Document WINNF-TS-1014 
+ 
+Version V1.5.0 
+25 April 2025 
+ 
+
+
+--- Page 2 ---
+6 GHz Committee Functional Specification WG 
+Functional Requirements for the U.S. 6 GHz Band 
+WINNF-TS-1014-V1.5.0 
+ 
+Copyright © 2025 The Software Defined Radio Forum Inc  
+Page  i 
+All Rights Reserved 
+TERMS, CONDITIONS & NOTICES 
+ 
+This document has been prepared by the 6 GHz Committee Functional Specification WG to assist The Software Defined Radio Forum Inc. (or its successors or assigns, hereafter “the Forum”). It 
+may be amended or withdrawn at a later time and it is not binding on any member of the Forum or of the 6 GHz Committee Functional Specification WG. 
+ 
+Contributors to this document that have submitted copyrighted materials (the Submission) to the Forum for use in this document retain copyright ownership of their original work, while at the same time granting the Forum a non-exclusive, irrevocable, worldwide, perpetual, royalty-free license under the Submitter’s copyrights in the Submission to reproduce, distribute, publish, display, perform, and create derivative works of the Submission based on that original work for the purpose of developing this document under the Forum's own copyright. 
+ 
+Permission is granted to the Forum’s participants to copy any portion of this document for legitimate purposes of the Forum.  Copying for monetary gain or for other non-Forum related 
+purposes is prohibited. 
+ 
+The Forum draws attention to the fact that it is claimed that compliance with this specification may involve the use of a patent ("IPR") concerning [section of Specification].  The Forum takes no position concerning the evidence, validity or scope of this IPR. 
+ 
+The holder of this IPR has assured the Forum that it is willing to license all IPR it owns and any third party IPR it has the right to sublicense which might be infringed by any implementation of this specification to the Forum and those licensees (members and non-members alike) desiring to implement this specification.  Information may be obtained from: 
+ 
+ 
+Qualcomm Incorporated 
+ 
+5775 Morehouse Drive 
+ 
+San Diego, CA 92121 
+ 
+Attention is also drawn to the possibility that the Forum shall not be responsible for identifying any or all such IPR. 
+ 
+THIS DOCUMENT IS BEING OFFERED WITHOUT ANY WARRANTY WHATSOEVER, AND IN PARTICULAR, ANY WARRANTY OF NON-INFRINGEMENT IS EXPRESSLY DISCLAIMED.  ANY USE OF THIS SPECIFICATION SHALL BE MADE ENTIRELY AT THE IMPLEMENTER'S OWN RISK, AND NEITHER THE FORUM, NOR ANY OF ITS MEMBERS OR SUBMITTERS, SHALL HAVE ANY LIABILITY WHATSOEVER TO ANY IMPLEMENTER OR THIRD PARTY FOR ANY DAMAGES OF ANY NATURE WHATSOEVER, DIRECTLY OR INDIRECTLY, ARISING FROM THE USE OF THIS DOCUMENT. 
+ 
+
+--- Page 3 ---
+6 GHz Committee Functional Specification WG 
+Functional Requirements for the U.S. 6 GHz Band 
+WINNF-TS-1014-V1.5.0 
+ 
+Copyright © 2025 The Software Defined Radio Forum Inc  
+Page  ii 
+All Rights Reserved 
+Recipients of this document are requested to submit, with their comments, notification of any relevant patent claims or other intellectual property rights of which they may be aware that might be infringed by any implementation of the specification set forth in this document, and to provide supporting documentation. 
+ 
+This document was developed following the Forum's policy on restricted or controlled information (Policy 009) to ensure that that the document can be shared openly with other member 
+organizations around the world. Additional Information on this policy can be found here: 
+http://www.wirelessinnovation.org/page/Policies_and_Procedures  
+ 
+Although this document contains no restricted or controlled information, the specific implementation of concepts contain herein may be controlled under the laws of the country of 
+origin for that implementation. Readers are encouraged, therefore, to consult with a cognizant authority prior to any further development.    
+ 
+Wireless Innovation Forum ™ and SDR Forum ™ are trademarks of the Software Defined Radio Forum Inc.  
+
+
+--- Page 4 ---
+6 GHz Committee Functional Specification WG 
+Functional Requirements for the U.S. 6 GHz Band 
+WINNF-TS-1014-V1.5.0 
+ 
+Copyright © 2025 The Software Defined Radio Forum Inc  
+Page  iii 
+All Rights Reserved 
+Table of Contents 
+ 
+TERMS, CONDITIONS & NOTICES ............................................................................................ i 
+Table of Contents ........................................................................................................................... iii 
+Contributors ................................................................................................................................... vi 
+1 Scope ...........................................................................................................................................7 
+2 References ...................................................................................................................................7 
+2.1 
+Normative References ......................................................................................................7 
+2.2 
+Informative References ....................................................................................................9 
+3 Definitions, Abbreviations and Symbols ..................................................................................10 
+3.1 
+Definitions......................................................................................................................10 
+3.1.1 
+FCC Definitions .....................................................................................................10 
+3.1.2 
+WInnForum Definitions .........................................................................................11 
+3.2 
+Abbreviations .................................................................................................................13 
+3.3 
+Symbols..........................................................................................................................14 
+4 Requirement Organization ........................................................................................................17 
+5 Standard Power Device General Requirements (DGR) ............................................................18 
+5.1 
+Device Registration and Spectrum Inquiry ....................................................................18 
+5.2 
+Geolocation Capability ..................................................................................................19 
+5.3 
+Use of Proxy ..................................................................................................................20 
+5.4 
+Device Power and Emission Limits ...............................................................................20 
+6 Standard Power Device Security Requirements (DSQ) ............................................................21 
+6.1 
+Communication Security ...............................................................................................21 
+7 AFC System General Requirements (AGR) .............................................................................22 
+7.1 
+Device Registration ........................................................................................................22 
+7.2 
+Determination of Available Frequencies and the Maximum Permissible Power ..........22 
+7.3 
+Storage of Information ...................................................................................................23 
+7.4 
+Enforcement Instructions from the Commission ...........................................................23 
+8 AFC System Security Requirements (ASQ) .............................................................................24 
+8.1 
+Communication Security ...............................................................................................24 
+9 AFC System Incumbent Protection (AIP) ................................................................................25 
+9.1 
+Fixed Service Receiver Protection .................................................................................25 
+9.1.1 
+Interference Protection Criteria and Evaluation Point ...........................................25 
+9.1.2 
+Fixed Service Transmitter and Receiver Parameters .............................................28 
+9.1.3 
+Propagation Models ...............................................................................................45 
+9.1.4 
+Passive Sites ...........................................................................................................49 
+9.2 
+Radio Astronomy Service Protection .............................................................................57 
+9.3 
+International Border Protection ......................................................................................59 
+Annex A (Normative): 3GPP Specific Features (Optional) .......................................................60 
+A.1 
+Description .....................................................................................................................60 
+A.1.1 
+NRU1: 3GPP-defined 6 GHz Channel ..................................................................60 
+A.2 
+Use for Operations that could impact Part 15 Subpart E Regulatory Compliance ........60 
+A.2.1 
+AFC System General Requirements (AGR) ..........................................................60 
+A.2.2 
+Device General Requirements (DGR) ...................................................................60 
+A.3 
+Use for Operations not impacting Part 15 Subpart E Regulatory Compliance ..............60 
+
+
+--- Page 5 ---
+6 GHz Committee Functional Specification WG 
+Functional Requirements for the U.S. 6 GHz Band 
+WINNF-TS-1014-V1.5.0 
+ 
+Copyright © 2025 The Software Defined Radio Forum Inc  
+Page  iv 
+All Rights Reserved 
+Annex B (Normative): IEEE 802.11ax Specific Features (Optional) .........................................61 
+B.1 
+Feature Description ........................................................................................................61 
+Annex C (Normative): Reference Table for Fixed Service Receiver Parameters ......................62 
+Annex D (Informative): AFC System Operator Certification Procedure Information ...............65 
+Annex E (Informative): Data Interpolation Methods for Fixed Service Receiver Antenna and 
+Passive Sites 
+66 
+E.1 
+Linear Interpolation for Fixed Service Antenna RPE ....................................................66 
+E.2 
+Linear Interpolation for Passive Sites ............................................................................67 
+Annex F (Normative): Considerations for 6 GHz AFC Use of NLCD Data ..............................69 
+F.1 
+Introduction ....................................................................................................................69 
+F.2 
+Land Clutter Classifications ...........................................................................................72 
+F.3 
+Roads in Rural Areas .....................................................................................................72 
+F.3.1 
+Data Adjustment Technique ..................................................................................73 
+F.3.2 
+Example Calculations ............................................................................................73 
+F.3.3 
+Example Results.....................................................................................................75 
+Annex G (Informative): Revision History ..................................................................................77 
+  
+ 
+
+
+--- Page 6 ---
+6 GHz Committee Functional Specification WG 
+Functional Requirements for the U.S. 6 GHz Band 
+WINNF-TS-1014-V1.5.0 
+ 
+Copyright © 2025 The Software Defined Radio Forum Inc  
+Page  v 
+All Rights Reserved 
+List of Tables 
+Table 1: Requirements Categorization.......................................................................................... 17 
+Table 2: Minimum radiation suppression defined in FCC Rules Part 101.115 [n.16] ................. 33 
+Table 3: U-NII-5 Antenna Size versus Gain ................................................................................. 40 
+Table 4: U-NII-7 Antenna Size versus Gain ................................................................................. 40 
+Table 5: FCC-Authorized Bandwidths ......................................................................................... 44 
+Table 6: FS Assigned Frequency vs. Bandwidth .......................................................................... 44 
+Table 7: Default ITM Parameter Values ....................................................................................... 47 
+Table 8: Typical Billboard Reflector Dimensions ........................................................................ 51 
+Table 9: Reference coordinates and receiver heights above ground level (AGL) ........................ 58 
+Table 10: Relationship between ULS data elements and fixed service receive antenna parameters 
+employed in this specification .............................................................................................. 62 
+Table 11: Relationship between ULS data elements and fixed service transmit antenna 
+parameters employed in this specification ............................................................................ 63 
+Table 12: Relationship between ULS data elements and fixed service passive repeater parameters 
+employed in this specification .............................................................................................. 64 
+Table 13: H parameter vs efficiency  ......................................................................................... 66 
+Table 14: NLCD Data ................................................................................................................... 69 
+Table 15: USGS NLCD Classifications ........................................................................................ 70 
+Table 16: NOAA NLCD Class to USGS NLCD Class Mapping ................................................. 71 
+Table 17: Clutter Classification Hierarchy ................................................................................... 72 
+ 
+ 
+ 
+
+
+--- Page 7 ---
+6 GHz Committee Functional Specification WG 
+Functional Requirements for the U.S. 6 GHz Band 
+WINNF-TS-1014-V1.5.0 
+ 
+Copyright © 2025 The Software Defined Radio Forum Inc  
+Page  vi 
+All Rights Reserved 
+Contributors 
+The following individuals made significant contributions to this document: 
+Group Chair: Navin Hathiramani (Nokia), Richard Bernhardt (WISPA) 
+Editor: Sho Furuichi (Sony) 
+Other Member Representatives: 
+ 
+Aruba: Chuck Lukaszewski, Stuart Strickland 
+ 
+AT&T: Tom Willis 
+ 
+Baylor University: Austin Egbert 
+ 
+Cisco: Peter Ecclesine 
+ 
+CommScope: Mark Gibson, Joe Marzin, Alexander Medvinsky, Peter Young 
+ 
+Ericsson: Virgil Cimpu, Christopher Richards 
+ 
+Federated Wireless: Samuel MacMullan, Masoud Olfat 
+ 
+Google: Andrew Clegg, Kate Harrison, Yi Hsuan 
+ 
+NCTA: Andy Scott 
+ 
+Qualcomm: Tevfik Yucek 
+ 
+RED Technologies: Thomas Hervier, Meryem Messaoudi, Christophe Le Thierry 
+ 
+RKF Engineering: Farinaz Edalat, Michael Mandell 
+ 
+Sony: Hiroto Kuriki, Naotaka Sato, Yusuke Tanaka 
+ 
+WISPA: Fred Goldstein 
+ 
+
+
+--- Page 8 ---
+6 GHz Committee Functional Specification WG 
+Functional Requirements for the U.S. 6 GHz Band 
+WINNF-TS-1014-V1.5.0 
+ 
+Copyright © 2025 The Software Defined Radio Forum Inc. 
+Page 7 
+All Rights Reserved 
+Functional Requirements for the U.S. 6 GHz Band under the 
+Control of an AFC System 
+1 Scope 
+The scope of this technical specification is to define the functional requirements for the AFC System, AFC System Operator, Standard Power Access Points, Fixed Client Devices and Proxies 
+and to specify the necessary standards to enable test and certification procedures for a properly functioning environment in the 6 GHz band. The functional requirements specified in this 
+specification are based on Federal Communications Commission (FCC) rules governing the use of 6 GHz band subject to the control of an AFC System, which are codified in Part 15 Subpart E 
+of Title 47 the U.S. Code of Federal Regulations [n.1] adopted in the 2021.  
+The requirements captured in this specification, outside of the normative annexes, are described in a technology neutral manner and applicable for any unlicensed wireless communication technology operating in the 6 GHz band under the Part 15 Subpart E rules in the 6 GHz band. This specification will be further extended to include the following topics in different normative annexes. 
+▪ 
+Technology-neutral optional features and the requirements for those features that are not required to be tested for FCC certification; 
+▪ 
+Technology-specific optional features and the requirements for those features that are required to be tested for FCC certification if implemented by an AFC System, a Proxy, a Standard 
+Power Access Point or a Fixed Client Device; and, 
+▪ 
+Technology-specific optional features and the requirements for those features that are not  required to be tested for the FCC certification. 
+The FCC’s Part 15 Subpart E rules will hereafter be referred to as “the FCC Rules”, “the Rules”  or “Part 15” and reference to specific items in the rules will be given in the form of, for example, 
+15.407(k)(16) if from Part 15. 
+NOTE 1: Not all the 6 GHz-specific rules are captured in this specification as  this document is not a comprehensive list of requirements for the 
+implementation or operation of an AFC System, Proxy, Standard Power Access Point or Fixed Client Device. AFC System operation, 
+components and/or devices, as applicable, are expected to comply with the rules that are not considered in this specification. 
+NOTE 2: Unless otherwise specified, “Standard Power Access Point” and g“Fixed Client Device” are collectively referred to as “Standard Power 
+Device” in this document. 
+2 References 
+2.1 
+Normative References 
+The following referenced documents are necessary for the application of the present document. 
+
+
+--- Page 9 ---
+6 GHz Committee Functional Specification WG 
+Functional Requirements for the U.S. 6 GHz Band 
+WINNF-TS-1014-V1.5.0 
+ 
+Copyright © 2025 The Software Defined Radio Forum Inc. 
+Page 8 
+All Rights Reserved 
+[n.1] Title 47, Code of Federal Regulations, Part 15 Subpart E - Unlicensed National Information Infrastructure Devices, available at: 
+https://ecfr.federalregister.gov/current/title-47/chapter-I/subchapter-A/part-15/subpart-E 
+[n.2] RFC-2119, “Key words for use in RFCs to Indicate Requirement Levels”, March 1997.  
+Available at: https://tools.ietf.org/html/rfc2119 
+[n.3] Federal Communications Commission, Unlicensed Use of the 6 GHz Band Report and 
+Order and Further Notice of Proposed Rulemaking ET Docket No. 18-295; GN Docket 
+No. 17-183, available at: https://docs.fcc.gov/public/attachments/FCC-20-51A1_Rcd.pdf 
+[n.4] P. Kyösti et al., “WINNER II channel models”, IST-4-027756 WINNER II Deliverable 
+D1.1.2, 2008, available at: https://www.cept.org/files/8339/winner2%20-
+%20final%20report.pdf 
+[n.5] NTIA – ITS Irregular Terrain Model (ITM) (Longley-Rice) (20MHz-20 GHz), available 
+at: http://www.its.bldrdoc.gov/resources/radio-propagation-software/itm/itm.aspx 
+[n.6] ITU-R P.2108: Prediction of clutter loss (P.2108-0 (06/2017)), available at 
+https://www.itu.int/rec/R-REC-P.2108/en  
+[n.7] ITU-R P.452: Prediction procedure for the evaluation of interference between stations on 
+the surface of the Earth at frequencies above about 0.1 GHz (P.452-16 (07/2015)), 
+available at https://www.itu.int/rec/R-REC-P.452-16-201507-I/en  
+[n.8] Federal Communications Commission, “Unlicensed Use of the 6 GHz Band; Review of 
+the Commission's Rules Governing the 896-901/935-940 MHz Band”, Federal Register / 
+Vol. 86, No. 32, available at: 
+https://www.federalregister.gov/documents/2021/02/19/2021-00782/unlicensed-use-of-
+the-6-ghz-band-review-of-the-commissions-rules-governing-the-896-901935-940-mhz  
+[n.9] RFC-2616, “Hypertext Transfer Protocol -- HTTP/1.1”, Fielding, Gettys, Mogul, Frystyk, 
+Masinter, Leach and Berners-Lee, June 1999. 
+[n.10] RFC-5246, “The Transport Layer Security (TLS) Protocol Version 1.2”, Dierks and 
+Rescorla, August 2008. 
+[n.11] RFC-8446, “The Transport Layer Security (TLS) Protocol Version 1.3”, E. Rescorla and 
+Mozilla, August 2018 
+[n.12] 3GPP TS 38.101-1, “NR; User Equipment (UE) radio transmission and reception; Part 1: 
+Range 1 Standalone”, available at: 
+https://portal.3gpp.org/desktopmodules/Specifications/SpecificationDetails.aspx?specific
+ationId=3283  
+[n.13] 3GPP TS 38.104, “NR; Base Station (BS) radio transmission and reception”, available at: 
+https://portal.3gpp.org/desktopmodules/Specifications/SpecificationDetails.aspx?specific
+ationId=3202  
+[n.14] Wi-Fi Alliance AFC System to AFC Device Interface Specification, available at: 
+https://www.wi-fi.org/file/afc-specification-and-test-plans 
+[n.15] ITU Recommendation ITU-R F.699-8, “Reference radiation patterns for fixed wireless 
+system antennas for use in coordination studies and interference assessment in the 
+
+
+--- Page 10 ---
+6 GHz Committee Functional Specification WG 
+Functional Requirements for the U.S. 6 GHz Band 
+WINNF-TS-1014-V1.5.0 
+ 
+Copyright © 2025 The Software Defined Radio Forum Inc. 
+Page 9 
+All Rights Reserved 
+frequency range from 100 MHz to 86 GHz”, available at https://www.itu.int/rec/R-REC-
+F.699/en  
+[n.16] 47 C.F.R. §101.115(b)(2), available at https://www.ecfr.gov/current/title-47/chapter-
+I/subchapter-D/part-101#101.115  
+[n.17] WINNF-TS-5008, “6 GHz Supplementary Data Repository Technical Specification”, 
+Wireless Innovation Forum 
+[n.18] National Land Cover Database (NLCD) data for CONUS, Alaska, Hawaii and Puerto 
+Rico, available at https://www.mrlc.gov/data  
+[n.19] ULS Data File Format, available at, 
+https://www.fcc.gov/sites/default/files/public_access_database_definitions_v6.pdf  
+[n.20] 47 C.F.R. §101.147(i), available at: https://www.ecfr.gov/current/title-47/chapter-
+I/subchapter-D/part-101/subpart-C/section-101.147#p-101.147(i)  
+[n.21] 47 C.F.R. §101.147(k), available at: https://www.ecfr.gov/current/title-47/chapter-
+I/subchapter-D/part-101/subpart-C/section-101.147#p-101.147(k)  
+[n.22] KDB 987594 D05 AFC DUT Test Harness Testing v01 (August 7, 2023), available at: 
+https://apps.fcc.gov/kdb/GetAttachment.html?id=bTx5S2dBrBUu%2F%2F1kuciwtw%3
+D%3D&desc=987594%20D05%20AFC%20DUT%20Test%20Harness%20Testing%20v
+01&tracking_number=277034  
+2.2 
+Informative References 
+The following referenced documents are not necessary for the application of the present 
+document, but they assist the reader with regard to a particular subject area. 
+[i.1] 
+RFC-8996, “Deprecating TLS 1.0 and TLS 1.1”, K. Moriarty, CIS, S. Farrell, Trinity 
+College Dublin, March 2021 
+[i.2] 
+NIST Special Publication 800-52 Revision 2, “Guidelines for the Selection, 
+Configuration, and Use of Transport Layer Security (TLS) Implementations”, August 
+2019, available at: https://doi.org/10.6028/NIST.SP.800-52r2  
+[i.3] 
+RFC-7525, “Recommendations for Secure Use of Transport Layer Security (TLS) and 
+Datagram Transport Layer Security (DTLS)”, Y. Sheffer, Intuit, R. Holz, NICTA, P. 
+Saint-Andre, &yet, May 2015 
+[i.4] 
+IEEE Std 802.11axTM-2021, “IEEE Standard for Information Technology--
+Telecommunications and Information Exchange between Systems Local and 
+Metropolitan Area Networks--Specific Requirements Part 11: Wireless LAN Medium 
+Access Control (MAC) and Physical Layer (PHY) Specifications Amendment 1: 
+Enhancements for High-Efficiency WLAN”, May 2021. 
+[i.5] 
+TIA-10 (2019 Edition), “Interference Criteria for Microwave Systems”, The 
+Telecommunications Industry Association 
+[i.6] 
+ITU Recommendation ITU-R F.758-7, “System parameters and considerations in the 
+development of criteria for sharing or compatibility between digital fixed wireless 
+
+
+--- Page 11 ---
+6 GHz Committee Functional Specification WG 
+Functional Requirements for the U.S. 6 GHz Band 
+WINNF-TS-1014-V1.5.0 
+ 
+Copyright © 2025 The Software Defined Radio Forum Inc. 
+Page 10 
+All Rights Reserved 
+systems in the fixed service and systems in other services and other sources of 
+interference”. 
+[i.7] 
+Federal Communications Commission, “The Commission Begins The Process For 
+Authorizing 6 GHz Band Automated Frequency Coordination Systems”, FCC 21-100, 
+available at: https://ecfsapi.fcc.gov/file/09281454120568/FCC-21-100A1.pdf  
+[i.8] 
+R. C. Hansen, “A One-Parameter Circular Aperture Distribution with Narrow Beamwidth 
+and Low Sidelobes”, Trans. IEEE, vol. AP-24 no.4, pp. 477-480, July 1976. 
+[i.9] 
+ETSI EN 319 403-1 V2.3.1 (2020-06), “Electronic Signatures and Infrastructures (ESI); 
+Trust Service Provider Conformity Assessment; Part 1: Requirements for conformity 
+assessment bodies assessing Trust Service Providers”, available at: 
+https://www.etsi.org/deliver/etsi_en/319400_319499/31940301/02.03.01_60/en_3194030
+1v020301p.pdf  
+[i.10] CA/Browser Forum Baseline Requirements, available at: https://cabforum.org/baseline-
+requirements-documents  
+[i.11] WINNF-TS-0022, “WInnForum CBRS Certificate Policy”, available at: 
+https://winnf.memberclicks.net/assets/CBRS/WINNF-TS-0022.pdf  
+[i.12] Passive Repeater Engineering, Microflect Co. Inc. 1989, Catalog 161A; available at: 
+http://www.qrp.gr/passivereptitan/Passive_repeaters.pdf  
+[i.13] WINNF-6GHZ-0005, “Policies for Post First Wave Certification and Post Initial 
+Certification”, available at: 
+https://winnf.memberclicks.net/assets/work_products/WINNF-6GHZ-0005.pdf  
+3 Definitions, Abbreviations and Symbols 
+3.1 
+Definitions 
+3.1.1 FCC Definitions 
+The Wireless Innovation Forum 6 GHz Committee leverages the definitions provided by the 
+FCC from 47 CFR 15.403. These definitions and others are also available at reference [n.1]. 
+Access Point (AP): A U-NII transceiver that operates either as a bridge in a peer-to-peer 
+connection or as a connector between the wired and wireless segments of the network or as a 
+relay between wireless network segments. 
+Automated Frequency Coordination (AFC) System: A system that automatically determines and 
+provides lists of which frequencies are available for use by Standard Power Access Points 
+operating in the 5.925-6.425 GHz and 6.525-6.875 GHz bands. 
+NOTE: Although not explicitly stated in the definition, the AFC System provides 
+lists of which frequencies are available for use by Fixed Client Devices 
+in the same way as to Standard Power Access Points operating in the 
+
+
+--- Page 12 ---
+6 GHz Committee Functional Specification WG 
+Functional Requirements for the U.S. 6 GHz Band 
+WINNF-TS-1014-V1.5.0 
+ 
+Copyright © 2025 The Software Defined Radio Forum Inc. 
+Page 11 
+All Rights Reserved 
+5.925-6.425 GHz and 6.525-6.875 GHz bands. (See the definition of 
+Fixed Client Device) 
+Client Device: A U-NII device whose transmissions are generally under the control of an Access 
+Point and is not capable of initiating a network. 
+Fixed Client Device: A Client Device intended as customer premise equipment that is 
+permanently attached to a structure, operates only on channels provided by an AFC System, has 
+a geolocation capability, and complies with antenna pointing angle requirements. 
+NOTE: WInnForum believes that the FCC allows a Fixed Client Device to 
+operate as a Client Device in accordance with 15.407(a)(7), 
+15.407(d)(5) and 15.407(d)(7), and, while doing so, to 
+communicate with an AFC System. 
+Maximum Power Spectral Density: The Maximum Power Spectral Density is the maximum 
+Power Spectral Density, within the specified measurement bandwidth, within the U-NII device 
+operating band. 
+Power Spectral Density: The Power Spectral Density is the total energy output per unit 
+bandwidth from a Pulse or sequence of Pulses for which the transmit power is at its maximum 
+level, divided by the total duration of the Pulses. This total time does not include the time 
+between Pulses during which the transmit power is off or below its maximum level. 
+Pulse: A Pulse is a continuous transmission of a sequence of modulation symbols, during which 
+the average symbol envelope power is constant. 
+Standard Power Access Point: An Access Point that operates in the 5.925-6.425 GHz and 6.525-
+6.875 GHz bands pursuant to direction from an Automated Frequency Coordination System. 
+U-NII devices: Intentional radiators operating in the frequency bands 5.15-5.35 GHz, 5.470-5.85 
+GHz, 5.925-7.125 GHz that use wideband digital modulation techniques and provide a wide 
+array of high data rate mobile and fixed communications for individuals, businesses, and 
+institutions. 
+3.1.2 WInnForum Definitions 
+AFC System Operator: An entity designated by the Commission to operate an AFC System in 
+accordance with the rules and procedures set forth in the Part 15 Subpart E. 
+Available Channel: A Channel, determined by an AFC System, on which a Standard Power 
+Device is allowed to operate at its geographic coordinates.  
+NOTE: For the purpose of this document, the WInnForum definition of 
+Available Channel takes precedence over the definition in the 47 
+CFR Part 15 Subpart E [n.1] since the FCC-defined Available 
+Channel applies only in the context of its DFS rules.  
+
+
+--- Page 13 ---
+6 GHz Committee Functional Specification WG 
+Functional Requirements for the U.S. 6 GHz Band 
+WINNF-TS-1014-V1.5.0 
+ 
+Copyright © 2025 The Software Defined Radio Forum Inc. 
+Page 12 
+All Rights Reserved 
+Channel: A contiguous frequency range between lower and upper frequency limits. 
+FS Link Path: A sequence of Segments between a fixed service transmitter and a fixed service 
+receiver.  
+Passive Sites: A terminology collectively referring to 1) a passive repeater consisting of back-to-
+back antennas connected to each other by waveguide or cable, 2) a single billboard reflector, or 
+3) a double passive reflector consisting of two billboard reflectors typically less than 120 meters 
+from each other. 
+NOTE: Double passive reflectors are treated as two single billboard reflectors as per 
+R2-AIP-31.  
+Proxy: A network entity engaging in communications with an AFC System on behalf of one or 
+more Standard Power Devices, or networks of such devices. 
+NOTE: The WInnForum has defined this terminology such that it becomes equivalent 
+to the term “network element representing multiple Standard Power Access 
+Points or Fixed Client Devices” or “network element device representing 
+multiple Standard Power Access Points or Fixed Client Devices” used by the 
+FCC in some of the rules. For R0 requirements using these terms, “[Proxy]” is 
+inserted for clarification purposes. 
+Segment: A path within an FS Link between a fixed service transmitter and a fixed service 
+receiver (when there are no Passive Sites), between a fixed service transmitter and a Passive Site, 
+between two Passive Sites, or between a Passive Site and a fixed service receiver.  
+NOTE: For an FS Link Path without any Passive Site, the FS Link Path has a single 
+segment between the fixed service transmitter and receiver. For an FS Link Path 
+containing n Passive Sites, it has n+1 Segments between the transmitter and 
+receiver, where the first Segment is from the fixed service transmitter to the first 
+Passive Site, the next Segment is from the first Passive Site to the second 
+Passive Site and so on. The final Segment ends at the fixed service receiver. 
+Server Certificate: A digital certificate issued to a server for the purpose of authenticating its 
+identity and creating secure communication channels to its clients. 
+Standard Power Device: A terminology collectively referring to Standard Power Access Point 
+and Fixed Client Device. 
+NOTE: In this document, this terminology is used for R1, R2 and R3 requirements.  
+Trusted CA: A certificate authority (CA) which has been proven to be secure by an external 
+WebTrust audit or equivalent (e.g., ETSI EN 319 403 [i.9]). 
+NOTE: Example policies against which such audit would occur are CA/Browser 
+Forum Baseline Requirements [i.10] and WINNF-TS-0022 [i.11]. 
+
+
+--- Page 14 ---
+6 GHz Committee Functional Specification WG 
+Functional Requirements for the U.S. 6 GHz Band 
+WINNF-TS-1014-V1.5.0 
+ 
+Copyright © 2025 The Software Defined Radio Forum Inc. 
+Page 13 
+All Rights Reserved 
+Virtual Receiver: A term referring to a Passive Site as fixed service receiver virtually. 
+3.2 
+Abbreviations 
+3GPP 
+ 
+3rd Generation Partnership Project  
+AFC 
+ 
+Automated Frequency Coordination 
+AGL 
+ 
+Above Ground Level 
+BER 
+ 
+Bit Error Rate 
+DFS 
+ 
+Dynamic Frequency Selection 
+e.i.r.p. 
+ 
+Equivalent Isotropically Radiated Power 
+FCC 
+ 
+Federal Communications Commission 
+FS 
+ 
+Fixed Service 
+HH 
+The response of a horizontally polarized antenna port to a horizontally 
+polarized signal 
+HV 
+The response of a horizontally polarized antenna port to a vertically polarized 
+signal 
+IEEE 
+ 
+Institute of Electrical and Electronic Engineers 
+ITM 
+ 
+Irregular Terrain Model 
+ITU 
+ 
+International Telecommunication Union 
+ITU-R 
+ 
+ITU Radiocommunication Sector 
+NAD 
+ 
+North American Datum 
+NIST 
+ 
+National Institute of Standards and Technology 
+NLCD 
+ 
+National Land Cover Database 
+OET 
+ 
+Office of Engineering and Technology 
+RPE 
+ 
+Radiation Pattern Envelope 
+TIA 
+ 
+Telecommunications Industry Association 
+ULS 
+ 
+Universal Licensing System 
+U-NII 
+ 
+Unlicensed National Information Infrastructure 
+VH 
+The response of a vertically polarized antenna port to a horizontally polarized 
+signal 
+VV 
+The response of a vertically polarized antenna port to a vertically polarized 
+signal 
+
+
+--- Page 15 ---
+6 GHz Committee Functional Specification WG 
+Functional Requirements for the U.S. 6 GHz Band 
+WINNF-TS-1014-V1.5.0 
+ 
+Copyright © 2025 The Software Defined Radio Forum Inc. 
+Page 14 
+All Rights Reserved 
+WINNER II 
+Wireless World Initiative New Radio phase II 
+3.3 
+Symbols 
+[a : b] 
+from a to b inclusive (where a and b are numerical values) 
+AR 
+Area of receiving reflector (in m2) 
+AT 
+Area of transmitting reflector (in m2) 
+BWFS 
+Channel bandwidth of the fixed microwave service receiver 
+c 
+The speed of light 
+DDRx 
+Fixed service diversity receive antenna diameter 
+dFSRx-Eval 
+Distance between the FS receiver antenna and the evaluation point 
+dFSTx-FSRx 
+Distance between fixed service transmit and receive antennas  
+dLimit 
+Near field distance limit 
+dPathSegLength 
+Path segment length (in meters) 
+DRx 
+Fixed service primary receive antenna diameter 
+DRx, B-B 
+Diameter of receiving back-to-back antenna (in meters) 
+DRx, Next 
+Diameter of the antenna at the next site towards the actual FS receiver 
+DRx, NFA 
+Fixed service primary receive antenna diameter for near field adjustment 
+DTx, B-B 
+Diameter of transmitting back-to-back antenna (in meters) 
+dkm_los 
+Size of the exclusion zone to protect the radio astronomy antenna 
+Fc, FS-Rx, ULS 
+Center frequency of fixed service receiver recorded in the ULS 
+Fc, U-NII-band 
+Center frequency of a U-NII band (i.e., 5925-6425 MHz or 6525-6875 MHz) 
+G0 
+The boresight gain of the fixed service receiver antenna  
+GCDisc 
+The effective antenna discrimination of the fixed service receiver co-
+polarization RPE 
+GCommon 
+The most common antenna gain for the antenna model 
+GDisc 
+The effective discrimination of the antenna RPE 
+GDRx 
+Fixed service diversity receive antenna gain 
+GVRx-j, Effective 
+Effective gain of the j-th Virtual Receiver 
+GMB 
+The mid-band antenna gain  
+GRx 
+Fixed service primary receive antenna gain 
+GRx, AZ-RPE 
+Fixed service receive antenna azimuthal RPE 
+GRx, B-B  
+Receiving back-to-back antenna gain  
+GRx, B-B, ULS 
+Fixed service receive back-to-back antenna gain recorded in the ULS 
+
+
+--- Page 16 ---
+6 GHz Committee Functional Specification WG 
+Functional Requirements for the U.S. 6 GHz Band 
+WINNF-TS-1014-V1.5.0 
+ 
+Copyright © 2025 The Software Defined Radio Forum Inc. 
+Page 15 
+All Rights Reserved 
+GRx, C-RPE 
+The co-polarization RPE of the fixed service receiver antenna 
+GRx, Effective 
+The effective antenna gain of the fixed service receiver antenna 
+GRx, EL-RPE 
+Fixed service receive antenna elevation RPE  
+GRx, HH-RPE 
+HH RPE of the fixed service receiver antenna 
+GRx, HV-RPE 
+HV RPE of the fixed service receiver antenna 
+GRx, ULS 
+Fixed service primary receive antenna gain recorded in the ULS 
+GRx, VH-RPE 
+VH RPE of the fixed service receiver antenna 
+GRx, VV-RPE 
+VV RPE of the fixed service receiver antenna 
+GRx, XX-RPE 
+Discrimination value for an unspecified polarization 
+GTypical 
+The typical antenna gain for a given antenna of diameter of a fixed service 
+microwave receiver 
+GTx, B-B 
+Transmitting back-to-back antenna gain  
+GTx, B-B, ULS 
+Fixed service transmit back-to-back antenna gain recorded in the ULS 
+GTx, ULS 
+Fixed service transmit antenna gain recorded in the ULS 
+GVRx-j, Disc 
+The antenna discrimination of the j-th Virtual Receiver antenna 
+GXDisc 
+The effective antenna discrimination of the fixed service receiver cross-
+polarization RPE 
+HEP (AMSL) 
+Height above mean sea level of an evaluation point in km  
+HFS, DRx (AGL) 
+Fixed service diversity receive antenna height above ground level 
+HFS, Rx (AMSL) 
+Fixed service receive antenna height above mean sea level 
+HFS, Rx (AGL) 
+Fixed service receive antenna height above ground level 
+HFS, Tx (AMSL) 
+height of fixed service transmit site (AMSL) in km.  
+HRef-AntennaModel 
+Reflector Height associated with the antenna model recorded in the ULS 
+HRef-ULS 
+Reflector Height recorded in the ULS 
+HSPD (AGL) 
+Height above ground level reported by the Standard Power Device (in meters) 
+Hrx 
+Height of the radio astronomy antenna above ground level 
+Htx 
+Height of the unlicensed Standard Power Device above ground level 
+I 
+Interference from the Standard Power Device at the fixed microwave service 
+receiver  
+I/NRx, Est 
+Estimated interference-to-noise ratio at the fixed service receiver or diversity 
+receiver 
+I/NVRx-j, Est 
+Estimated interference-to-noise ratio at the j-th Virtual Receiver 
+I/NThres 
+Interference-to-noise ratio as the interference protection criteria 
+
+
+--- Page 17 ---
+6 GHz Committee Functional Specification WG 
+Functional Requirements for the U.S. 6 GHz Band 
+WINNF-TS-1014-V1.5.0 
+ 
+Copyright © 2025 The Software Defined Radio Forum Inc. 
+Page 16 
+All Rights Reserved 
+kB 
+Boltzmann’s constant 
+L 
+Combined path loss 
+LBEL 
+Building Entry Loss 
+LFS, Feeder 
+Fixed service receiver feeder loss, which is the total loss between the fixed 
+service receive antenna port and the transceiver receive port. 
+LLOS 
+Line-of-sight path loss 
+LPropagation, Rx 
+Propagation loss between the Standard Power Device and FS receiver antenna 
+LPropagation, VRx-j 
+Propagation loss between the Standard Power Device and the j-th Virtual 
+Receiver 
+LWG 
+Connecting waveguide/cable loss 
+N 
+Background noise level at the fixed microwave service receiver 
+NF 
+Noise figure 
+PLOS 
+Probability of line-of-sight 
+PNLOS 
+Probability of non-line-of-sight 
+PSPD, Tx 
+The Standard Power Device transmission power across the frequency range 
+I/NEst calculations are performed. 
+rEarth 
+Effective radius of the Earth (= 8500 km) 
+T 
+Threshold level 
+T/I 
+Threshold-to-interference 
+T0 
+Standard temperature 
+u 
+FS antenna discrimination parameter 
+WRef-AntennaModel 
+Reflector Width associated with the antenna model recorded in the ULS 
+WRef-ULS 
+Reflector Width recorded in the ULS 
+xdB 
+Normalized separation distance  
+HSPD 
+Vertical uncertainty reported by the Standard Power Device (in meters) 
+Rx 
+Antenna aperture efficiency 
+Rx, B-B 
+Antenna aperture efficiency for back-to-back passive receiver 
+Rx, NFA 
+Antenna aperture efficiency for near field adjustment 
+AZ-Bearing-To-Eval The bearing angle of the azimuth plane to the evaluation point with respect to 
+the fixed service receive antenna 
+AZ-Boresight 
+The fixed service receive antenna boresight direction of the azimuth plane with 
+respect to true north 
+DDisc 
+The angle-off-boresight between vectors from Standard Power Device to fixed 
+service diversity receive antenna and from segment transmitter (e.g., fixed 
+
+
+--- Page 18 ---
+6 GHz Committee Functional Specification WG 
+Functional Requirements for the U.S. 6 GHz Band 
+WINNF-TS-1014-V1.5.0 
+ 
+Copyright © 2025 The Software Defined Radio Forum Inc. 
+Page 17 
+All Rights Reserved 
+service transmitter, passive reflector) to fixed service diversity receive antenna, 
+and reflects both the horizontal azimuth and vertical elevation 
+Disc 
+The angle-off-boresight between vectors from Standard Power Device to fixed 
+service primary receive antenna and from segment transmitter (e.g., fixed 
+service transmitter, passive reflector) to fixed service primary receive antenna, 
+and reflects both the horizontal azimuth and vertical elevation 
+FSRx-Eval 
+Off-boresight axis angle in a direction from the FS receiver antenna towards 
+the evaluation point 
+ 
+Wavelength (= c/Fc, U-NII-band) (in meters) 
+CPL (dB) 
+Standard deviation in dB of combined path loss  
+LOS (dB) 
+Standard deviation of LOS path loss (i.e., LLOS) in dB 
+NLOS (dB) 
+Standard deviation of NLOS path loss (i.e., LNLOS) in dB 
+4 Requirement Organization 
+Requirements shall be uniquely identified by:  R#-<FEATURE>-<CATEGORY>-<XX>-<Y>, 
+where R<#> is defined by: 
+• R0-:  Requirements directly from FCC rules  
+ 
+R1-:  Requirements derived from FCC rules or from the text of an applicable FCC order 
+ 
+R2-:  Requirements imposed by WInnForum to meet FCC rules 
+ 
+R3-:  Requirements imposed by WInnForum to meet industry needs. 
+NOTE: Support of R3 requirements for some optional features specified in 
+normative annexes will need to be considered in the protection of fixed 
+service receivers and radio astronomy service facilities in accordance with 
+the technology neutral requirements specified in the main body of this 
+technical specification. See details in each normative annex. 
+• <FEATURE>: Unique feature identifier for which the requirements are applicable. In 
+V1.5.0 or later versions of this present document, the identifier “REL” + “A.B” is used in 
+this field for the requirements specified after the First Wave Certification. “A.B” will be 
+set to “1.1” for the requirements newly added in this version of this present document. 
+Refer to WINNF-6GHZ-0005 [i.13] for the definition of First Wave Certification. 
+NOTE: If this tag is not present, the requirement is not feature specific. 
+• <CATEGORY>: Categorization of the requirement by using a code from the table below: 
+Table 1: Requirements Categorization 
+Code 
+Category 
+DGR 
+Standard Power Device General Requirements 
+DSQ 
+Standard Power Device Security Requirements 
+AGR 
+AFC System General Requirements 
+ASQ 
+AFC System Security Requirements 
+
+
+--- Page 19 ---
+6 GHz Committee Functional Specification WG 
+Functional Requirements for the U.S. 6 GHz Band 
+WINNF-TS-1014-V1.5.0 
+ 
+Copyright © 2025 The Software Defined Radio Forum Inc. 
+Page 18 
+All Rights Reserved 
+AIP 
+AFC System Incumbent Protection 
+• <XX>: Unique number to identify the requirement 
+• <Y>: Optional and used to identify subordinate requirements, typically captured in an 
+alphabetical list following the main requirement number <XX> (e.g., R0-DTR-06-a). 
+Requirements taken from the FCC Rules are included as “R0” and we attempted to use 
+the FCC Rules without change. In some instances, the FCC uses “must”, “should” or 
+“will” for the rules, which we have included below as “R0” requirements; however, 
+[shall] is inserted to indicate this is considered as a mandatory requirement. In addition, 
+the FCC uses the term “network element” or “network element device” in some of the 
+rules which have been adopted for “R0” requirements in this specification; for these 
+cases the term [Proxy] is inserted for clarification purposes. Furthermore, citations used 
+in the FCC rule are converted into the corresponding requirement numbers in this 
+specification. 
+The following terms are used within this document and should be interpreted as described in 
+RFC-2119 [n.2]: 
+• 
+SHALL is a mandatory requirement (negative is SHALL NOT) 
+• SHOULD is recommended requirement/best practice (negative is SHOULD NOT) 
+• MAY is an optional requirement, i.e. something that is allowed (negative is NEED 
+NOT) 
+5 Standard Power Device General Requirements (DGR) 
+5.1 
+Device Registration and Spectrum Inquiry 
+R0-DGR-01 
+Device registration requirements: 
+a. Standard Power Access Points and Fixed Client Devices must [shall] register with and be 
+authorized by an AFC System prior to the Standard Power Access Point and Fixed Client 
+Device’s initial service transmission, or after a Standard Power Access Point or Fixed 
+Client Device changes location. (15.407(k)(8)(i)) 
+b. Standard Power Access Points and Fixed Client Devices must [shall] register with the 
+AFC System by providing the following parameters: geographic coordinates (latitude and 
+longitude referenced to North American Datum 1983 (NAD 83)), antenna height above 
+ground level, FCC identification number, and unique manufacturer’s serial number. 
+(15.407(k)(8)(ii)) 
+i. If any of these parameters change, the Standard Power Access Point or Fixed Client 
+Device must [shall] provide updated parameters to the AFC System. 
+c. Standard Power Access Points and Fixed Client Devices must [shall] provide the 
+registration information to the AFC System either directly and individually or by a 
+network element [Proxy] representing multiple Standard Power Access Points or Fixed 
+Client Devices from the same operating network. (15.407(k)(8)(iii)) 
+
+
+--- Page 20 ---
+6 GHz Committee Functional Specification WG 
+Functional Requirements for the U.S. 6 GHz Band 
+WINNF-TS-1014-V1.5.0 
+ 
+Copyright © 2025 The Software Defined Radio Forum Inc. 
+Page 19 
+All Rights Reserved 
+R2-DGR-07 
+In addition to registration parameters required by R0-DGR-01-b, Standard 
+Power Device may notify the AFC System whether it is located indoors. 
+R0-DGR-02 
+Standard Power Access Points and Fixed Client Devices may transmit only on 
+frequencies and at power levels that an AFC System indicates as available. (15.407(k)(1)) 
+R0-DGR-06 
+Standard Power Access Points and Fixed Client Devices operating under CFR 
+15.407(a)(4) must [shall] access an AFC System to determine the available frequencies and 
+the maximum permissible power in each frequency range at their geographic coordinates 
+prior to transmitting. (15.407(k)(1)) 
+R0-DGR-03 
+Standard Power Access Points and Fixed Client Devices must [shall] contact 
+an AFC System at least once per day to obtain the latest list of available frequencies and the 
+maximum permissible power the Standard Power Access Point or Fixed Client Device may 
+operate with on each frequency at the Standard Power Access Point and Fixed Client 
+Device’s location. (15.407(k)(8)(iv)) 
+R0-DGR-04 
+If the Standard Power Access Point or Fixed Client Device fails to successfully 
+contact the AFC System during any given day, the Standard Power Access Point or Fixed 
+Client Device may continue to operate until 11:59 p.m. of the following day at which time it 
+must [shall] cease operations until it re-establishes contact with the AFC System and re-
+verifies its list of available frequencies and associated power levels. (15.407(k)(8)(iv)) 
+R2-DGR-02 
+When contacting the AFC System in accordance with R0-DGR-03, the 
+Standard Power Device shall query the AFC System for the frequency availability using one 
+of the following methods: 
+a. Query the AFC System for a frequency range(s) without specifying a Channel size 
+across which it will operate. 
+b. Query the AFC System for Channel(s) identified in a manner specific to an air interface 
+that defines its upper and lower frequency boundaries and bandwidth. 
+R2-DGR-05 
+The frequency range(s) queried by the Standard Power Device following 
+R2-DGR-02-a shall include up to one and one-half times the device’s intended operating 
+Channel bandwidth away from the Channel’s center frequency to the extent that such 
+frequencies are within the U-NII-5 and U-NII-7 bands. 
+R2-DGR-06 
+In R0-DGR-04, the Standard Power Device shall use the time zone of its 
+geographic coordinates (i.e., local time). 
+R3-DGR-01 
+Deprecated. 
+5.2 
+Geolocation Capability 
+R0-DGR-05 
+Geolocation capability: 
+
+
+--- Page 21 ---
+6 GHz Committee Functional Specification WG 
+Functional Requirements for the U.S. 6 GHz Band 
+WINNF-TS-1014-V1.5.0 
+ 
+Copyright © 2025 The Software Defined Radio Forum Inc. 
+Page 20 
+All Rights Reserved 
+a. A Standard Power Access Point and a Fixed Client Device must [shall] report such 
+coordinates [its geographic coordinates] and location uncertainty to an AFC System at 
+the time of activation from a power-off condition. (15.407(k)(9)(i)) 
+b. An external geolocation source may be connected to a Standard Power Access Point or 
+Fixed Client Device through either a wired or a wireless connection. A single 
+geolocation source may provide location information to multiple Standard Power 
+Access Points or Fixed Client Devices. (15.407(k)(9)(ii)) 
+c. The applicant for certification of a Standard Power Access Point or Fixed Client Device 
+must [shall] demonstrate the accuracy of the geolocation method used and the location 
+uncertainty. (15.407(k)(9)(iv)) 
+d. For Standard Power Access Points and Fixed Client Devices that may not use an 
+internal geo-location capability, this uncertainty must [shall] account for the accuracy of 
+the geolocation source and the separation distance between such source and the 
+Standard Power Access Point or Fixed Client Device. (15.407(k)(9)(iv)) 
+R1-DGR-01 
+A Standard Power Device must [shall] include either an internal geolocation 
+capability or an integrated capability to securely connect to an external geolocation devices 
+or service, to automatically determine the Standard Power Device’s geographic coordinates 
+and location uncertainty (in meters), with a confidence level of 95 %. (15.407(k)(9)(i)) 
+5.3 
+Use of Proxy 
+R2-DGR-01 
+The obligations of one or more Standard Power Devices to communicate with 
+the AFC System may be met in combination with a Proxy. 
+5.4 
+Device Power and Emission Limits 
+R0-DGR-07 
+Power Limits (15.407(a)(4)) 
+a. The maximum power spectral density must [shall] not exceed 23 dBm e.i.r.p in any 1-
+megahertz band. 
+b. The maximum e.i.r.p. over the frequency band of operation must [shall] not exceed 36 
+dBm. 
+R2-DGR-03 
+A Standard Power Device that follows the available frequencies and the 
+maximum permissible power provided by the AFC System in accordance with 
+R2-AGR-03-a shall ensure that its emissions outside of its intended Channel of operation do 
+not exceed the allowable level on any frequency, on either the upper or lower adjacent 
+Channels, by applying the relative out of Channel emission maxima specified in 
+15.407(b)(7), or an alternative set of relative emission levels as authorized for the specific 
+device. 
+R2-DGR-04 
+Channel emission limits in multiple channel operation: 
+
+
+--- Page 22 ---
+6 GHz Committee Functional Specification WG 
+Functional Requirements for the U.S. 6 GHz Band 
+WINNF-TS-1014-V1.5.0 
+ 
+Copyright © 2025 The Software Defined Radio Forum Inc. 
+Page 21 
+All Rights Reserved 
+The Standard Power Device that follows the available frequencies and the maximum 
+permissible power provided by the AFC System in accordance with R2-AGR-03-b, and 
+which operates on more than one Channel simultaneously, shall reduce out of Channel 
+emissions by 3 dB for overlapping frequencies of the out of Channel emission masks 
+corresponding to any of the transmission Channels. 
+6 Standard Power Device Security Requirements (DSQ) 
+6.1 
+Communication Security 
+R1-DSQ-01 
+Standard Power Device Security (15.407(k)(8)(v)): 
+a. Standard Power Devices must [shall] incorporate adequate security measures to prevent 
+it from accessing AFC Systems not approved by the FCC. 
+b. Standard Power Devices must [shall] incorporate adequate security measures to ensure 
+that communications between Standard Power Devices and AFC Systems are secure to 
+prevent corruption or unauthorized interception of data. 
+R1-DSQ-02 
+The Proxy shall implement security mechanisms to prevent any third party to 
+control, authorize or allow Standard Power Devices to radiate emissions in the 6 GHz band any 
+other way than permitted by an AFC System ([n.22], Section 2). 
+R2-DSQ-05 
+Standard Power Device shall address R1-DSQ-01-a by verifying the AFC 
+System’s Server Certificate. 
+R2-DSQ-01 
+A Standard Power Device or Proxy if applicable shall use, for the purpose of 
+communications with an AFC System, the following protocols: HTTP 1.1 [n.9] or higher 
+and TLS 1.2 [n.10] or higher, or an alternative method of communication which provides a 
+similar or higher level of security. 
+NOTE: Useful information related to this requirement is available in RFC-8996 
+[i.1], NIST Special Publication 800-52 Revision 2 [i.2], and RFC-7525 [i.3]. 
+R2-DSQ-02 
+A Standard Power Device or Proxy shall support at least the following cipher 
+suites when utilizing TLS 1.2 [n.10]: 
+ 
+TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256 
+ 
+TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256 
+R2-DSQ-03 
+Cipher suites that offer equivalent or higher levels of protection as those cited 
+in R2-DSQ-02 may also be supported and used. 
+R2-DSQ-04 
+All cipher suites supported in TLS 1.3 [n.11] or higher may also be supported 
+and used. 
+
+
+--- Page 23 ---
+6 GHz Committee Functional Specification WG 
+Functional Requirements for the U.S. 6 GHz Band 
+WINNF-TS-1014-V1.5.0 
+ 
+Copyright © 2025 The Software Defined Radio Forum Inc. 
+Page 22 
+All Rights Reserved 
+7 AFC System General Requirements (AGR) 
+7.1 
+Device Registration 
+R1-AGR-01 
+An AFC System must [shall] verify the validity of the FCC identifier (FCC ID) 
+of any Standard Power Device seeking access to its services prior to authorizing the 
+Standard Power Device to begin operation. (15.407(k)(6))  
+a. A list of Standard Power Devices with valid FCC IDs and the FCC IDs of those devices 
+must [shall] be obtained from the Commission's Equipment Authorization System. 
+R1-AGR-02 
+The AFC System shall register, authenticate and authorize Standard Power 
+Device operations, individually or through a network element device [Proxy] representing 
+multiple Standard Power Devices from the same operating network. (15.407(k)(7)(ii)) 
+R2-AGR-06 
+If the Standard Power Device does not notify whether it is located indoors as 
+per R2-DGR-07, the AFC System shall assume the Standard Power Device is located 
+outdoors. 
+7.2 
+Determination of Available Frequencies and the Maximum Permissible Power 
+R0-AGR-01 
+An AFC System must [shall] be capable of determining the available 
+frequencies in steps of no greater than 3 dB below the maximum permissible e.i.r.p of 
+36 dBm, and down to at least a minimum level of 21 dBm. (15.407(k)(2)) 
+R1-AGR-03 
+An AFC System must [shall] use the information supplied by Standard Power 
+Devices during registration to determine available frequencies and the maximum permissible 
+power in each frequency range for a Standard Power Device at any given location using 
+propagation models and interference protection criteria defined in 47 CFR 15.407(l). 
+(15.407(k)(4), 15.407(k)(7)(iii), 15.407(l)) 
+a. All such determinations and assignments must [shall] be made in a non-discriminatory 
+manner.  
+R2-AGR-01 
+An AFC System shall use location uncertainty reported by a Standard Power 
+Device to determine maximum acceptable power levels to protect fixed service receivers. 
+([n.3], Paragraph 41) 
+R2-AGR-02 
+The AFC System shall support one or more query methods specified in 
+R2-DGR-02 for providing frequency availability to the Standard Power Devices. 
+R2-AGR-03 
+Available Frequencies and the Maximum Permissible Power: 
+a. The AFC System responding to the Standard Power Device using the method a in 
+R2-DGR-02 shall identify the maximum allowed Power Spectral Density for each 
+1 MHz interval across the queried frequency range. 
+
+
+--- Page 24 ---
+6 GHz Committee Functional Specification WG 
+Functional Requirements for the U.S. 6 GHz Band 
+WINNF-TS-1014-V1.5.0 
+ 
+Copyright © 2025 The Software Defined Radio Forum Inc. 
+Page 23 
+All Rights Reserved 
+b. The AFC System responding to the Standard Power Device using the method b in 
+R2-DGR-02 shall identify the maximum allowed e.i.r.p for each specified Channel 
+bandwidth. 
+R2-AGR-04 
+Limits of Maximum Permissible Power determined by the AFC System: 
+a. Maximum PSD returned by the AFC System as per R2-AGR-03-a shall not exceed the 
+maximum PSD limit specified in R0-DGR-07-a. 
+b. When calculating the maximum e.i.r.p of a queried Channel, the AFC System shall 
+assume the Standard Power Device will operate on only the queried Channel over the 
+frequency band of operation. 
+R2-AGR-05 
+Standard Power Device Height Above Ground Level 
+The AFC System shall assume a height above ground level of 1.5 meters for the Standard 
+Power Device height if the corresponding height reported by the device, HSPD (AGL), is less 
+than 1.5 meters. 
+R3-AGR-01 
+Deprecated. 
+R3-AGR-02 
+Deprecated. 
+7.3 
+Storage of Information 
+R0-AGR-02 
+An AFC System shall obtain updated protected sites information from 
+Commission databases. (15.407(k)(7)(iv)) 
+R0-AGR-03 
+Each AFC System Operator designated by the Commission must [shall] 
+maintain a regularly updated AFC System database, including incumbent’s information and 
+Standard Power Access Points and Fixed Client Devices registration parameters. 
+(15.407(k)(15)(i)) 
+R1-AGR-04 
+Storage of registered information (15.407(k)(5)): 
+a. An AFC System shall store Standard Power Device registration information in a secure 
+database. 
+b. The stored registration information shall be available for more than three months after 
+the Standard Power Devices last contacted with the AFC System. 
+7.4 
+Enforcement Instructions from the Commission 
+R1-AGR-05 
+AFC Systems shall have the capability to deny spectrum access to a particular 
+Standard Power Device upon requests by the Commission, in the event of harmful 
+interference caused by a particular device or type of device. ([n.3], Paragraph 83) 
+R1-AGR-06 
+Each AFC System Operator designated by the Commission must [shall] 
+comply with enforcement instructions from the Commission, including discontinuance of 
+Standard Power Device operations in designated geographic areas. (15.407(k)(15)(vi)) 
+
+
+--- Page 25 ---
+6 GHz Committee Functional Specification WG 
+Functional Requirements for the U.S. 6 GHz Band 
+WINNF-TS-1014-V1.5.0 
+ 
+Copyright © 2025 The Software Defined Radio Forum Inc. 
+Page 24 
+All Rights Reserved 
+8 AFC System Security Requirements (ASQ) 
+8.1 
+Communication Security 
+R0-ASQ-01 
+The AFC System must [shall] ensure that: 
+a. all communications and interactions between the AFC System and Standard Power 
+Devices are accurate and secure. (15.407(k)(13)) 
+b. unauthorized parties cannot access or alter the database, or alter the list of available 
+frequencies and associated powers sent to a Standard Power Device. (15.407(k)(13)) 
+R1-ASQ-01 
+The AFC System shall incorporate security measures to protect against 
+unauthorized data input or alteration of stored data, including establishing communications 
+authentication procedures between the AFC System and Standard Power Devices. 
+(15.407(k)(8)(v)) 
+R2-ASQ-05 
+The AFC System shall identify itself via a Server Certificate issued by a 
+Trusted CA. 
+a. Server Certificates shall be OV (Organization Validated) certificates that include vetted 
+company information. 
+b. Server Certificates with only domain name shall not be accepted. 
+R2-ASQ-01 
+An AFC System shall use the following protocols for the purpose of 
+communications between itself and a Standard Power Device or Proxy: HTTP 1.1 [n.9] or 
+higher and TLS 1.2 [n.10] or higher, or an alternative method of communication which 
+provides a similar or higher level of security. 
+NOTE: Useful information related to this requirement is available in RFC-8996 
+[i.1], NIST Special Publication 800-52 Revision 2 [i.2], and RFC-7525 [i.3]. 
+R2-ASQ-02 
+An AFC System shall support at least the following cypher suites when 
+utilizing TLS 1.2 [n.10]: 
+ 
+TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256 
+ 
+TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256 
+R2-ASQ-03 
+Cypher suites that offer equivalent or higher levels of protection as those cited 
+in R2-ASQ-02 may also be supported and used. 
+R2-ASQ-04 
+All cipher suites supported in TLS 1.3 [n.11] or higher may also be supported 
+and used. 
+
+
+--- Page 26 ---
+6 GHz Committee Functional Specification WG 
+Functional Requirements for the U.S. 6 GHz Band 
+WINNF-TS-1014-V1.5.0 
+ 
+Copyright © 2025 The Software Defined Radio Forum Inc. 
+Page 25 
+All Rights Reserved 
+9 AFC System Incumbent Protection (AIP) 
+9.1 
+Fixed Service Receiver Protection 
+9.1.1 Interference Protection Criteria and Evaluation Point 
+R0-AIP-07 
+Based on the criteria set forth in R0-AIP-03 and R0-AIP-04, an AFC System 
+must [shall] establish location and frequency-based exclusion zones (both co-channel and 
+adjacent channel) around fixed microwave receivers operating in the 5.925-6.425 GHz and 
+6.525-6.875 GHz bands. (15.407(l)) 
+R0-AIP-03 
+The AFC System must [shall] use -6 dB I/N as the interference protection 
+criteria in determining the size of the co-channel exclusion zone where I (interference) is the 
+co-channel signal from the Standard Power Access Point or Fixed Client Device at the fixed 
+microwave service receiver, and N (noise) is background noise level at the fixed microwave 
+service receiver (15.407(l)(2)(i)) 
+R0-AIP-04 
+The AFC System must [shall] use -6 dB I/N as the interference protection 
+criteria in determining the size of the adjacent channel exclusion zone, where I (interference) 
+is the signal from the Standard Power Access Point or Fixed Client Device’s out of channel 
+emissions at the fixed microwave service receiver and N (noise) is background noise level at 
+the fixed microwave service receiver. (15.407(l)(2)(ii)) 
+a. 
+The adjacent channel exclusion zone must [shall] be calculated based on the emissions 
+requirements specified in 47 CFR 15.407(b)(7).  
+R2-AIP-03 
+When calculating an adjacent channel exclusion zone in accordance with 
+R0-AIP-04-a, the AFC system following R2-AGR-03-b shall take into account out of 
+channel emission limits (specified in 47 CFR 15.407(b)(7)) up to one and a half times the 
+device’s channel bandwidth away from its channel center, where the device’s Channel 
+bandwidth refers to Channel bandwidth provided by the device using the method b in 
+R2-DGR-02. 
+R2-AIP-01 
+AFC Systems shall protect temporary fixed links from harmful interference 
+during the term defined by “start date” and “end date” in the ULS database. ([n.3], 
+Paragraph 32, and [n.8]) 
+R2-AIP-16 
+In determining frequency availability and maximum permissible power as per 
+R2-AGR-03, the AFC System shall determine the maximum permissible power so that the 
+following condition is met for protection of fixed service receivers and diversity receivers: 
+I/NThres ≥ max(I/NRx, Est,  I/NVRx-1, Est, ⋯ , I/NVRx-j, Est, ⋯ , I/NVRx-XNumOfVRx, Est) 
+I/NRx, Est = PSPD, Tx – LPropagation, Rx – LBEL + GRx, Effective – N – LFS, Feeder 
+I/NVRx-j, Est = PSPD, Tx – LPropagation, VRx-j – LBEL + GVRx-j, Effective – GVRx-j, Disc – N – LFS, Feeder 
+where: 
+
+
+--- Page 27 ---
+6 GHz Committee Functional Specification WG 
+Functional Requirements for the U.S. 6 GHz Band 
+WINNF-TS-1014-V1.5.0 
+ 
+Copyright © 2025 The Software Defined Radio Forum Inc. 
+Page 26 
+All Rights Reserved 
+▪ 
+I/NThres (dB): interference-to-noise ratio as the interference protection criteria as per 
+R0-AIP-03 and R0-AIP-04  
+▪ 
+I/NRx, Est (dB): estimated interference-to-noise ratio at the fixed service receiver or 
+diversity receiver1 
+▪ 
+I/NVRx-j, Est (dB): estimated interference-to-noise ratio at the j-th Virtual Receiver (if 
+present) 
+▪ 
+PSPD, Tx (dBm): the Standard Power Device transmission power across the frequency 
+range I/NEst calculations are performed. 
+▪ 
+LPropagation, Rx (dB): propagation losses as per R0-AIP-02 between the Standard Power 
+Device and FS receiver antenna. In addition, R2-AIP-34 provides additional information 
+for WINNER II path loss.  
+▪ 
+LPropagation, VRx-j (dB): propagation losses as per R2-AIP-38 between the Standard Power 
+Device and the j-th Virtual Receiver. In addition, R2-AIP-34 provides additional 
+information for WINNER II path loss.  
+▪ 
+LBEL (dB) (OPTIONAL): the Building Entry Loss (BEL) applicable to Standard Power 
+Devices located indoors. 
+▪ 
+GRx, Effective (dBi): the FS receiver effective antenna gain determined in the direction of 
+the Standard Power Device (R2-AIP-05, R2-AIP-07, R2-AIP-08, R2-AIP-09 and 
+R2-AIP-23) 
+▪ 
+GVRx-j, Effective: Effective gain of the j-th Virtual Receiver as per R2-AIP-31-b 
+▪ 
+GVRx-j, Disc: The j-th Virtual Receiver gain determined in the direction of the Standard 
+Power Device as per R2-AIP-31-c 
+▪ 
+N (dBm): the actual FS receiver noise level as per R2-AIP-02 scaled to the frequency 
+range I/NRx, Est and I/NVRx-j, Est calculations are performed. 
+▪ 
+LFS, Feeder (dB): the FS feeder loss of the actual FS receiver antenna as per R2-AIP-10 
+R2-AIP-26 
+Building Entry Loss (BEL):  
+a. When BEL is applicable to the propagation loss of a Standard Power Device, the default 
+value of LBEL in R2-AIP-16 shall be set to 20.5 dB. 
+b. An AFC System Operator may modify the BEL value for specific locations based on 
+site-specific information, such as measured values of BEL, to ensure required protection 
+of incumbents as per R0-AIP-03 and R0-AIP-04 and efficient access for unlicensed 
+users. The methods for modification are for further study. 
+R2-AIP-22 
+Use of Location Uncertainty in Fixed Service Receiver Protection: 
+a. The AFC System shall determine the available frequencies and maximum radiated PSD 
+per frequency or maximum allowed e.i.r.p. for each specified channel bandwidth 
+ 
+1 Fixed Service site can be protected as long as maximum permissible power is determined based on higher value of 
+I/NRx, Est between primary and diversity receivers. 
+
+
+--- Page 28 ---
+6 GHz Committee Functional Specification WG 
+Functional Requirements for the U.S. 6 GHz Band 
+WINNF-TS-1014-V1.5.0 
+ 
+Copyright © 2025 The Software Defined Radio Forum Inc. 
+Page 27 
+All Rights Reserved 
+consistent with the most restrictive radiated PSD or e.i.r.p. for each point and frequency 
+or channel evaluated within the uncertainty volume. 
+b. The evaluation points within this uncertainty volume shall be determined based on a 
+grid superimposed on the Standard Power Device’s horizontal area of location 
+uncertainty as reported in the request, along with the reported height HSPD (AGL) and 
+associated vertical uncertainty HSPD, sampled at intervals no greater than 1 arc second 
+of latitude and longitude and no greater than 5 meters of elevation. 
+c. The minimum and maximum Standard Power Device heights (i.e., HSPD (AGL) +/- HSPD) 
+shall always be included in the range covered by the set of evaluation points, where the 
+minimum height is set in accordance with R2-AGR-05. 
+d. The morphology shall be determined as per R2-AIP-11 and R2-AIP-12 at each 
+evaluation point within the horizontal area of location uncertainty. 
+R2-AIP-40 
+FS in Standard Power Device’s Horizontal Area of Location Uncertainty 
+If the FS Rx is inside the Standard Power Device’s horizonal area of location uncertainty or 
+if the FS Rx is outside the Standard Power Device’s horizonal area of location uncertainty 
+but within a 1-arcsec by 1-arcsec evaluation point that overlaps with the Standard Power 
+Device’s horizonal area of location uncertainty,  
+a. if the FS Rx height is inside the Standard Power Device’s vertical uncertainty, AFC 
+System reports an allowable PSD2 level of -40 dBm/MHz for the frequencies co-channel 
+with that FS Rx 
+b. else if the FS Rx height is outside the Standard Power Device’s vertical uncertainty,  
+i. 
+Compute the minimum angle-off-boresight from that FS Rx to the Standard 
+Power Device’s uncertainty volume, and use this angle to compute FS Rx 
+antenna gain towards the Standard Power Device for all evaluation points. 
+ii. 
+Use free space path loss for path loss calculation at all evaluation points. 
+iii. 
+In all cases if the calculation of PSD is below -40 dBm/MHz in any MHz co-
+channel with FS Rx, report an allowable PSD level of -40 dBm/MHz for the 
+frequencies co-channel with that FS Rx. 
+R2-AIP-41 
+Evaluation Point Ground Elevation 
+Each USGS 1-arcsec 3DEP ground elevation data point represents a uniform height over a 
+1-arcsec by 1-arcsec region, and is used for all calculations requiring the ground elevation 
+above mean sea level (AMSL). 
+ 
+2 Note that for the channel response, the EIRP is calculated by multiplying the PSD by the channel bandwidth. The 
+EIRP is set such that both in-band and adjacent channel interference are met across SPD’s channel +/- first adjacent 
+channel. 
+
+
+--- Page 29 ---
+6 GHz Committee Functional Specification WG 
+Functional Requirements for the U.S. 6 GHz Band 
+WINNF-TS-1014-V1.5.0 
+ 
+Copyright © 2025 The Software Defined Radio Forum Inc. 
+Page 28 
+All Rights Reserved 
+R3-AIP-01 
+Deprecated. 
+9.1.2 Fixed Service Transmitter and Receiver Parameters 
+9.1.2.1 Retrieval of Fixed Service Data 
+R0-AIP-01 
+An AFC System must [shall] obtain information on protected services within 
+the 5.925-6.425 GHz and 6.525-6.875 GHz bands from Commission databases and use that 
+information to determine frequency availability for Standard Power Access Points and Fixed 
+Client Devices based on protection criteria specified in R0-AIP-03 and R0-AIP-04. 
+(15.407(k)(3)) 
+NOTE: 
+The ULS data element corresponding to fixed service parameters 
+referred in this section can be found in Annex C. 
+R1-AIP-02 
+The AFC System shall download the ULS databases on a daily basis to obtain 
+information on protected services within the 5.925-6.425 GHz and 6.525-6.875 GHz bands. 
+(Paragraph 30, [n.3]) 
+NOTE: In the event the ULS databases are not available for daily download, the AFC 
+System is expected to continue to operate on the most recently available 
+database download. 
+R2-AIP-18 
+Missing Center Frequency in the ULS: 
+If the center frequency, Fc, FS-Rx, ULS (MHz), is not available in the ULS, the AFC System 
+need not perform any protection for the fixed service receiver primary and diversity path. 
+R2-AIP-13 
+Use of Supplementary Data Repository: 
+a. The AFC System shall obtain the following data from the Supplementary Data 
+Repository [n.17]. 
+• 
+Category B1 Antenna data (if supporting the procedure specified in R2-AIP-07-b) 
+• 
+High Performance Antenna data (if supporting the procedure specified in 
+R2-AIP-07-b) 
+• 
+Transmit Radio Unit Architecture data (as per R2-AIP-10) 
+• 
+Billboard Reflector data (as per R2-AIP-29) 
+• 
+Antenna Model, Diameter and Gain data (as per R2-AIP-06 and R2-AIP-29) 
+b. The AFC System may additionally obtain the following data from the Supplementary 
+Data Repository [n.17]. 
+• 
+FCC Frequency Assignment data (as per R2-AIP-19) 
+9.1.2.2 Determination of Fixed Service Antenna Parameters 
+R2-AIP-05 
+Fixed Service Receiver Antenna Gain, Diameter and Aperture Efficiency:  
+
+
+--- Page 30 ---
+6 GHz Committee Functional Specification WG 
+Functional Requirements for the U.S. 6 GHz Band 
+WINNF-TS-1014-V1.5.0 
+ 
+Copyright © 2025 The Software Defined Radio Forum Inc. 
+Page 29 
+All Rights Reserved 
+In determining a fixed service receiver antenna gain GRx (dBi), diameter DRx (m) and 
+aperture efficiency Rx for I/N estimation in R2-AIP-16, the AFC System shall use one of 
+the following methods in order of precedence: 
+a. If the receiver antenna gain GRx, ULS (dBi), receive antenna model and receive antenna 
+make are available in the ULS, and if DRx (m) is available for the receive antenna model 
+in the Antenna Model, Diameter, and Gain data, the AFC System shall determine 
+GRx (dBi), DRx (m) and Rx by using GRx, ULS (dBi), receive antenna model, receive 
+antenna make and the center frequency Fc, FS-Rx, ULS (MHz) in the method specified by 
+R2-AIP-06.  
+b. If GRx, ULS (dBi) is available in the ULS and receive or passive end antenna model is not 
+available, but the antenna model of the transmitter of the FS Path Link is available in the 
+ULS, DTx (m) is available for the transmit antenna model in the Antenna Model, 
+Diameter, and Gain data and GRx, ULS (dBi) is equal to the transmit antenna gain 
+GTx, ULS (dBi), the AFC System shall determine GRx (dBi) and Rx by using GRx, ULS (dBi), 
+transmit antenna model, transmit antenna make, and Fc, FS-Rx, ULS (MHz) in the method 
+specified by R2-AIP-06 and shall set DRx (m) to DTx (m).  
+c. If GRx, ULS (dBi) is available in the ULS, receive or passive antenna model and make are 
+not available, but the return path is known and the transmitter antenna gain for that return 
+path, GTx, ULS (dBi), transmit antenna model, transmit antenna make of the return path are 
+available in the ULS, DTx (m) is available for the transmit antenna model of the return 
+path in the Antenna Model, Diameter, and Gain data and GRx, ULS (dBi) is equal to 
+GTx, ULS (dBi), the AFC System shall determine GRx (dBi) and Rx by using GTx, ULS (dBi), 
+return path transmit antenna model, return path transmit antenna make and 
+Fc, FS-Rx, ULS (MHz) in the method specified by R2-AIP-06 and shall set DRx (m) to 
+DTx (m). 
+NOTE:  A return path is available in the ULS if the same licensee has a path 
+within the same frequency band with transmit, receive and all Passive 
+Site location coordinates that match the receive, transmit and all Passive 
+Site location coordinates respectively. 
+d. If GRx, ULS (dBi) is available in the ULS but the methods in a-to-c above are not 
+applicable, the AFC System shall determine GRx (dBi), DRx (m) and Rx by using the 
+following formula:  
+GRx = {
+32 dBi
+GRx, ULS
+48 dBi
+dBi           
+for GRx, ULS< 32 dBi
+for 32 ≤ GRx, ULS ≤ 48 dBi
+Otherwise
+ 
+DRx=
+c
+π∙Fc, U-NII-band
+∙√10GRx 10
+⁄
+Rx 
+ (m) 
+
+
+--- Page 31 ---
+6 GHz Committee Functional Specification WG 
+Functional Requirements for the U.S. 6 GHz Band 
+WINNF-TS-1014-V1.5.0 
+ 
+Copyright © 2025 The Software Defined Radio Forum Inc. 
+Page 30 
+All Rights Reserved 
+ 
+c: The speed of light (= 299,792,458 m/s) 
+ 
+Fc, U-NII-band= {6,175,000,000 Hz (if Fc, FS-Rx, ULS is within the U-NII-5 band)
+6,700,000,000 Hz (if Fc, FS-Rx, ULS is within the U-NII-7 band) 
+ 
+Rx: 55% typical antenna aperture efficiency (0.55) 
+e. If GRx, ULS (dBi) is not available in the ULS, the AFC System shall determine GRx (dBi), 
+DRx (m) and Rx as follows: 
+GRx (dBi) = {38.8 dBi (if Fc, FS-Rx, ULS is within the U-NII-5 band)
+39.5 dBi (if Fc, FS-Rx, ULS is within the U-NII-7 band) 
+DRx (m) = 1.83 meters (= 6 feet) 
+Rx = 0.55 
+R2-AIP-06 
+Determination of Fixed Service Receiver Antenna Gain, Diameter and 
+Aperture Efficiency using ULS information: 
+a. In the methods a-to-c in R2-AIP-05, the AFC System shall determine the fixed service 
+receiver antenna gain GRx (dBi), DRx (m) and Rx as follows: 
+ 
+DRx (m) = Antenna diameter identified by the antenna model according to Antenna 
+Model, Diameter, and Gain data as per R2-AIP-13, where the antenna model to be 
+used for identification of diameter depends on which method is selected in R2-
+AIP-05. 
+ 
+GRx (dBi) = {
+GULS
+if GTypical - 0.7 ≤ GULS ≤ GTypical + 0.7
+GMB
+else if GMB is available
+GTypical
+otherwise
+  
+ 
+Rx = 55% typical antenna aperture efficiency (0.55)  
+where: 
+o 
+GULS (dBi): GRx, ULS or GTx, ULS , depending on which method is 
+selected in R2-AIP-05 
+o 
+GMB (dBi): The licensed mid-band antenna gain identified by the 
+antenna model according to Antenna Model, Diameter, and Gain data 
+as per R2-AIP-13, where the antenna model to be used for 
+identification of the mid-band gain depends on which method is 
+selected in R2-AIP-05. from the specifications of receive antenna 
+model produced by receive antenna make is used in most 
+circumstances.  
+
+
+--- Page 32 ---
+6 GHz Committee Functional Specification WG 
+Functional Requirements for the U.S. 6 GHz Band 
+WINNF-TS-1014-V1.5.0 
+ 
+Copyright © 2025 The Software Defined Radio Forum Inc. 
+Page 31 
+All Rights Reserved 
+NOTE: The exception to using the licensed gain is in the situation 
+where it does not fall within reasonable tolerance of the 
+typical gain for the antenna diameter.  
+o 
+GTypical (dBi): The typical antenna gain for an antenna of diameter DRx 
+(m), determined by using the following formula: 
+GTypical = 10 log10 [Rx∙(π∙Fc, U-NII-band∙DRx
+c
+)
+2
+]  (dBi) 
+ 
+c: The speed of light (= 299,792,458 m/s) 
+ 
+Fc, U-NII-band =
+{6,175,000,000 Hz (if Fc, FS-Rx, ULS is within the U-NII-5 band)
+6,700,000,000 Hz (if Fc, FS-Rx, ULS is within the U-NII-7 band) 
+ 
+DRx: Antenna diameter specified for the antenna model (depending on 
+which method is selected in R2-AIP-05) 
+b. The AFC system shall then adjust the value of Rx as follows: 
+ηRx= {
+0.55
+if |GULS –  GTypical| ≤ 0.7 
+100.1[GRx+ 159.593 – 20log10(Fc, U-NII-band)-20 log10(DRx)]
+Otherwise
+ 
+R2-AIP-07 
+Fixed Service Receiver and Diversity Receiver Antenna Radiation Pattern 
+Envelope: 
+a. For the purpose of fixed service receiver protection, the AFC System shall use the FS 
+antenna radiation pattern envelope (RPE). 
+b. The AFC System shall support at least one of the following methods to determine the 
+FS antenna RPE: 
+i. 
+To use actual RPE provided by the manufacturer. 
+ii. 
+To use default RPE defined by the following procedures: 
+1. The AFC System shall use |Disc| (and |DDisc|) calculated from the receiver 
+antenna (and the diversity receiver antenna) with boresight in the direction of 
+the Segment transmitter (i.e., fixed service transmitter or Passive Site). 
+2. For primary receive antennas with GRx < 38 dBi: 
+▪ Use the formulas in ITU-R F.699-8 [n.15] by using DRx and GRx 
+determined in accordance with R2-AIP-05 if |Disc| < 5 degrees. 
+▪ Use the minimum radiation suppression in Table 2 for the Fc, FS-Rx, ULS 
+(MHz) and Category B2 if |Disc| ≥ 5 degrees. 
+
+
+--- Page 33 ---
+6 GHz Committee Functional Specification WG 
+Functional Requirements for the U.S. 6 GHz Band 
+WINNF-TS-1014-V1.5.0 
+ 
+Copyright © 2025 The Software Defined Radio Forum Inc. 
+Page 32 
+All Rights Reserved 
+3. For primary receive antennas with GRx ≥ 38 dBi: 
+▪ Use the formulas in ITU-R F.699-8 [n.15] by using DRx and GRx 
+determined in accordance with R2-AIP-05 if |Disc| < 5 degrees. 
+▪ If |Disc| ≥ 5 degrees: 
+• Use the minimum radiation suppression in Table 2 for the 
+Fc, FS-Rx, ULS (MHz) and Category B1 if antenna model is blank in 
+the ULS or is identified as a Category B1 antenna according to 
+Category B1 Antenna data obtained as per R2-AIP-13.   
+• Use the greater discrimination value of: 
+o the minimum radiation suppression in Table 2 for the 
+Fc, FS-Rx, ULS (MHz) and Category A and  
+o GRx – GRx(Disc), where GRx(Disc) is determined using the 
+formulas in ITU-R F.699-8 [n.15] by using DRx and GRx 
+determined in accordance with R2-AIP-05 and Fc, FS-Rx, ULS  
+if antenna model is identified as a high-performance antenna 
+according to High Performance Antenna data obtained as per 
+R2-AIP-13.   
+• Use the minimum radiation suppression in Table 2 for the 
+Fc, FS-Rx, ULS (MHz) and Category A otherwise.   
+4. For diversity receive antennas with GDRx < 38 dBi: 
+▪ Use the formulas in ITU-R F.699-8 [n.15] by using DDRx and GDRx 
+determined in accordance with R2-AIP-08 if |DDisc| < 5 degrees. 
+▪ Use the minimum radiation suppression in Table 2 for the Fc, FS-Rx, ULS 
+(MHz) and Category B1 if |DDisc| ≥ 5 degrees. 
+5. For diversity receive antennas with GDRx ≥ 38 dBi: 
+▪ Use the formulas in ITU-R F.699-8 [n.15] by using DDRx and GDRx 
+determined in accordance with R2-AIP-08 if |DDisc| < 5 degrees. 
+▪ If |DDisc| ≥ 5 degrees: 
+• Use the minimum radiation suppression in Table 2 for the 
+Fc, FS-Rx, ULS (MHz) and Category B1 if antenna model is blank in 
+the ULS or is identified as a Category B1 antenna according to 
+Category B1 Antenna data obtained as per R2-AIP-13.  
+
+
+--- Page 34 ---
+6 GHz Committee Functional Specification WG 
+Functional Requirements for the U.S. 6 GHz Band 
+WINNF-TS-1014-V1.5.0 
+ 
+Copyright © 2025 The Software Defined Radio Forum Inc. 
+Page 33 
+All Rights Reserved 
+• Use the greater discrimination value of  
+o the minimum radiation suppression in Table 2 for the 
+Fc, FS-Rx, ULS (MHz) and Category A and  
+o GDRx – GDRx(DDisc), where GDRx(DDisc) is determined 
+using the formulas in ITU-R F.699-8 [n.15] by using DDRx 
+and GDRx as specified in R2-AIP-08 and Fc, FS-Rx, ULS. 
+if antenna model is identified as a high-performance antenna 
+according to High Performance Antenna data obtained as per 
+R2-AIP-13.  
+• Use the minimum radiation suppression in Table 2 for the 
+Fc, FS-Rx, ULS (MHz) and Category A otherwise.   
+Table 2: Minimum radiation suppression defined in FCC Rules Part 101.115 [n.16] 
+Frequency 
+(MHz) 
+Category Maximum 
+beamwidth 
+to 3 dB 
+point 
+(included 
+angle in 
+degrees) 
+Minimum 
+antenna 
+gain (dBi) 
+Minimum radiation suppression to 
+angle in degrees from centerline of 
+main beam in decibels 
+5° 
+to 
+10° 
+10° 
+to 
+15° 
+15° 
+to 
+20° 
+20° 
+to 
+30° 
+30° 
+to 
+100° 
+100° 
+to 
+140° 
+140° 
+to 
+180° 
+5,925 to 
+6,425 
+A 
+2.2 
+38 
+25 
+29 
+33 
+36 
+42 
+55 
+55 
+B1 
+2.2 
+38 
+21 
+25 
+29 
+32 
+35 
+39 
+45 
+B2 
+4.1 
+32 
+15 
+20 
+23 
+28 
+29 
+60 
+60 
+6,525 to 
+6,875 
+A 
+2.2 
+38 
+25 
+29 
+33 
+36 
+42 
+55 
+55 
+B1 
+2.2 
+38 
+21 
+25 
+29 
+32 
+35 
+39 
+45 
+B2 
+4.1 
+32 
+15 
+20 
+23 
+28 
+29 
+60 
+60 
+R2-AIP-08 
+Fixed Service Diversity Receive Antenna Gain and Diameter: 
+In determining a fixed service diversity receive antenna gain GDRx (dBi) and diameter DDRx 
+(m), the AFC System shall use one of the following methods in order of precedence: 
+a. If the receive antenna gain GRx, ULS (dBi), receive antenna model, receive antenna make 
+in the ULS are not blank, the value of GRx, ULS (dBi) is not 0, and the value of diversity 
+receiver antenna gain GDRx, ULS (dBi) is not blank, the value of GDRx, ULS (dBi) is not 0, 
+and GRx, ULS (dBi) = GDRx, ULS (dBi), the AFC System shall determine GDRx (dBi) and 
+DDRx (m) by using GRx, ULS (dBi), receive antenna model, receive antenna make and 
+Fc, FS-Rx, ULS (MHz) in the method specified by R2-AIP-05.  
+b. If the value of GDRx, ULS (dBi) is not blank, and the value of GDRx, ULS (dBi) is not 0, but 
+the method a above is not applicable, the AFC System shall determine GDRx (dBi) and 
+DDRx (m) by using the following formula: 
+
+
+--- Page 35 ---
+6 GHz Committee Functional Specification WG 
+Functional Requirements for the U.S. 6 GHz Band 
+WINNF-TS-1014-V1.5.0 
+ 
+Copyright © 2025 The Software Defined Radio Forum Inc. 
+Page 34 
+All Rights Reserved 
+GDRx = {GDRx, ULS dBi            for 28 ≤ GDRx, ULS ≤ 48 dBi 
+GRx, ULS   dBi                       Otherwise                 
+DDRx=
+c
+π∙Fc, U-NII-band
+∙√10GDRx 10
+⁄
+𝜂Rx
+ (m) 
+▪ 
+c: The speed of light (= 299,792,458 m/s) 
+▪ 
+Fc, U-NII-band =
+ {6,175,000,000 Hz (if Fc, FS-Rx, ULS is within the U-NII-5 band)
+6,700,000,000 Hz (if Fc, FS-Rx, ULS is within the U-NII-7 band) 
+▪ 
+Rx: 55% typical antenna efficiency (0.55) 
+c. If the value of GDRx, ULS (dBi) is blank, or the value of GDRx, ULS (dBi) is 0, the AFC 
+System need not perform any protection for the fixed service receiver diversity path. 
+R2-AIP-23 
+Consideration of Antenna Discrimination in Determining Fixed Service 
+Receiver Effective Antenna Gain: 
+a. The AFC System shall use at least one of the following methods to determine Fixed 
+Service receiver effective antenna gain, GRx, Effective (in dBi), in R2-AIP-16: 
+i. 
+Fixed Service receiver effective antenna gain determined as per R2-AIP-37, which 
+is based on the off-boresight antenna discrimination angle. 
+ii. 
+Fixed Service receiver effective antenna gain determined as per R2-AIP-36, which 
+is based on both azimuthal and elevation antenna discrimination angles. 
+b. The AFC System shall then make any required near field adjustment to the determined 
+antenna discrimination as specified in R2-AIP-17. 
+R2-AIP-09 
+Determination of Fixed Service Receiver Effective Antenna Gain: 
+a. If the AFC System uses R2-AIP-23-a to determine the effective antenna gain 
+GRx, Effective (in dBi) in R2-AIP-16, the AFC System shall set GRx, Effective (in dBi) to the 
+value calculated by using the following equations:  
+GRx, Effective = G0 + GDisc  
+where: 
+▪ 
+G0: the boresight gain of the fixed service receiver antenna in dBi,  
+G0= { GRx
+GDRx     for primary receive antenna
+for diversity receive antenna 
+▪ 
+GDisc (≤ 0): the effective discrimination of the antenna RPE in dB 
+GDisc= GRx, RPE(𝜃Disc) 
+
+
+--- Page 36 ---
+6 GHz Committee Functional Specification WG 
+Functional Requirements for the U.S. 6 GHz Band 
+WINNF-TS-1014-V1.5.0 
+ 
+Copyright © 2025 The Software Defined Radio Forum Inc. 
+Page 35 
+All Rights Reserved 
+b. Instead of the effective antenna gain GRx, Effective (in dBi) above, the AFC System may use 
+the effective antenna gain considering polarization mismatch calculated by using the 
+following equations: 
+GRx, Effective= G0 + GDisc −3 dB 
+where:  
+▪ 
+GDisc (≤ 0): the effective discrimination of the antenna RPE in dB,  
+GDisc= {
+GRx, RPE(𝜃Disc)
+GRx, C-RPE(𝜃Disc)
+10 log10(100.1GCDisc+100.1GXDisc)
+  
+for default RPE
+for actual RPE without cross-polarization data
+for actual RPE with cross-polarization data
+ 
+▪ 
+GRx, C-RPE( ): the co-polarization RPE of the fixed service receiver antenna which is 
+computed using the procedure specified in R2-AIP-23. 
+▪ 
+GCDisc (≤ 0): the effective antenna discrimination of the fixed service receiver co-
+polarization RPE in dB. 
+▪ 
+GXDisc (≤ 0): the effective antenna discrimination of the fixed service receiver cross-
+polarization RPE in dB. 
+NOTE 1: 
+-3 dB is the polarization mismatch factor. 
+NOTE 2: 
+Actual RPE and default RPE refer to RPEs determined by using the 
+Method A and Method B in R2-AIP-07, respectively. 
+i. 
+For actual RPE with cross-polarization data, the AFC System shall set GCDisc and 
+GXDisc as follows: 
+▪ 
+For vertically-polarized receive antenna (i.e., “V”): 
+GCDisc = GRx, VV-RPE(Disc) 
+GXDisc = GRx, VH-RPE(Disc) 
+▪ 
+For horizontally-polarized receive antenna (i.e., “H”): 
+GCDisc = GRx, HH-RPE(Disc) 
+GXDisc = GRx, HV-RPE(Disc) 
+▪ 
+For other cases (i.e., “S”, blank or anything else): 
+GCDisc= {
+max[GRx, HH-RPE(θDisc), GRx, VV-RPE(θDisc)]
+GRx, HH-RPE(θDisc)
+GRx, VV-RPE(θDisc)
+if GRx, HH-RPE(θ) and GRx, VV-RPE(θ) are available 
+if only GRx, HH-RPE(θ) is available
+if only GRx, VV-RPE(θ) is available
+ 
+GXDisc= {
+max[GRx, HV-RPE(θDisc), GRx, VH-RPE(θDisc)]
+GRx, VH-RPE(θDisc)
+GRx, HV-RPE(θDisc)
+if GRx, HV-RPE(θ) and GRx, VH-RPE(θ) are available 
+if only GRx, VH-RPE(θ) is available
+if only GRx, HV-RPE(θ) is available
+ 
+
+
+--- Page 37 ---
+6 GHz Committee Functional Specification WG 
+Functional Requirements for the U.S. 6 GHz Band 
+WINNF-TS-1014-V1.5.0 
+ 
+Copyright © 2025 The Software Defined Radio Forum Inc. 
+Page 36 
+All Rights Reserved 
+where the following quantities are computed using the procedure specified in 
+R2-AIP-23:  
+▪ 
+GRx, HH-RPE( ): HH RPE of the fixed service receiver antenna  
+▪ 
+GRx, VV-RPE( ): VV RPE of the fixed service receiver antenna 
+▪ 
+GRx, HV-RPE( ): HV RPE of the fixed service receiver antenna 
+▪ 
+GRx, VH-RPE( ): VH RPE of the fixed service receiver antenna 
+c. In R2-AIP-09-b, if the fixed service antenna receive polarization is not available but the 
+transmit polarization is available in the ULS, the AFC System shall assume that the 
+receive polarization is the same as the transmit polarization specified in the ULS. 
+R2-AIP-37 
+Antenna Discrimination Based on Off-Boresight Discrimination Angle: 
+a. If the actual RPE provided by the manufacturer is used, the AFC System shall use the 
+following procedure to determine the antenna discrimination based on off-boresight 
+angle: 
+i. 
+If the AFC System uses R2-AIP-09-a and R2-AIP-23-a-i to determine the effective 
+antenna gain GRx, Effective (in dBi) in R2-AIP-16, the AFC System shall use the 
+following procedure to determine GRx, RPE (Disc) using the off-boresight 
+discrimination angle and the co-polarization RPE for the antenna’s polarization. 
+1. The off-boresight, or overall, discrimination angle, , may be computed using 
+the relations in R2-AIP-36-a and R2-AIP-36-b or by other essentially 
+equivalent methods such as the directional vector inner product method. 
+2. If no elevation antenna pattern data is available at angles ±, the antenna 
+discrimination value GRx, ZZ-RPE is taken as the more conservative value of the 
+appropriate polarization azimuthal pattern at the angles +  and –. 
+GRx, ZZ-RPE = max[GRx, AZ-RPE(+ ), GRx, AZ-RPE(– )] 
+where GRx, AZ-RPE (≤ 0) is the azimuthal RPE data provided by the 
+manufacturer. 
+3. If elevation antenna pattern data is available at angles ±, the antenna 
+discrimination value GRx, ZZ-RPE is taken as the most conservative value of the 
+appropriate polarization azimuthal pattern and elevation pattern data at the 
+angles +  and –. 
+GRx, ZZ-RPE = max[GRx, AZ-RPE(+ ), GRx, AZ-RPE(– ), GRx, EL-RPE(+ ), 
+GRx, EL-RPE(– )] 
+where GRx, EL-RPE (≤ 0) is the elevation RPE data provided by the 
+manufacturer. 
+NOTE: Since RPE discrimination values are negative, the maximum 
+(least negative) is the more conservative value. 
+
+
+--- Page 38 ---
+6 GHz Committee Functional Specification WG 
+Functional Requirements for the U.S. 6 GHz Band 
+WINNF-TS-1014-V1.5.0 
+ 
+Copyright © 2025 The Software Defined Radio Forum Inc. 
+Page 37 
+All Rights Reserved 
+ii. 
+If the AFC System uses R2-AIP-09-b and R2-AIP-23-a-i to determine the effective 
+antenna gain GRx, Effective (in dBi) in R2-AIP-16, the AFC System shall use the above 
+procedure to determine any of GRx, HH-RPE ( ), GRx, VV-RPE ( ), GRx, HV-RPE ( ), or 
+GRx, VH-RPE ( ) using the off-boresight angle and appropriate polarization RPE. 
+b. Else, if the default RPE as specified per R2-AIP-07 is used, the antenna discrimination 
+based on off-boresight angle shall be determined per R2-AIP-07 and R2-AIP-09. 
+R2-AIP-36 
+Determination of Fixed Service Receiver Effective Antenna Gain Using Two-
+Dimensional Discrimination: 
+If the AFC System uses R2-AIP-23-a-ii to determine the effective antenna gain 
+GRx, Effective (in dBi) in R2-AIP-16, the AFC System shall use the following procedure 
+to determine GRx, Effective (in dBi) using both azimuthal and elevation. 
+a. The following three types of angles shall be computed: 
+i. 
+The azimuthal discrimination angle, AZ-Disc, as follows: 
+θAZ-Disc= {
+θAZ-Bearing-To-Eval –  θAZ-Boresight
+θAZ-Bearing-To-Eval –  θAZ-Boresight - 360
+θAZ-Bearing-To-Eval – θAZ-Boresight + 360
+     
+-180 ≤ θAZ-Bearing-To-Eval –  θAZ-Boresight ≤ 180
+180 < θAZ-Bearing-To-Eval –  θAZ-Boresight
+θAZ-Bearing-To-Eval –  θAZ-Boresight < -180
+ 
+where: 
+o 
+AZ-Bearing-To-Eval: the bearing angle of the azimuth plane to the 
+evaluation point with respect to the fixed service receive antenna 
+o 
+AZ-Boresight: the fixed service receive antenna boresight direction of 
+the azimuth plane with respect to true north 
+ii. The fixed service receive antenna boresight elevation angle, EL-Disc, as 
+follows: 
+θEL-Disc= tan-1 (HFS, Tx(AMSL) –  HFS, Rx(AMSL)
+dFSTx-FSRx
+– dFSTx-FSRx
+2rEarth
+) 
+where: 
+o 
+HFS, Tx (AMSL): height of fixed service transmit site (AMSL) in km.  
+The transmit site is the location of equipment directing signals to the 
+fixed service receive antenna. This equipment may be the fixed 
+service transmit antenna or a passive repeater/reflector. 
+o 
+HFS, Rx (AMSL): height of fixed service receive antenna (AMSL) in km 
+o 
+dFSTx-FSRx: Distance between fixed service transmit and receive 
+antennas in km 
+o 
+rEarth: Effective radius of the Earth (= 8500 km) 
+iii. The elevation angle from the fixed service receive antenna to the evaluation 
+point, ’, as follows: (see details of “evaluation point” in R2-AIP-22) 
+
+
+--- Page 39 ---
+6 GHz Committee Functional Specification WG 
+Functional Requirements for the U.S. 6 GHz Band 
+WINNF-TS-1014-V1.5.0 
+ 
+Copyright © 2025 The Software Defined Radio Forum Inc. 
+Page 38 
+All Rights Reserved 
+φ'= tan-1 (HEP(AMSL) –  HFS, Rx(AMSL)
+dEP-FSRx
+ –  dEP-FSRx
+2rEarth
+) 
+where:  
+o 
+HEP (AMSL): height of an evaluation point (AMSL) in km 
+o 
+dEP-FSRx: Distance between an evaluation point and the fixed service 
+receive antenna in km 
+b. Overall discrimination angle, 𝛾, shall be computed as follows: 
+𝛾 = cos-1(cos φ' cos θAZ-Disc cos θEL-Disc + sin φ' sin θEL-Disc) 
+c. The azimuthal discrimination contribution GAZ-Disc in dB shall be computed as 
+follows: 
+GAZ-Disc= { GRx, AZ-RPE(γ)
+GRx, AZ-RPE(-γ)         if  θAZ-Disc ≥ 0 
+otherwise
+ 
+where:  
+o 
+GRx, AZ-RPE (≤ 0): Fixed service receive antenna azimuthal RPE 
+determined as per R2-AIP-07-b (RPE provided by the manufacturer 
+or RPE computed as per the defined procedure) 
+NOTE: 
+These two values will be different only when antenna manufacturer 
+pattern data is selected in R2-AIP-07 and it is asymmetric.  
+d. The elevation discrimination contribution GEL-Disc in dB shall be computed as 
+follows: 
+GEL-Disc= {
+GRx, EL-RPE(γ)
+GRx, EL-RPE(-γ)
+max (GRx, AZ-RPE(γ), GRx, AZ-RPE(– γ))
+   
+if GRx, EL-RPE is available at γ, and β ≥ 0
+if GRx, EL-RPE is available at –γ, and β < 0
+otherwise
+ 
+where:  
+o 
+GRx, EL-RPE (≤ 0): Fixed service receive antenna elevation RPE 
+provided by the manufacturer 
+o 
+ = sin’cosEL-Disc – cos’cosAZ-DiscsinEL-Disc  
+ 
+e. GRx, Effective (in dBi) shall be computed as follows:  
+GRx, Effective = G0 + wA·GAZ-Disc + wE·GEL-Disc 
+where:  
+wA=
+cos2 φ'sin2 θAZ-Disc
+β2+cos2 φ' sin2 θAZ-Disc
+ 
+
+
+--- Page 40 ---
+6 GHz Committee Functional Specification WG 
+Functional Requirements for the U.S. 6 GHz Band 
+WINNF-TS-1014-V1.5.0 
+ 
+Copyright © 2025 The Software Defined Radio Forum Inc. 
+Page 39 
+All Rights Reserved 
+wE=
+β2
+β2+cos2 φ' sin2 θAZ-Disc
+ 
+i. 
+If both cos’sinAZ-Disc = 0 and  = 0, so that the weights are indeterminate, then wA 
+shall be taken as one and wE as zero. 
+NOTE: 
+This procedure is consistent with that described in TIA Standard 10 
+section 4.16 [i.5]. It consists of computing various angles, then an 
+azimuthal and elevation discrimination contribution and finally weights 
+to use in combining these contributions into an estimated discrimination 
+value.  
+R2-AIP-17 
+Near Field Adjustment of the Fixed Service Receiver Antenna RPE: 
+a. When determining the maximum permissible power at the evaluation point as per 
+R2-AIP-16, the AFC System shall perform near field adjustment to the fixed service 
+antenna RPE as per the item b of this requirement if the following inequalities are met. 
+{ dFSRx-Eval < dLimit
+φFSRx-Eval < 90 (deg) 
+where: 
+▪ 
+dFSRx-Eval: Distance (in meters) between the FS receiver antenna and the 
+evaluation point (see R2-AIP-22) 
+▪ 
+dLimit: Near field distance limit (in meters) computed by the following formula:  
+dLimit = 0.185806∙Fc, U-NII-band∙DRx, NFA
+2
+c
+ 
+▪ 
+FSRx-Eval: Off-boresight axis angle (in degrees) in a direction from the FS 
+receiver antenna towards the evaluation point (see R2-AIP-22), having a value 
+between 0 (deg) and 180 (deg) inclusive. 
+▪ 
+Fc, U-NII-band = {6,175,000,000 Hz (if Fc, FS-Rx, ULS is within the U-NII-5 band)
+6,700,000,000 Hz (if Fc, FS-Rx, ULS is within the U-NII-7 band) 
+▪ 
+DRx, NFA: Antenna diameter (in feet) used for near field adjustment. See the 
+item i below. 
+i. 
+DRx, NFA shall be determined by using one of the following methods in order of 
+precedence:  
+ 
+Set DRx, NFA to the antenna diameter specified for the receive antenna make and 
+the receive antenna model. 
+ 
+Determine DRx, NFA by using the ULS antenna gain data GRx, ULS according to 
+Table 3 (if Fc, FS-Rx, ULS is within 5,925 – 6,425 MHz band) or Table 4 (if 
+Fc, FS-Rx, ULS is within 6,525 – 6,875 MHz band). 
+ 
+Set DRx, NFA to 6 feet. 
+
+
+--- Page 41 ---
+6 GHz Committee Functional Specification WG 
+Functional Requirements for the U.S. 6 GHz Band 
+WINNF-TS-1014-V1.5.0 
+ 
+Copyright © 2025 The Software Defined Radio Forum Inc. 
+Page 40 
+All Rights Reserved 
+Table 3: U-NII-5 Antenna Size versus Gain 
+Range of ULS Antenna Gain Data 
+GRx, ULS [dBi] 
+Antenna Diameter for Near 
+Field Adjustment DRx, NFA [ft] 
+Min 
+Max 
+32.0 
+34.3 
+3 
+34.4 
+37.5 
+4 
+37.6 
+40.3 
+6 
+40.4 
+42.5 
+8 
+42.6 
+44.5 
+10 
+44.6 
+46.1 
+12 
+46.2 
+48.0 
+15 
+Table 4: U-NII-7 Antenna Size versus Gain 
+Range of ULS Antenna Gain Data 
+GRx, ULS [dBi] 
+Antenna Diameter for Near 
+Field Adjustment DRx, NFA [ft] 
+Min 
+Max 
+32.0 
+34.5 
+3 
+34.6 
+37.6 
+4 
+37.7 
+40.5 
+6 
+40.6 
+42.7 
+8 
+42.8 
+44.5 
+10 
+44.6 
+46.2 
+12 
+46.3 
+48.0 
+15 
+b. The near field adjustment shall be performed by adding the near field adjustment factor 
+to the FS antenna RPE, where the near field adjustment factor is computed by linear 
+interpolation of the data in the Appendix3 using the normalized separation distance xdB in 
+dB, fixed service antenna discrimination parameter, u, and the antenna aperture efficiency 
+Rx, NFA.   
+i. 
+The normalized separation distance xdB in dB shall be computed as follows: 
+xdB = 10 log10 (
+c∙dFSRx-Eval
+2Fc, U-NII-band ∙DRx, NFA
+2
+) +10.32 
+ii. 
+The FS antenna discrimination parameter u shall be computed as follows: 
+u = 0.3048∙Fc, U-NII-band∙DRx, NFA
+c
+sin 𝜑FSRx-Eval 
+iii. 
+The antenna aperture efficiency Rx, NFA for near field adjustment shall be 
+determined as follows:  
+ 
+3 The Appendix (App01) is available at https://6ghz.wirelessinnovation.org/work-group-products. See also Annex E 
+(Informative) for the information about the Appendix. 
+
+
+--- Page 42 ---
+6 GHz Committee Functional Specification WG 
+Functional Requirements for the U.S. 6 GHz Band 
+WINNF-TS-1014-V1.5.0 
+ 
+Copyright © 2025 The Software Defined Radio Forum Inc. 
+Page 41 
+All Rights Reserved 
+{
+0.4    if 𝜂Rx, NFA < 0.4
+0.7    if 𝜂Rx, NFA > 0.7
+𝜂Rx, NFA     otherwise
+ 
+where: 
+ 
+Rx, NFA =10
+𝜂Rx, NFA (dB)
+10
+ 
+ 
+Rx, NFA(dB): If the ULS antenna gain data GRx, ULS is more than 0.3 dB outside 
+the range from Table 3 or Table 4 for the antenna diameter DRx, NFA determined 
+as per the first method of the R2-AIP-17-a-i, or if the ULS antenna gain data 
+GRx, ULS is not available or if the diameter DRx, NFA is determined as 6 feet as per 
+the third method of the R2-AIP-17-a-i, the value is set to -2.6 dB. Otherwise, 
+the value is set according to the following formula: 
+Rx, NFA (dB) = 
+{
+GRx, ULS - 25.90 - 20 log10(DRx, NFA)     (if Fc, FS-Rx, ULS is within 5,925 – 6,425 MHz)
+GRx, ULS - 26.61 - 20 log10(DRx, NFA)     (if Fc, FS-Rx, ULS is within 6,525 – 6,875 MHz) 
+NOTE: The theoretical dBi gain of a 100 % efficient dish antenna is 
+25.90 + 20 log10 (D) at 6.175 GHz and is 26.61 + 20 log10 (D) at 
+6.700 GHz, and these values can be used in the computation of 
+actual antenna efficiency.   
+9.1.2.3 Determination of other Fixed Service Parameters 
+R2-AIP-02 
+Fixed Service Receiver Noise Level: 
+In determining the noise level N of a fixed service receiver, if the AFC System has the 
+needed radio manufacturer data, technique b, technique c or technique d shall be used. 
+Otherwise, technique a shall be used.  
+a. Use of the typical noise level N determined as follows: 
+N =  {– 110.0 dBm/MHz (if Fc, FS-Rx, ULS ≤ 6425 MHz)
+– 109.5 dBm/MHz (if Fc, FS-Rx, ULS > 6425 MHz), 
+where: 
+ 
+Fc, FS-Rx, ULS: Center frequency of the FS receiver recorded in the ULS 
+NOTE: These noise levels are computed by the formula in c below with a 
+noise figure value of 4 dB below or equal to 6425 MHz and 4.5 dB 
+above 6425 MHz. These values are provided as default FS parameters 
+in ITU-R F.758-7 [i.6]. See Table 7 of ITU-R F.758-7 [i.6] for more 
+information. 
+b. Use of the noise level N (with proper consideration for the occupied bandwidth) 
+specified by the manufacturer’s specification for the given receiver model identified by 
+the corresponding data element in the ULS. 
+
+
+--- Page 43 ---
+6 GHz Committee Functional Specification WG 
+Functional Requirements for the U.S. 6 GHz Band 
+WINNF-TS-1014-V1.5.0 
+ 
+Copyright © 2025 The Software Defined Radio Forum Inc. 
+Page 42 
+All Rights Reserved 
+NOTE: For example, if the receiver model is listed as “ACME XYZ” in ULS, 
+an AFC System can use N available in the specification for XYZ 
+receiver model published by the Acme receiver company. 
+c. Use of the noise level N determined by the following equation:  
+N = –114 dBm/MHz + NF, 
+where: 
+ 
+NF: Noise figure specified by the manufacturer’s specification for the receiver 
+model identified by the corresponding data element in the ULS 
+NOTE: –114 dBm/MHz equals 10 log10 (kB·T0) + 10 log10 (106 Hz/MHz) + 
+10 log10 (103 mW/W), where kB is Boltzmann’s constant of 
+1.38064852 × 10-23 m2·kg·s-2·K-1 and T0 is the standard reference 
+temperature of 290 K. 
+d. Use of the noise level N determined by the following equation: 
+N (dBm/MHz) = T (dBm) – T/I (dB) – 10 log10[BWFS (MHz)] + 6 dB, 
+where:  
+ 
+BWFS: Channel bandwidth of the FS receiver (as per R2-AIP-19) 
+ 
+T: Threshold for 10-6 bit error rate (BER) for the channel bandwidth BWFS 
+ 
+T/I: Threshold-to-Interference (T/I) specified by the manufacturer’s specification 
+for the given receiver model identified by the corresponding data element in the 
+ULS. 
+NOTE: The T/I specification is defined to apply for 10-6 BER in TIA-10, 2019 
+Edition [i.5]. 
+R2-AIP-10 
+Feeder Loss: 
+a. In R2-AIP-16, the AFC System shall use the fixed service receiver feeder loss, LFS, Feeder, 
+determined by using one of the following methods in order of precedence: 
+i. 
+The receive feeder loss as provided in the ULS, if it is not null. 
+ii. A feeder loss of 3 dB shall be used if the transmit radio, make and model is 
+available in the ULS and it is identified as IDU (Indoor Unit) according to Transmit 
+Radio Unit Architecture data obtained as per R2-AIP-13.  
+iii. Deprecated. 
+iv. A feeder loss of 0 dB shall be used if the transmit radio, make and model is 
+available in the ULS and it is identified as ODU (Outdoor Unit) according to 
+Transmit Radio Unit Architecture data obtained as per R2-AIP-13. 
+
+
+--- Page 44 ---
+6 GHz Committee Functional Specification WG 
+Functional Requirements for the U.S. 6 GHz Band 
+WINNF-TS-1014-V1.5.0 
+ 
+Copyright © 2025 The Software Defined Radio Forum Inc. 
+Page 43 
+All Rights Reserved 
+v. Otherwise, the AFC System shall set the feeder loss to any value in the range 
+0 dB ≤ LFS, Feeder ≤ 3 dB. 
+NOTE These fallback feeder loss values are computed by calculating the 
+average feeder/multiplexer loss values provided in ITU-R F.758-7 
+[i.6]. See Table 7 of ITU-R F.758-7 [i.6] for more information. 
+R2-AIP-14 
+Fixed Service Receive Antenna Height: 
+a. In determining a fixed service receive antenna height HFS, Rx (AGL) (m), the AFC System 
+shall use one of the following methods in order of precedence: 
+i. 
+The receive antenna height as provided in ULS, if it is not blank. 
+ii. If the return path’s segment is known, the return path’s transmit antenna height, if it 
+is not blank. 
+NOTE: A return path is available in the ULS if the same licensee has a path 
+within the same frequency band with transmit and receive location 
+coordinates that match the receive and transmit location 
+coordinates respectively. 
+iii. A receive antenna height of 42.5 meters. 
+b. If the receive antenna height is equal to or less than 1.5 meter above ground level, the 
+AFC System shall use 1.5 meters for the receive antenna height. 
+R2-AIP-15 
+Fixed Service Diversity Antenna Height: 
+a. In determining a fixed service diversity antenna height HFS, DRx (AGL) (m) in cases where 
+it is determined that a diversity receiver is in use, the AFC System shall use one of the 
+following methods in order of precedence: 
+i. 
+The diversity antenna height as provided in ULS, if it is not blank. 
+ii. The following formula: 
+HFS, DRx (AGL)= {HFS, Rx (AGL) + 11 (m)    for HFS, Rx (AGL)<14 m
+HFS, Rx (AGL) −11 (m)    for HFS, Rx (AGL) ≥14 m 
+b. If the fixed service diversity antenna height is equal to or less than 1.5 meter above 
+ground level, the AFC System shall use 1.5 meters for the fixed service diversity 
+antenna height 
+R2-AIP-19 
+Fixed Service Receiver Bandwidth  
+In determining a fixed service receiver bandwidth BWFS (MHz), the AFC System shall use 
+one of the following methods in order of precedence: 
+a. If the associated transmitter’s emissions designator as provided in the ULS is not blank, 
+not 0 and not greater than 60 MHz, the AFC System shall determine BWFS (MHz) by 
+following the following steps. 
+Step 1: Compute the bandwidth using transmitter’s emissions designator from the ULS 
+(BWEmissionsDesignator) 
+
+
+--- Page 45 ---
+6 GHz Committee Functional Specification WG 
+Functional Requirements for the U.S. 6 GHz Band 
+WINNF-TS-1014-V1.5.0 
+ 
+Copyright © 2025 The Software Defined Radio Forum Inc. 
+Page 44 
+All Rights Reserved 
+Step 2: Set BWFS to BWEmissionsDesignator if Fc, FS-Rx, ULS is not in U-NII-5 nor U-NII-7. 
+Otherwise, determine BWFS as follows: 
+Step 2.1: 
+Find the smallest value (BWSmallestFCC) of the FCC-authorized 
+bandwidths that is greater than or equal to the BWEmissionsDesignator, 
+where the FCC-defined authorized bandwidths are defined in FCC 
+Rule Parts 101.147(i) [n.20] and 101.147(k) [n.21] as shown in the 
+table below: 
+Table 5: FCC-Authorized Bandwidths 
+Frequency Band of Fc, FS-Rx, ULS 
+FCC-authorized bandwidths 
+In 5925 – 6425 MHz 
+400 kHz, 800 kHz, 1.25 MHz, 2.5 MHz, 
+3.75 MHz, 5 MHz, 10 MHz, 30 MHz and 60 MHz 
+In 6525 – 6875 MHz 
+400 kHz, 800 kHz, 1.25 MHz, 2.5 MHz, 
+3.75 MHz, 5 MHz, 10 MHz, 30 MHz 
+Step 2.2: 
+Set BWFS as follows: 
+BWFS(MHz) = {
+BWEmissionsDesignator
+min(BWSmallestFCC, 1.1∙BWEmissionDesignator)  if Fc, FS-Rx, ULS is in U-NII-7 and BWEmissionsDesignator > 30 MHz
+otherwise
+ 
+NOTE: 
+1.1·BWEmissionsDesignator refers to the value 10 % greater than 
+BWEmissionsDesignator, and 30 MHz is the maximum FCC-authorized 
+bandwidth in 6525 – 6875 MHz. 
+b. The maximum FCC-authorized bandwidth for the assigned frequency, Fc, FS-Rx, ULS with 
+a 0.5 MHz tolerance as determined according to either of the followings. 
+▪ 
+The FCC Rule Parts 101.147(i) [n.20] and 101.147(k) [n.21]  
+▪ 
+The FCC Frequency Assignment data obtained as per R2-AIP-13. 
+NOTE: Both sources provide exactly the same data, and the item ii 
+provides the data in machine-readable format. Table 5 can also be 
+referenced for the purpose of this method. 
+c. The bandwidth for the assigned frequency, Fc, FS-Rx, ULS, as follows: 
+Table 6: FS Assigned Frequency vs. Bandwidth 
+Assigned frequency Fc, FS-Rx, ULS (MHz) 
+Bandwidth BWFS (MHz) 
+5967.4375 
+30 
+6056.3875 
+30 
+6189.8275 
+30 
+6219.4775 
+30 
+6308.4275 
+30 
+d. The bandwidth as determined by the following formula: 
+
+
+--- Page 46 ---
+6 GHz Committee Functional Specification WG 
+Functional Requirements for the U.S. 6 GHz Band 
+WINNF-TS-1014-V1.5.0 
+ 
+Copyright © 2025 The Software Defined Radio Forum Inc. 
+Page 45 
+All Rights Reserved 
+BWFS(MHz)=
+{
+  
+ 
+  
+ 2(Fc, FS-Rx, ULS –  5925)
+60
+2(6425 – Fc, FS-Rx, ULS)
+2(Fc, FS-Rx, ULS –  6525)
+30
+2(6875 – Fc, FS-Rx, ULS)
+        
+5925 MHz ≤ Fc, FS-Rx, ULS < 5955 MHz
+5955 MHz ≤ Fc, FS-Rx, ULS < 6395 MHz
+6395 MHz ≤ Fc, FS-Rx, ULS < 6425 MHz
+6525 MHz ≤ Fc, FS-Rx, ULS < 6540 MHz
+6540 MHz ≤ Fc, FS-Rx, ULS < 6860 MHz
+6860 MHz ≤ Fc, FS-Rx, ULS < 6875 MHz
+ 
+9.1.3 Propagation Models 
+9.1.3.1 Common Requirements 
+R0-AIP-02 
+Propagation models to determine the appropriate separation distance between a 
+Standard Power Access Point or a Fixed Client Device and an incumbent fixed microwave 
+service receiver. For a separation distance: 
+a. Up to 30 meters, the AFC System must [shall] use the free space path-loss model. 
+(15.407(l)(1)(i)) 
+b. More than 30 meters and up to and including one kilometer, the AFC System must [shall] 
+use the Wireless World Initiative New Radio phase II (WINNER II) model [n.4]. 
+(15.407(l)(1)(ii)) 
+i. The AFC System must [shall] use site specific information, including buildings and 
+terrain data, for determining the line-of-sight/non-line-of-sight path component in the 
+WINNER II model [n.4], where such data is available.  
+ii. For evaluating paths where such data is not available, the AFC System must [shall] use 
+a probabilistic model combining the line-of-sight path and non-line-of-sight path into a 
+single path-loss as follows: 
+Path-loss (L) = ∑i P(i) * Li = PLOS * LLOS + PNLOS * LNLOS,  
+where PLOS is the probability of line-of-sight, LLOS is the line-of-sight path loss, PNLOS 
+is the probability of non-line-of sight, LNLOS is the non-line-of-sight path loss, and L is 
+the combined path loss. The WINNER II path loss models include a formula to 
+determine PLOS as a function of antenna heights and distance. PNLOS is equal to 
+(1 - PLOS).  
+iii. In all cases, the AFC System will [shall] use the correct WINNER II parameters to 
+match the morphology of the path between a Standard Power Access Point and a fixed 
+microwave receiver (i.e., Urban, Suburban, or Rural).  
+c. More than one kilometer, the AFC System must [shall] use Irregular Terrain Model 
+(ITM) [n.5] combined with the appropriate clutter model. (15.407(l)(1)(iii)) 
+i. To account for the effects of clutter, such as buildings and foliage, that the AFC 
+System must [shall] combine the ITM [n.5] with the ITU-R P.2108-0 (06/2017) [n.6] 
+
+
+--- Page 47 ---
+6 GHz Committee Functional Specification WG 
+Functional Requirements for the U.S. 6 GHz Band 
+WINNF-TS-1014-V1.5.0 
+ 
+Copyright © 2025 The Software Defined Radio Forum Inc. 
+Page 46 
+All Rights Reserved 
+clutter model for urban and suburban environments and the ITU-R P.452-16 (07/2015) 
+[n.7] clutter model for rural environments.  
+ii. The AFC System should use the most appropriate clutter category for the local 
+morphology when using ITU-R P.452-16 [n.7].  
+iii. If detailed local information is not available, the “Village Centre” clutter category 
+should be used.  
+iv. The AFC System must [shall] use 1 arc-second digital elevation terrain data and, for 
+locations where such data is not available, the most granular available digital elevation 
+terrain data.  
+R2-AIP-24 
+Use of National Land Cover Database (NLCD): 
+For R2-AIP-11 and R2-AIP-12, the AFC System shall employ the National Land Cover 
+Database (NLCD) data4 [n.18]. 
+R2-REL1.5-AIP-43 
+The NLCD data employed per R2-AIP-24 for the 48 contiguous United 
+States (CONUS) and Alaska5 shall be modified according to Annex F of this present 
+document. 
+9.1.3.2 WINNER II Model 
+R2-AIP-04 
+WINNER II Parameters: 
+a. For urban, suburban, and rural morphologies, scenarios C2 (Typical urban macro-cell), 
+C1 (Suburban), and D1 (Rural macro-cell) of WINNER II model as defined in Table 4-4 
+of IST-4-027756 [n.4] shall respectively be used by the AFC System. 
+b. For propagation loss calculations between 30 meters and 50 meters distances, only LOS 
+component of the model shall be used by the AFC System, i.e., Path-loss (L) = LLOS.  
+c. The AFC System shall set hBS to the height above ground level of fixed service receiver 
+antenna (i.e., HFS, Rx (AGL) or HFS, DRx (AGL)) and hMS to the height above ground level of 
+Standard Power Device. 
+NOTE: hBS and hMS are the symbols defined in the WINNER II model. 
+R2-AIP-11 
+WINNER II Morphology: 
+The AFC System shall determine morphology for the WINNER II model based on the 
+corresponding NLCD code at the location of Standard Power Device as following: 
+▪ 
+Code 23 or 24: Urban 
+ 
+4 Suggested baseline versions of NLCD data are NLCD 2019 Land Cover (CONUS), NLCD 2016 Land Cover 
+(ALASKA), NLCD 2001 Land Cover (HAWAII) and NLCD 2001 Land Cover (PUERTO RICO). 
+5 The NLCD data to be modified is suggested to be the most recent versions introduced in section F.1 of this 
+document. For updating the version of the NLCD data for use in the AFC System, the AFC System Operator 
+following this version of this technical specification is highly recommended to follow the certification policy as 
+shown in WINNF-6GHZ-0005 [i.13]. 
+
+
+--- Page 48 ---
+6 GHz Committee Functional Specification WG 
+Functional Requirements for the U.S. 6 GHz Band 
+WINNF-TS-1014-V1.5.0 
+ 
+Copyright © 2025 The Software Defined Radio Forum Inc. 
+Page 47 
+All Rights Reserved 
+▪ 
+Code 21 or 22: Suburban 
+▪ 
+Else: Rural 
+R2-AIP-34 
+WINNER II: 
+a. In the absence of site-specific information, including buildings and terrain data, to 
+determine the presence of an obstruction in the path between the evaluation point and 
+FS receiver antenna, the AFC System shall set LPropagation, Rx (dB) in R2-AIP-16 as 
+follows:  
+LPropagation, Rx (dB) = Path-loss (L) – CPL(dB) 
+where:  
+▪ 
+Path-loss (L): the combined path loss in dB as per R0-AIP-02-b-ii 
+▪ 
+CPL(dB): Standard deviation in dB of combined path loss, which is computed as 
+follows: 
+σCPL (dB)=√PLOS
+2
+∙σLOS(dB)
+2
++PNLOS
+2
+∙σNLOS(dB)
+2
+ 
+▪ 
+LOS(dB): Standard deviation of LOS path loss (i.e., LLOS) in dB, as per Table 4-4 of 
+IST-4-027756 [n.4] 
+▪ 
+NLOS (dB): Standard deviation of NLOS path loss (i.e., LNLOS) in dB, as per 
+Table 4-4 of IST-4-027756 [n.4] 
+b. Where site-specific information is available to determine the presence of an obstruction 
+in the path between the evaluation point and FS receiver antenna, the AFC System shall 
+set LPropagation, Rx (dB) in R2-AIP-16 as follows: 
+LPropagation, Rx(dB) = {
+LNLOS −σNLOS(dB)
+LLOS −σLOS(dB)    If an obstruction is found
+otherwise
+ 
+c. An AFC System Operator may modify the amount of deviation from the median 
+WINNER II path loss for site-specific and combined models to ensure required 
+protection of incumbents as per R0-AIP-03 and R0-AIP-04 and efficient access for 
+unlicensed users. The methods for modification are for future study. 
+9.1.3.3 Irregular Terrain Model (ITM) with Clutter Models 
+R2-AIP-27 
+ITM Parameters: 
+a. The AFC System shall use the default ITM parameter values listed in Table 7. 
+Table 7: Default ITM Parameter Values 
+ITM Parameter Name 
+Default Value 
+Polarization 
+Horizontal or Vertical 
+
+
+--- Page 49 ---
+6 GHz Committee Functional Specification WG 
+Functional Requirements for the U.S. 6 GHz Band 
+WINNF-TS-1014-V1.5.0 
+ 
+Copyright © 2025 The Software Defined Radio Forum Inc. 
+Page 48 
+All Rights Reserved 
+Climatic Zone 
+Per ITU-R P.617-3 map using the minimum value of 
+{Standard Power Device location, FS Rx location}. 
+1: Equatorial 
+2: Continental sub-tropical 
+3: Maritime sub-tropical 
+4: Desert 
+5: Continental temperate 
+6: Maritime temperate, overland 
+0: Maritime temperate, oversea 
+Surface refractivity (N-units) 
+Per ITU-R P.452 database using mid-point of the 
+interference path 
+Ground dielectric constant 
+25 
+Ground conductivity (S/m) 
+0.02 
+Mode of variability 
+13 
+Confidence 
+5% 
+Reliability 
+20% 
+NOTE: For Climatic Zone, ITU-R P.617-3 uses “0” for “maritime temperate, oversea”, 
+but ITM uses “7” for “maritime temperate, oversea”. 
+b. An AFC System Operator may modify the ITM reliability and confidence factors for 
+specific locations based on site-specific information, such as buildings and terrain data 
+and/or measured values of components of path loss, to ensure required protection of 
+incumbents as per R0-AIP-03 and R0-AIP-04 and efficient access for unlicensed users. 
+The methods for modification are for further study. 
+R2-AIP-33 
+Minimum Path Loss: 
+If the predicted path loss using the ITM propagation model with the parameters in Table 7 or 
+using the WINNER II propagation model is less than the free space loss, the free space loss 
+value shall be used instead. 
+R2-AIP-25 
+Clutter Model: 
+In determination of clutter loss as per R0-AIP-02: 
+a. For urban and suburban morphologies: 
+i. 
+Clutter loss shall be calculated and applied taking into consideration each 
+morphology separately at the FS receiver antenna and Standard Power Device 
+locations as given in R2-AIP-12. 
+ii. 
+Clutter loss may be applied at the FS receiver location only if the FS receive 
+antenna height HFS, Rx (AGL) determined as per R2-AIP-14 is lower than 6 meters 
+above ground level. 
+b. For morphologies other than urban and suburban, clutter loss shall only be applied to the 
+Standard Power Device location. 
+
+
+--- Page 50 ---
+6 GHz Committee Functional Specification WG 
+Functional Requirements for the U.S. 6 GHz Band 
+WINNF-TS-1014-V1.5.0 
+ 
+Copyright © 2025 The Software Defined Radio Forum Inc. 
+Page 49 
+All Rights Reserved 
+c. The frequency of 6400 MHz shall be used. 
+NOTE: 6400 MHz is the frequency that corresponds to the center of the 
+lower edge of U-NII-5 band and upper edge of U-NII-7 band, i.e., 
+6400 MHz = 5925 + (6875 – 5925)/2 MHz. 
+R2-AIP-12 
+Clutter Morphology for ITM: 
+a. The AFC System shall determine the morphology for the clutter model using the 
+corresponding NLCD code at the location of application (Standard Power Device or FS 
+receiver locations). The following classification shall be used: 
+ 
+Code 23 or 24: Urban (use ITU-R P.2108) 
+ 
+Code 21 or 22: Suburban (use ITU-R P.2108) 
+ 
+Else: Rural (use ITU-R P.452) 
+b. When using P.452 for rural regions, the following model types shall be used: 
+ 
+Code 11, 12, 31, 51, 71, 72, 73, 74, 81, 95: No clutter loss is added. 
+ 
+Code 52, 82: High Crop fields (use ITU-R P.452-16 Table 4, Row 1) 
+ 
+Code 41, 43, or 90: Deciduous trees (use ITU-R P.452-16 Table 4, Row 3) 
+ 
+Code 42: Coniferous (use ITU-R P.452-16 Table 4, Row 4) 
+ 
+Else: Village Center (use ITU-R P.452-16 Table 4, Row 2) 
+NOTE: This requirement is mandatory WInnForum requirement which 
+overrides the optionality provided by R0-AIP-02-c-ii and the 
+recommendation provided by R0-AIP-02-c-iii. 
+R2-AIP-35 
+Confidence Factor for P.2108-0: 
+a. 
+The default values of P.2108-0 clutter parameters used by the AFC System to calculate 
+clutter loss shall be based on 0.25 confidence factor, where the result of calculation is as 
+follows: 
+Lctt = – 5 log10(10-0.2Ll+10-0.2Ls) –   6∙0.675 
+b. An AFC System Operator may modify the value of the P.2108-0 confidence factor at 
+specific locations to ensure required protection of incumbents as per R0-AIP-03 and 
+R0-AIP-04 and efficient access for unlicensed users. The methods for modification are 
+for future study. 
+NOTE 1: “Confidence factor” in this requirement refers to “Percentage of Locations” in 
+ITU-R Recommendation P.2108-0 [n.6]. 
+NOTE 2: See definitions of Lctt, Ll and Ls in ITU-R Recommendation P.2108-0 [n.6]. 
+9.1.4 Passive Sites 
+R2-AIP-38 
+The AFC System shall use propagation models specified in R0-AIP-02 to 
+determine the propagation loss between a Standard Power Device and a Passive Site. 
+
+
+--- Page 51 ---
+6 GHz Committee Functional Specification WG 
+Functional Requirements for the U.S. 6 GHz Band 
+WINNF-TS-1014-V1.5.0 
+ 
+Copyright © 2025 The Software Defined Radio Forum Inc. 
+Page 50 
+All Rights Reserved 
+R2-AIP-28 
+Consideration of Fixed Service Passive Sites: 
+a. For protection of fixed service receivers using Passive Sites in their fixed service link, the 
+AFC System shall consider the Passive Sites in determining frequency availability and 
+maximum permissible power as per R2-AIP-16. 
+b. The AFC System shall obtain fixed service passive repeater data from the ULS. 
+R2-AIP-29 
+Determination of Fixed Service Passive Site Antenna Data: 
+Based on the ULS data obtained as per R2-AIP-28-b, the AFC System shall determine fixed 
+service Passive Site antenna data by using the following procedure: 
+a. For each ULS record of a Passive Site antenna, the AFC System shall identify whether it 
+is billboard reflector or back-to-back antenna by using the Billboard Reflector data and 
+the Antenna Model, Diameter and Gain data obtained as per R2-AIP-13 and the antenna 
+model recorded in the ULS. 
+i. 
+If the antenna model is missing from the ULS record, or if the antenna model is 
+recorded in the ULS but the antenna model in the ULS does not match the antenna 
+model in the Billboard Reflector data and the Antenna Model, Diameter and Gain 
+data obtained as per R2-AIP-13, the type of Passive Site shall be identified by the 
+following method in order of precedence: 
+1. If at least either a back-to-back Tx gain value or a back-to-back Rx gain value 
+is recorded in the ULS and if either the range of gain value is [32 : 48] (dBi), 
+the AFC System shall assume the Passive Site is back-to-back antenna. 
+2. For cases not meeting the above, the AFC System shall assume the Passive Site 
+is billboard reflector. 
+b. If the Passive Site is a billboard reflector, the AFC System shall determine the billboard 
+reflector dimensions by using the following procedure: 
+NOTE: 
+if HRef-ULS or WRef-ULS is missing from the ULS record, use R2-AIP-30-a to 
+determine HRef-ULS and WRef-ULS. 
+i. 
+The AFC System shall identify the billboard reflector dimensions which is 
+associated with the antenna model recorded in the ULS by using the Billboard 
+Reflector data obtained as per R2-AIP-13, HRef-AntennaModel × WRef-AntennaModel. 
+ii. 
+The AFC System shall identify the billboard reflector dimensions identified by the 
+combination of the Reflector Height and Reflector Width recorded in the ULS, 
+HRef-ULS × WRef-ULS. 
+iii. 
+If the dimension HRef-ULS is greater or equal to 1.83 m and WRef-ULS is greater or 
+equal to 2.44 m, the AFC System shall determine the billboard reflector dimension 
+as follows, where “identical” is defined as within 0.1 m. 
+1. If either HRef-AntennaModel or WRef-AntennaModel is missing from the Billboard 
+Reflector data (per R2-AIP-13), HRef-ULS and WRef-ULS shall be used. 
+2. If HRef-AntennaModel is identical to HRef-ULS and WRef-AntennaModel is identical to 
+WRef-ULS, these dimensions shall be used.  
+
+
+--- Page 52 ---
+6 GHz Committee Functional Specification WG 
+Functional Requirements for the U.S. 6 GHz Band 
+WINNF-TS-1014-V1.5.0 
+ 
+Copyright © 2025 The Software Defined Radio Forum Inc. 
+Page 51 
+All Rights Reserved 
+3. If HRef-AntennaModel is not identical to HRef-ULS or WRef-AntennaModel is not identical to 
+WRef-ULS, and if both {HRef-AntennaModel, WRef-AntennaModel} and {HRef-ULS, WRef-ULS} 
+are listed in Table 8, the dimensions with the greater surface area (Height × 
+Width) shall be used.   
+4. If HRef-AntennaModel is not identical to HRef-ULS or WRef-AntennaModel is not identical to 
+WRef-ULS, and if either {HRef-AntennaModel, WRef-AntennaModel} or {HRef-ULS, WRef-ULS} 
+is listed in Table 8, the dimensions listed in Table 8 shall be used. 
+5. Else, the dimensions with the greater surface area (Height × Width) shall be 
+used. 
+iv. 
+Else, the billboard reflector dimensions {HRef-AntennaModel, WRef-AntennaModel} shall be 
+used. 
+Table 8: Typical Billboard Reflector Dimensions 
+Height (ft) 
+Width (ft) 
+Height (m) Width (m) 
+6 
+8 
+1.83 
+2.44 
+8 
+10 
+2.44 
+3.05 
+8 
+12 
+2.44 
+3.66 
+10 
+15 
+3.05 
+4.57 
+10 
+16 
+3.05 
+4.88 
+10 
+24 
+3.05 
+7.32 
+12 
+16 
+3.66 
+4.88 
+14 
+16 
+4.27 
+4.88 
+16 
+20 
+4.88 
+6.10 
+16 
+24 
+4.88 
+7.32 
+20 
+24 
+6.10 
+7.32 
+20 
+30 
+6.10 
+9.14 
+20 
+32 
+6.10 
+9.75 
+24 
+30 
+7.32 
+9.14 
+30 
+32 
+9.14 
+9.75 
+30 
+40 
+9.14 
+12.19 
+30 
+48 
+9.14 
+14.63 
+40 
+50 
+12.19 
+15.24 
+c. If the Passive Site is back-to-back antenna, the AFC System shall determine the back-to-
+back antenna data by using the following procedure: 
+NOTE: 
+If either the Tx or Rx Back-to-Back Gain is missing in the ULS or is out of 
+range [32 : 48] dBi, they need to be set per R2-AIP-30-b, R2-AIP-30-c or 
+R2-AIP-30-d before going through steps below. In that case, the Back-to-Back 
+
+
+--- Page 53 ---
+6 GHz Committee Functional Specification WG 
+Functional Requirements for the U.S. 6 GHz Band 
+WINNF-TS-1014-V1.5.0 
+ 
+Copyright © 2025 The Software Defined Radio Forum Inc. 
+Page 52 
+All Rights Reserved 
+Tx or Rx ULS Gain below refers to the Tx or Rx ULS Gains as determined in 
+R2-AIP-30.  
+i. 
+If the Back-to-Back Tx ULS Gain matches the Back-to-Back Rx ULS Gain, the 
+AFC System shall determine the back-to-back receiver antenna gain, diameter and 
+aperture efficiency as per R2-AIP-39 and the back-to-back receiver antenna RPE as 
+per R2-AIP-07, respectively. Next, the back-to-back transmitter antenna gain  shall 
+be set to the back-to-back receiver antenna gain (as set per R2-AIP-39). 
+ii. 
+If the Back-to-Back Tx ULS Gain does not match the Back-to-Back Rx ULS gain, 
+the AFC System shall determine the back-to-back receiver antenna gain, diameter, 
+aperture efficiency and the back-to-back receiver antenna RPE by using the 
+following procedure:  
+1. If the antenna model recorded in the ULS is found in the Antenna Model, 
+Diameter and Gain data obtained as per R2-AIP-13, extract GMB for this antenna 
+model from the Antenna Model, Diameter and Gain data (per R2-AIP-13). 
+(a) The back-to-back receiver antenna gain, diameter and aperture efficiency 
+shall be set as following: 
+(1) If |GRx, B-B, ULS – GMB| ≤ 0.7 dB, R2-AIP-39-a shall be used with 
+GRx, B-B, ULS set to the Back-to-Back Rx ULS Gain and using the 
+antenna model from the Antenna Model, Diameter and Gain data. 
+(2) Else, R2-AIP-39-b or R2-AIP-39-c shall be used with GRx, B-B, ULS set to 
+the Back-to-Back Rx ULS Gain. 
+(b) The back-to-back transmitter antenna gain shall be set as following: 
+(1) If |GTx, B-B, ULS – GMB| ≤ 0.7 dB, R2-AIP-39-a shall be used with 
+GRx, B-B, ULS set to the Back-to-Back Tx ULS Gain and using the 
+antenna model from the Antenna Model, Diameter and Gain data. 
+(2) Else, R2-AIP-39-b or R2-AIP-39-c shall be used with GRx, B-B, ULS set to 
+the Back-to-Back Tx ULS Gain. 
+NOTE: For determination of the back-to-back transmitter antenna gain, 
+R2-AIP-39-b is applied in reverse, where the receivers are 
+replaced with transmitters and vice versa. 
+2. Else, R2-AIP-39-b or R2-AIP-39-c shall be used with GRx, B-B, ULS set to the 
+Back-to-Back Rx ULS Gain to determine the back-to-back receiver antenna 
+gain, diameter and aperture efficiency. For the back-to-back transmitter gain, 
+R2-AIP-39-b or R2-AIP-39-c shall be used with GRx, B-B, ULS set to the Back-to-
+Back Tx ULS Gain to determine the back-to-back transmitter antenna gain. 
+NOTE: For determination of the back-to-back transmitter antenna gain, 
+R2-AIP-39-b is applied in reverse, where the receivers are replaced 
+with transmitters and vice versa. 
+3. The back-to-back receiver antenna RPE shall be determined using R2-AIP-07. 
+
+
+--- Page 54 ---
+6 GHz Committee Functional Specification WG 
+Functional Requirements for the U.S. 6 GHz Band 
+WINNF-TS-1014-V1.5.0 
+ 
+Copyright © 2025 The Software Defined Radio Forum Inc. 
+Page 53 
+All Rights Reserved 
+R2-AIP-30 
+Determination of Fixed Service Passive Site Antenna Data using 
+Missing/Erroneous ULS Data 
+a. In R2-AIP-29-b, if at least either HRef-ULS or WRef-ULS is missing from the ULS record, the 
+AFC System shall determine HRef-ULS = 4.88 m and WRef-ULS = 6.10 m. 
+b. In R2-AIP-29-c, if Back-to-Back Tx Gain is missing from the ULS or is in the ULS but 
+not in the range [32 : 48] dBi and the Back-to-Back Rx Gain is recorded and the range is 
+[32 : 48] dBi, the AFC System shall determine that the Back-to-Back Tx Gain is the same 
+as Back-to-Back Rx Gain. 
+c. In R2-AIP-29-c, if Back-to-Back Rx Gain is missing from the ULS or is in the ULS but 
+not in the range [32 : 48] dBi and the Back-to-Back Tx Gain is provided the range is 
+[32 : 48] dBi, the AFC System shall determine that the Back-to-Back Rx Gain is the same 
+as Back-to-Back Tx Gain. 
+d. In R2-AIP-29-c, if both Back-to-Back Tx Gain and Back-to-Back Rx Gain are missing 
+from the ULS or both are not in the range [32 : 48] dBi, they shall be determined by 
+R2-AIP-39. 
+R2-AIP-39 
+Fixed Service Back-to-Back Receiver Antenna Gain, Diameter and Aperture 
+Efficiency: 
+In determining a fixed service back-to-back receiver antenna gain GRx, B-B (dBi), diameter 
+DRx, B-B (m) and aperture efficiency Rx, B-B for I/N estimation in R2-AIP-16, the AFC 
+System shall use one of the following methods in order of precedence: 
+a. If the back-to-back receiver antenna gain GRx, B-B, ULS (dBi), back-to-back receive antenna 
+model and back-to-back receive antenna make are available in the ULS, and if 
+DRx, B-B (m) is available for the back-to-back receive antenna model in the Antenna 
+Model, Diameter, and Gain data, the AFC System shall determine GRx, B-B (dBi), 
+DRx, B-B (m) and Rx, B-B by using GRx, B-B, ULS (dBi), back-to-back receive antenna model, 
+back-to-back receive antenna make and the center frequency Fc, FS-Rx, ULS (MHz) in the 
+method specified by R2-AIP-06.  
+b. If GRx, B-B ULS (dBi) is available in the ULS, the back-to-back receive antenna model and 
+make are not available, but the return path is known and the back-to-back transmitter 
+antenna gain for that Passive Site in the return path, GTx, B-B ULS (dBi), the Passive Site’s 
+antenna model in the return path are available in the ULS, and DTx, B-B (m) is available for 
+the passive transmit antenna model of the return path in the Antenna Model, Diameter, 
+and Gain data and GRx, B-B ULS (dBi) is equal to GTx, B-B ULS (dBi), the AFC System shall 
+determine GRx, B-B (dBi) and Rx, B-B by using GTx, B-B ULS (dBi), return path Passive Site’s 
+antenna model and Fc, FS-Rx, ULS (MHz) in the method specified by R2-AIP-06 and shall 
+set DRx, B-B (m) to DTx, B-B (m). 
+NOTE: 
+A return path is available in the ULS if the same licensee has a path 
+within the same frequency band with transmit, receive, and all Passive 
+
+
+--- Page 55 ---
+6 GHz Committee Functional Specification WG 
+Functional Requirements for the U.S. 6 GHz Band 
+WINNF-TS-1014-V1.5.0 
+ 
+Copyright © 2025 The Software Defined Radio Forum Inc. 
+Page 54 
+All Rights Reserved 
+Site location coordinates that match the receive, transmit, and all 
+Passive Site location coordinates respectively. 
+c. If GRx, B-B ULS (dBi) is available in the ULS but the methods in a and b above are not 
+applicable, the AFC System shall determine GRx, B-B (dBi), DRx, B-B (m) and Rx, B-B by 
+using the following formula:  
+GRx, B-B = {
+32 dBi
+GRx, B-B, ULS
+48 dBi
+dBi           
+for GRx, B-B, ULS< 32 dBi
+for 32 ≤ GRx, B-B, ULS ≤ 48 dBi
+Otherwise
+ 
+DRx, B-B = 
+c
+π∙Fc, U-NII-band
+∙√10GRx, B-B 10
+⁄
+Rx, B-B 
+ (m) 
+ 
+c: The speed of light (= 299,792,458 m/s) 
+ 
+Fc, U-NII-band = {6,175,000,000 Hz (if Fc, FS-Rx, ULS is within the U-NII-5 band)
+6,700,000,000 Hz (if Fc, FS-Rx, ULS is within the U-NII-7 band) 
+ 
+Rx, B-B: 55% typical antenna aperture efficiency (0.55) 
+d. If GRx, B-B ULS (dBi) is not available in the ULS, the AFC System shall determine 
+GRx, B-B (dBi), DRx, B-B (m) and Rx, B-B as follows: 
+GRx, B-B (dBi) = {38.8 dBi (if Fc, FS-Rx, ULS is within the U-NII-5 band)
+39.5 dBi (if Fc, FS-Rx, ULS is within the U-NII-7 band) 
+DRx, B-B (m) = 1.83 meters 
+Rx, B-B = 0.55 
+R2-AIP-31 
+Interference Analysis involving Passive Sites: 
+NOTE: The techniques specified in this requirement are based on [i.12]. 
+a. The AFC System shall treat the Passive Sites as fixed service receivers virtually 
+(hereinafter “Virtual Receivers”) when determining frequency availability and maximum 
+permissible power as per R2-AIP-16. 
+b. The AFC System shall determine effective gain of the Virtual Receiver according to the 
+following procedure: 
+i. 
+Given XNumOfVRx Passive Sites from the fixed service transmitter to the receiver, the 
+AFC System shall calculate the effective gain, GVRx-j, Effective, of the Virtual Receiver 
+by summing all the path Segment gains from the j-th Passive Site to the actual 
+receiving antenna along with the boresight gain (GRx as determined per R2-AIP-05) 
+of the actual receiving antenna as follows: 
+
+
+--- Page 56 ---
+6 GHz Committee Functional Specification WG 
+Functional Requirements for the U.S. 6 GHz Band 
+WINNF-TS-1014-V1.5.0 
+ 
+Copyright © 2025 The Software Defined Radio Forum Inc. 
+Page 55 
+All Rights Reserved 
+GVRx-j, Effective= (
+∑
+GPathSeg, i
+XNumOfVRx
+i = j
+)  + GRx 
+NOTE: This effective boresight gain does not include any discrimination that could 
+be the result of a Standard Power Device being off of the passive boresight 
+receive direction. That discrimination pattern is discussed in R2-AIP-31-c. 
+ii. The AFC System shall determine the effective path Segment gain of the Virtual 
+Receiver, GPathSeg, as follows: 
+1. Back-to-back antennas: 
+GPathSeg = GRx, B-B + GTx, B-B - LWG + 20 log10 (
+λ
+4πdPathSegLength
+) 
+where: 
+▪ 
+GRx, B-B: Receiving back-to-back antenna gain 
+▪ 
+GTx, B-B: Transmitting back-to-back antenna gain 
+▪ 
+LWG: Connecting waveguide/cable loss 
+▪ 
+: Wavelength (= c/Fc, U-NII-band) (in meters) 
+NOTE: The definition of  is applicable to R2-AIP-31-b-ii-2 and 
+R2-AIP-31-b-ii-3 as well. 
+▪ 
+dPathSegLength: Path Segment length (in meters) calculated using the latitude 
+and longitude coordinates of the path Segment endpoints. dPathSegLength of 
+zero as determined by the segment (SG) and location (LO) ULS tables 
+indicates an error in the ULS database and no further analysis is necessary 
+for the links with dPathSegLength = 0. 
+2. Single passive reflector: 
+GPathSeg = {min(+3, 𝛼n)
+𝛼NF
+       if 1/𝐾𝑆≥2.5 or If the next site is a single reflector
+otherwise
+ 
+where: 
+▪ 
+n = 20 log10 (
+𝜋
+4 ∙𝐾𝑆) 
+
+
+--- Page 57 ---
+6 GHz Committee Functional Specification WG 
+Functional Requirements for the U.S. 6 GHz Band 
+WINNF-TS-1014-V1.5.0 
+ 
+Copyright © 2025 The Software Defined Radio Forum Inc. 
+Page 56 
+All Rights Reserved 
+NOTE: In practice, n could be greater than 3 dB when the next site is a 
+passive reflector and close by (< 120 meters), as in the case of a 
+double passive reflector. 
+▪ 
+NF: the near field component of segment gain which is computed by the 
+method for given 1/KS and Q provided in Annex E.2, which uses Appendix 
+(App02) in the calculation. 
+▪ 
+KS = 4A·cos / (··dPathSegLength) 
+▪ 
+Q = DRx, Next [ / (4A·cos)]1/2 
+▪ 
+DRx, Next: Diameter (meters) of the antenna at the next site towards the actual 
+FS receiver, where the diameter is the back-to-back receive antenna 
+diameter if the next site towards the actual FS receiver is a back-to-back 
+repeater. 
+▪ 
+A: Area of the reflector (in m2) 
+▪ 
+: Inclusion angle between incident and reflected waves at the reflector 
+c. The AFC System shall determine discrimination value, GVRx-j, Disc of the j-th Virtual 
+Receiver according to the following procedure: 
+i. 
+The AFC System shall determine the discrimination angle θVRx-j, Disc by computing as 
+the difference in the Virtual Receiver boresight direction and the bearing to the 
+evaluation point. 
+1. The bearing to the evaluation point shall be based on the latitude, longitude and 
+height AMSL of the Virtual Receiver and the evaluation point. 
+ii. The AFC System shall determine boresight direction of the Virtual Receiver as 
+follows: 
+1. Back-to-back antennas: the boresight direction of the receiving antenna 
+calculated by using latitude, longitude and height AMSL of the receiving 
+antenna and the Segment transmitter (i.e., fixed service transmitter or Passive 
+Site) latitude, longitude and height AMSL.  
+2. Single passive reflector: the boresight direction calculated by using latitude, 
+longitude and height AMSL of the reflector and the previous Segment 
+transmitter (i.e., fixed service transmitter or Passive Site) latitude, longitude and 
+height AMSL 
+iii. The AFC System shall determine the discrimination value GVRx-j, Disc as follows:  
+
+
+--- Page 58 ---
+6 GHz Committee Functional Specification WG 
+Functional Requirements for the U.S. 6 GHz Band 
+WINNF-TS-1014-V1.5.0 
+ 
+Copyright © 2025 The Software Defined Radio Forum Inc. 
+Page 57 
+All Rights Reserved 
+1. For back-to-back antenna, the discrimination value GVRx-j, Disc shall be computed 
+based on the discrimination angle θVRx, Disc to the evaluation point and the Rx 
+antenna RPE as per R2-AIP-23. 
+2. For single passive reflector, the discrimination value GVRx-j, Disc shall be 
+computed based on the discrimination angle θ = θVRx-j, Disc to the evaluation point 
+and the single passive reflector discrimination pattern 
+GVRx-j, Disc = max(D0, D1) 
+D0 = –10 log10[4AcosθIN / 2] 
+D1(θ) =
+{
+ 
+ 
+ 
+ 20 log10 (sin u
+u ) ;          |θ| ≤ θ1  [degs]
+–20 log10(|u|) ;       θ1< |θ| ≤ θ0 [degs]
+ D1(θ0) – m(|θ| – θ0);      θ0 < |θ| [degs]
+ 
+where: 
+▪ 
+The calculation uses the angles θ, θ0 and θ1 expressed in degrees and u 
+expressed in radians: 
+u [rad] = πs
+λ sin θ 
+sin u
+u
+ ≈ 1 – u2
+6 (1 – u2
+20) ;  |u| < 0.1 
+m [dB/deg] = 0.4165 
+𝜃0 [deg] = 20 
+𝜃1 [deg] =  sin–1 ( λ
+2s) 
+s = max(W, H) cosθIN 
+▪ 
+W: Reflector width (in meters) 
+▪ 
+H: Reflector height (in meters) 
+R2-AIP-32 
+Back-To-Back Antenna Waveguide Loss 
+The AFC System shall use 0.5 dB of waveguide loss, LWG, when calculating the back-to-back 
+antenna path segment gain in R2-AIP-31. 
+9.2 
+Radio Astronomy Service Protection 
+R0-AIP-05 
+Protection of radio observatories: 
+
+
+--- Page 59 ---
+6 GHz Committee Functional Specification WG 
+Functional Requirements for the U.S. 6 GHz Band 
+WINNF-TS-1014-V1.5.0 
+ 
+Copyright © 2025 The Software Defined Radio Forum Inc. 
+Page 58 
+All Rights Reserved 
+a. The AFC System must [shall] enforce an exclusion zones to the following radio 
+observatories that observe between 6650-6675.2 MHz:  
+ Arecibo Observatory,  
+ the Green Bank Observatory,  
+ the Very Large Array (VLA),  
+ the 10 Stations of the Very Long Baseline Array (VLBA),  
+ the Owens Valley Radio Observatory, and  
+ the Allen Telescope Array.  
+b. The exclusion zone sizes are [shall be] based on the radio line-of-sight and determined 
+using 4/3 earth curvature and the following formula:  
+dkm_los = 4.12 * (sqrt(Htx) + sqrt(Hrx)),  
+where Htx is the height of the unlicensed Standard Power Access Point or Fixed Client 
+Device and Hrx is the height of the radio astronomy antenna in meters above ground 
+level. (15.407(m)) 
+R1-AIP-01 
+Radio Astronomy Service protection:  
+For protection of radio astronomy facilities listed in R0-AIP-05-a, the following reference 
+coordinates and receiver antenna heights above ground level (AGL) shall be used. 
+Table 9: Reference coordinates and receiver heights above ground level (AGL) 
+Observatory 
+North latitude 
+West longitude 
+AGL  
+(in meters) 
+Arecibo Observatory, PR 
+18° 20′ 37″ 
+66° 45′ 11″ 
+142.2 
+Green Bank Telescope 
+(GBT), WV 
+38° 25′ 59″ 
+79° 50′ 23″ 
+139.6 
+Very Large Array 
+(VLA), Socorro, NM 
+34° 04′ 44″ 
+107° 37′ 06″ 
+25 
+Very Long Baseline 
+Array (VLBA) Stations: 
+ 
+ 
+ 
+Brewster, WA 48° 07′ 52″ 
+119° 41′ 00″ 
+25 
+Fort Davis, TX 30° 38′ 06″ 
+103° 56′ 41″ 
+25 
+Hancock, NH 42° 56′ 01″ 
+71° 59′ 12″ 
+25 
+Kitt Peak, AZ 31° 57′ 23″ 
+111° 36′ 45″ 
+25 
+Los Alamos, NM 35° 46′ 30″ 
+106° 14′ 44″ 
+25 
+Mauna Kea, HI 19° 48′ 05″ 
+155° 27′ 20″ 
+25 
+North Liberty, IA 41° 46′ 17″ 
+91° 34′ 27″ 
+25 
+Owens Valley, CA 37° 13′ 54″ 
+118° 16′ 37″ 
+25 
+
+
+--- Page 60 ---
+6 GHz Committee Functional Specification WG 
+Functional Requirements for the U.S. 6 GHz Band 
+WINNF-TS-1014-V1.5.0 
+ 
+Copyright © 2025 The Software Defined Radio Forum Inc. 
+Page 59 
+All Rights Reserved 
+Pie Town, NM 34° 18′ 04″ 
+108° 07′ 09″ 
+25 
+St. Croix, VI 17° 45′ 24″ 
+64° 35′ 01″ 
+25 
+Allen Telescope Array 
+40° 49' 03" 
+121° 28' 24" 
+6.1 
+Owens Valley Radio 
+Observatory 
+37° 14' 02" 
+118° 16' 56" 
+40 
+R2-AIP-20 
+Use of Vertical Location Uncertainty in Radio Astronomy Service Protection:  
+In determining the size of the exclusion zone using the formula in R0-AIP-05-b, the AFC 
+System shall use the following value of Htx. 
+Htx = HSPD (AGL) + HSPD 
+where: 
+▪ 
+HSPD (AGL): the height above ground level reported by the Standard Power Device (in 
+meters) 
+▪ 
+HSPD: the vertical uncertainty reported by the Standard Power Device (in meters) 
+R2-AIP-21 
+Frequency Availability Determination using Horizontal Location Uncertainty 
+in Radio Astronomy Service Protection: 
+The AFC System shall determine that 6650 – 6675.2 MHz frequency range is unavailable 
+for the Standard Power Device if the horizontal area of location uncertainty reported by the 
+Standard Power Device overlaps with at least one of the exclusion zones determined as per 
+R0-AIP-05, R1-AIP-01 and R2-AIP-20. 
+9.3 
+International Border Protection 
+R0-AIP-06 
+An AFC System must [shall] implement the terms of international agreements 
+with Mexico and Canada. (15.407(k)(14)) 
+R2-AIP-42 
+For the purpose of Canadian Border Protection, regardless of the antenna 
+height or the morphology of the Canadian FS receiver, the AFC System operating in the 
+United States shall not apply any clutter at the FS Receiver, in calculating the path loss. 
+ 
+ 
+
+
+--- Page 61 ---
+6 GHz Committee Functional Specification WG 
+Functional Requirements for the U.S. 6 GHz Band 
+WINNF-TS-1014-V1.5.0 
+ 
+Copyright © 2025 The Software Defined Radio Forum Inc. 
+Page 60 
+All Rights Reserved 
+Annex A (Normative): 3GPP Specific Features (Optional) 
+A.1 
+Description 
+This annex provides requirements for 3GPP specific features. In this section, unless otherwise 
+specified, Standard Power Devices refer to those employing 3GPP based radio access technology 
+for operations in the 6 GHz band. 
+A.1.1 
+NRU1: 3GPP-defined 6 GHz Channel 
+An NRU1 feature enables an AFC System and a Standard Power Devices employing the 
+frequency availability query method specified in R2-DGR-02-b and R2-AGR-03-b to support 
+3GPP-defined 6 GHz Channels (e.g., Channels within the 3GPP-defined n96 band [n.12][n.13]). 
+The support of this feature is optional for AFC System and Standard Power Devices. 
+A.2 
+Use for Operations that could impact Part 15 Subpart E Regulatory Compliance 
+Requirements for the NRU1 feature in this section need to be considered in the protection of 
+fixed service receivers and radio astronomy service facilities in accordance with the technology 
+neutral requirements specified in the main body of this technical specification. 
+A.2.1 AFC System General Requirements (AGR) 
+R2-NRU1-AGR-01 
+The AFC System shall support the query method specified in 
+R2-DGR-02-b 
+R2-NRU1-AGR-02 
+Support of 3GPP-defined 6 GHz channelization [n.12][n.13]:  
+When an AFC System determines and provides a list of Available Channels and the 
+associated maximum power levels in accordance with R2-AGR-03-b, for a Standard Power 
+Device request based on R2-NRU1-DGR-02, each Channel in the list shall be aligned with 
+3GPP-defined 6 GHz channelization. 
+R3-NRU1-AGR-01 
+Deprecated (Converted into R2-NRU1-AGR-02). 
+A.2.2 Device General Requirements (DGR) 
+R2-NRU1-DGR-01 
+The Standard Power Device shall support the query method specified in 
+R2-DGR-02-b 
+R2-NRU1-DGR-02 
+Support of 3GPP-defined 6 GHz channelization [n.12][n.13]: 
+A Standard Power Device using the method in R2-DGR-02-b shall be able to request from 
+an AFC System that each Channel in the list of Available Channels be aligned with 3GPP-
+defined 6 GHz channelization. 
+R3-NRU1-DGR-01 
+Deprecated (Converted into R2-NRU1-DGR-02). 
+A.3 
+Use for Operations not impacting Part 15 Subpart E Regulatory Compliance 
+Not applicable for this version of this document. 
+ 
+
+
+--- Page 62 ---
+6 GHz Committee Functional Specification WG 
+Functional Requirements for the U.S. 6 GHz Band 
+WINNF-TS-1014-V1.5.0 
+ 
+Copyright © 2025 The Software Defined Radio Forum Inc. 
+Page 61 
+All Rights Reserved 
+Annex B (Normative): IEEE 802.11ax Specific Features (Optional) 
+B.1 
+Feature Description 
+This annex provides requirements for the support of IEEE 802.11ax specific features [i.4]. 
+In this release of the specification, all mandatory and optional requirements for IEEE 802.11ax-
+specific features are found in the Wi-Fi Alliance AFC System to AFC Device Interface 
+Specification [n.14].  
+ 
+ 
+
+
+--- Page 63 ---
+6 GHz Committee Functional Specification WG 
+Functional Requirements for the U.S. 6 GHz Band 
+WINNF-TS-1014-V1.5.0 
+ 
+Copyright © 2025 The Software Defined Radio Forum Inc. 
+Page 62 
+All Rights Reserved 
+Annex C (Normative): Reference Table for Fixed Service Receiver 
+Parameters 
+This annex provides a reference of how to obtain fixed service receiver parameters referenced in 
+this specification from the ULS. For each parameter, the ULS Record Type and ULS Data 
+Element [n.19] are provided. 
+“Antenna Type Code” element in “AN” type of record specifies whether the antenna identified 
+by the record is receive antenna (“R”) or transmit antenna (“T”). 
+Table 10: Relationship between ULS data elements and fixed service receive antenna 
+parameters employed in this specification 
+ULS 
+WINNF-TS-1014 
+ULS Data 
+Element 
+Record 
+Type 
+Parameter 
+Symbol 
+Requirement ID(s) 
+Gain 
+AN 
+receive antenna 
+gain 
+GRx, ULS 
+R2-AIP-05, R2-AIP-06, 
+R2-AIP-08,  
+Antenna Model 
+AN 
+receive antenna 
+model 
+n/a 
+R2-AIP-05, R2-AIP-06, 
+R2-AIP-07, R2-AIP-08, 
+Antenna Make 
+AN 
+receive antenna 
+make 
+n/a 
+R2-AIP-05, R2-AIP-06, 
+R2-AIP-08, 
+Height to 
+Center RAAT 
+AN 
+receive antenna 
+height 
+n/a 
+R2-AIP-14 
+Polarization 
+Code 
+AN 
+receive 
+polarization 
+n/a 
+R2-AIP-09 
+Latitude 
+Degrees 
+Latitude 
+Minutes 
+Latitude 
+Seconds 
+Latitude 
+Direction 
+Longitude 
+Degrees 
+Longitude 
+Minutes 
+Longitude 
+Seconds 
+Longitude 
+Direction 
+LO 
+receive location 
+coordinates 
+n/a 
+R2-AIP-05, R2-AIP-14 
+
+
+--- Page 64 ---
+6 GHz Committee Functional Specification WG 
+Functional Requirements for the U.S. 6 GHz Band 
+WINNF-TS-1014-V1.5.0 
+ 
+Copyright © 2025 The Software Defined Radio Forum Inc. 
+Page 63 
+All Rights Reserved 
+Frequency 
+Assigned 
+FR 
+center frequency  Fc, FS-Rx, ULS 
+R2-AIP-02, R2-AIP-05, 
+R2-AIP-06, R2-AIP-07, 
+R2-AIP-08, R2-AIP-17, 
+R2-AIP-19 
+Diversity Gain 
+AN 
+diversity receive 
+antenna gain 
+GDRx, ULS 
+R2-AIP-08, 
+Diversity 
+Height 
+AN 
+diversity antenna 
+height 
+n/a 
+R2-AIP-15 
+Line Loss 
+AN 
+feeder loss 
+n/a 
+R2-AIP-10 
+Transmitter 
+Make 
+FR 
+radio make 
+n/a 
+R2-AIP-10 
+Transmitter 
+Model 
+FR 
+radio model 
+n/a 
+R2-AIP-10 
+NOTE: The most convenient way to uniquely determine an FS receiver antenna location is to 
+use Tx call sign plus the path number. 
+Table 11: Relationship between ULS data elements and fixed service transmit antenna 
+parameters employed in this specification 
+ULS 
+WINNF-TS-1014 
+ULS Data 
+Element 
+Record 
+Type 
+Parameter 
+Symbol Requirement ID(s) 
+Gain 
+AN 
+transmit antenna 
+gain 
+GTx, ULS 
+R2-AIP-05, 
+R2-AIP-06, 
+Antenna Make 
+AN 
+transmit antenna 
+model 
+n/a 
+R2-AIP-05, 
+Antenna Model 
+AN 
+transmit antenna 
+make 
+n/a 
+R2-AIP-05, 
+Height to Center 
+RAAT 
+AN 
+transmit antenna 
+height 
+n/a 
+R2-AIP-14 
+
+
+--- Page 65 ---
+6 GHz Committee Functional Specification WG 
+Functional Requirements for the U.S. 6 GHz Band 
+WINNF-TS-1014-V1.5.0 
+ 
+Copyright © 2025 The Software Defined Radio Forum Inc. 
+Page 64 
+All Rights Reserved 
+Latitude 
+Degrees 
+Latitude 
+Minutes 
+Latitude 
+Seconds 
+Latitude 
+Direction 
+Longitude 
+Degrees 
+Longitude 
+Minutes 
+Longitude 
+Seconds 
+Longitude 
+Direction 
+LO 
+transmit location 
+coordinates 
+n/a 
+R2-AIP-05 
+Polarization 
+Code 
+AN 
+transmit 
+polarization 
+n/a 
+R2-AIP-09, 
+Table 12: Relationship between ULS data elements and fixed service passive repeater 
+parameters employed in this specification 
+ULS 
+WINNF-TS-1014 
+ULS Data 
+Element 
+Record 
+Type 
+Parameter 
+Symbol Requirement ID(s) 
+Antenna Type 
+Code 
+AN 
+passive repeater 
+antenna 
+n/a 
+R2-AIP-29 
+Antenna Model 
+AN 
+antenna model 
+n/a 
+R2-AIP-29 
+Back-to-Back 
+Rx Dish Gain 
+AN 
+Back-to-back 
+receive antenna 
+gain 
+n/a 
+R2-AIP-29 
+R2-AIP-30 
+Back-to-Back 
+Tx Dish Gain 
+AN 
+Back-to-back 
+transmit antenna 
+gain 
+n/a 
+R2-AIP-29 
+R2-AIP-30 
+Reflector Height AN 
+reflector height 
+n/a 
+R2-AIP-29 
+Reflector Width 
+AN 
+reflector width 
+n/a 
+R2-AIP-29 
+NOTE: In “AN” record file for Back-to-Back antennas, “Antenna Model” is applied 
+to both Tx and Rx dish antennas. 
+ 
+ 
+
+
+--- Page 66 ---
+6 GHz Committee Functional Specification WG 
+Functional Requirements for the U.S. 6 GHz Band 
+WINNF-TS-1014-V1.5.0 
+ 
+Copyright © 2025 The Software Defined Radio Forum Inc. 
+Page 65 
+All Rights Reserved 
+Annex D (Informative): AFC System Operator Certification Procedure 
+Information 
+The FCC has provided the information about the certification procedure for AFC System 
+Operators in its Public Notice [i.7]. The descriptions below can be found in the Public Notice and 
+are shown for informational purpose only.  
+ 
+As specified in the 6 GHz Report and Order [n.3], OET will follow a multistep process to 
+approve AFC Systems in which each prospective AFC System Operator must demonstrate 
+its ability to perform the required functions pursuant to the Commission’s 6 GHz unlicensed 
+rules [n.1]. ([i.7], Paragraph 7) 
+ 
+We request that parties interested in becoming an AFC System operator as part of the initial 
+evaluation process submit their proposals no later than November 30, 2021. ([i.7], Paragraph 
+7) 
+o 
+The AFC System proposals must describe how the prospective AFC System Operator 
+will comply with the requirements and core functions described in Section 15.407(k) of 
+the Commission’s rules [n.1] and the 6 GHz Report and Order [n.3]. ([i.7], Paragraph 9) 
+o 
+The public will then have an opportunity to review and comment on these proposals, 
+including on each prospective operator’s fitness to operate an AFC System as well as 
+the technical and operational description of each proposed AFC System. Comments on 
+these proposals must be submitted by December 21, 2021. ([i.7], Paragraph 7) 
+o 
+OET will review all proposals submitted by November 30, 2021 concurrently and with 
+equal priority. Proposals submitted after this date will be considered by OET, but they 
+may not be considered concurrently with proposals submitted by November 30, 2021. 
+For any proposal received after November 30, 2021, OET will issue a public notice 
+announcing receipt of the proposal and establishing a period for the public to review and 
+comment on the proposal. ([i.7], Paragraph 7) 
+ 
+Proposals will not be considered mutually exclusive and OET will conditionally approve as 
+many proposals as are found to satisfy all AFC System requirements. ([i.7], Paragraph 7) 
+ 
+Applicants who receive a conditional approval will then be required to allow access to their 
+AFC System for a public trial period to provide interested parties an opportunity to check 
+that it provides accurate results. ([i.7], Paragraph 8) 
+o 
+This trial period shall include thorough testing, both in a controlled environment (e.g., 
+lab testing) and through demonstration projects (e.g., field testing). OET may also 
+require prospective AFC System Operators to attend workshops and meetings as part of 
+the assessment process. ([i.7], Paragraph 8) 
+ 
+Prospective AFC system operators must comply with all instructions from OET and must 
+provide any requested information in a timely manner. ([i.7], Paragraph 8) 
+ 
+ 
+
+
+--- Page 67 ---
+6 GHz Committee Functional Specification WG 
+Functional Requirements for the U.S. 6 GHz Band 
+WINNF-TS-1014-V1.5.0 
+ 
+Copyright © 2025 The Software Defined Radio Forum Inc. 
+Page 66 
+All Rights Reserved 
+Annex E (Informative): Data Interpolation Methods for Fixed Service 
+Receiver Antenna and Passive Sites 
+E.1 Linear Interpolation for Fixed Service Antenna RPE 
+This informative annex provides the information about the Appendix A (App01) (in .xlsx format) 
+of WINNF-TS-1014 which is used for FS receiver near field adjustment specified in R2-AIP-17.  
+The Appendix lists the difference, in dB, between the near field and far field RPE of a parabolic 
+dish antenna assuming a Hansen single parameter dish illumination. This difference in the near 
+and far field is a function of three parameters: 1) antenna illumination efficiency, 2) normalized 
+distance from the antenna and 3) the discrimination parameter.  
+The antenna illumination efficiency is defined as the ratio of the far field boresight gain for a 
+given illumination to the gain of the antenna with a uniform illumination [i.8]. This efficiency 
+can be expressed in dB or as a simple ratio. For a Hansen illumination, the efficiency  is a 
+function of its H parameter.  The table below lists the H parameter for a number of efficiencies. 
+Table 13: H parameter vs efficiency  
+H parameter 
+efficiency   
+efficiency  [dB] 
+2.817 
+0.40 
+-3.98 
+2.454 
+0.45 
+-3.47 
+2.161 
+0.50 
+-3.01 
+1.918 
+0.55 
+-2.60 
+1.711 
+0.60 
+-2.22 
+1.532 
+0.65 
+-1.87 
+1.371 
+0.70 
+-1.55 
+The normalized distance x and the discrimination parameter u can be calculated as follows: 
+x = d/(2D2),  
+u = (D/) sin,  
+where: 
+▪ 
+D: the diameter of the dish antenna; 
+▪ 
+: the wavelength of the microwave signal; 
+▪ 
+d: the distance from the fixed service microwave antenna;  
+▪ 
+ the discrimination angle from boresight;  
+▪ 
+x can be expressed in dB as 10log10(x); and  
+▪ 
+all distances are expressed in the same units. 
+A different tab is present in the Appendix A for 18 different normalized distances expressed in 
+dB ranging from 0 dB (x = 1) to -17 dB (x = 0.02). On each tab the near field - far field 
+difference is listed for the seven efficiencies in the table above as a function of the discrimination 
+parameter. A properly interpolated value from these curves can be used to estimate the near field 
+
+
+--- Page 68 ---
+6 GHz Committee Functional Specification WG 
+Functional Requirements for the U.S. 6 GHz Band 
+WINNF-TS-1014-V1.5.0 
+ 
+Copyright © 2025 The Software Defined Radio Forum Inc. 
+Page 67 
+All Rights Reserved 
+RPE from the far field RPE given an efficiency, normalized distance and discrimination 
+parameter. 
+Steps to interpolate the data are as follows: 
+1. First determine the fixed service antenna efficiency along with the discrimination parameter 
+and the normalized distance in dB to the interference source. Then, find the two worksheets 
+in the workbook that bracket the normalized distance. If the normalized distance is greater 
+than or equal to 0 dB, no near field adjustment is needed, and no further calculations are 
+necessary. If the normalized distance is less than -17 dB, use the -17 dB worksheet. 
+2. Next find the two column pairs on each worksheet that bracket the antenna efficiency (). If 
+the efficiency is less than 0.4, use the 0.4 column pair. If the efficiency is greater than 0.7, 
+use the 0.7 column pair. 
+o 
+In the left column of each column pair, find the two discrimination parameter (u) values 
+that bracket the discrimination parameter. If the discrimination parameter is greater than 
+the largest value listed in the column, use an adjustment factor value of zero. Otherwise 
+use linear interpolation between the two bracketing values and the desired 
+discrimination parameter for each column pair.   
+o 
+If working with two column pairs in a worksheet, use linear interpolation between the 
+two determined column values for the desired antenna efficiency. This is the adjustment 
+factor associated with the worksheet. 
+o 
+If working with two worksheets, use linear interpolation between the two adjustment 
+factors for each worksheet and the desired normalized distance in dB. This will result in 
+the final adjustment factor to be added to the far field RPE value at the discrimination 
+angle. 
+E.2 Linear Interpolation for Passive Sites 
+In R2-AIP-31, the near field dB value of n can be interpolated from the supplementary tabulated 
+data with the following procedure. To determine the value of n for particular 1/Ks and Q values, 
+the nearest surrounding values of these parameters can be found in column A and row 1 of the 
+Appendix B (App02). Then bilinear interpolation is used to find n. Assuming these surrounding 
+values are given by: 
+1/KS1 ≤1/KS ≤ 1/KS2 
+Q1 < Q ≤ Q2 
+Then,  
+n(1/KS, Q) = wK1wQ1n(1/KS1, Q1) + wK2wQ1n(1/KS2 Q1) + wK1wQ2n(1/KS1, Q2) 
++ wK2wQ2n(1/KS2, Q2) 
+Where the n(1/KSi, Qj) dB values come from the appropriate row and column of the tabulated data 
+and the weights are defined as: 
+wK1= 1 KS2
+⁄
+– 1 KS
+⁄
+1 KS2
+⁄
+– 1 KS1
+⁄
+            wQ1=
+Q2– Q
+Q2– Q1
+ 
+
+
+--- Page 69 ---
+6 GHz Committee Functional Specification WG 
+Functional Requirements for the U.S. 6 GHz Band 
+WINNF-TS-1014-V1.5.0 
+ 
+Copyright © 2025 The Software Defined Radio Forum Inc. 
+Page 68 
+All Rights Reserved 
+wK2= 1 KS
+⁄
+– 1 KS1
+⁄
+1 KS2
+⁄
+– 1 KS1
+⁄
+            wQ2=
+Q –Q1
+Q2– Q1
+ 
+ 
+ 
+
+
+--- Page 70 ---
+6 GHz Committee Functional Specification WG 
+Functional Requirements for the U.S. 6 GHz Band 
+WINNF-TS-1014-V1.5.0 
+ 
+Copyright © 2025 The Software Defined Radio Forum Inc. 
+Page 69 
+All Rights Reserved 
+Annex F (Normative): Considerations for 6 GHz AFC Use of NLCD Data 
+NLCD data with 30 m × 30 m pixels, which includes the 48 contiguous United States (CONUS) 
+and Alaska, shall be processed using the data adjustment technique as described in F.3.1 of this 
+Annex. The other part of this Annex provides more information about the technique. 
+F.1 Introduction 
+The USGS National Land Cover Data (NLCD) can be downloaded at: 
+https://www.mrlc.gov/data?f%5B0%5D=category%3Aland%20cover  
+From that site, 30 m × 30 m pixel NLCD data can be downloaded for the contiguous 48 US 
+states (CONUS), Alaska, Hawaii, and Puerto Rico. Additionally, newer high resolution NLCD 
+data can also be downloaded for Hawaii, Puerto Rico and the US Virgin Islands from the NOAA 
+web sites at: 
+https://chs.coast.noaa.gov/htdata/raster1/landcover/bulkdownload/hires/hi/  
+https://chs.coast.noaa.gov/htdata/raster1/landcover/bulkdownload/hires/pr/  
+https://chs.coast.noaa.gov/htdata/raster1/landcover/bulkdownload/hires/usvi/  
+The legacy data sets from 2021 and earlier are provided as ERDAS Image (.img) files. The more 
+modern data set versions are in GeoTiff format. The data is provided in several different map 
+projections/datums depending on the source and region.  The USGS data comes in different 
+Albers Conic Equal Area projections. While the NOAA data comes as Universal Transverse 
+Mercator (UTM) projections, or in the case of Puerto Rico, a 1983 state plane projection based 
+on a Lambert Conic Two Parallel projection. The table below summarizes the most modern data 
+available from the USGS and NOAA for these regions. 
+Table 14: NLCD Data 
+Region 
+USGS 
+NOAA 
+Resolution Year 
+Projection 
+Resolution 
+Year 
+Projection 
+CONUS 30m x 30m 2023 Albers Conic  
+ 
+ 
+AK 
+30m x 30m 2016 Albers Conic  
+ 
+ 
+HI 
+30m x 30m 2001 Albers Conic 2.4m x 2.4m 2010/11 UTM 4N/5N 
+PR 
+30m x 30m 2001 Albers Conic 2m x 2m 
+2010 
+Lambert Conic 
+USVI 
+ 
+ 
+ 
+2.4m x 2.4m 2012 
+UTM 20N 
+The USGS data specifies its pixels as one of 20 different NLCD classes or a value of unclassified 
+(see Table 15). The NOAA data specifies its pixels as one of 27 different NLCD classes plus two 
+undefined values of unclassified and map background.  The USGS NLCD integer classification 
+values range from 0 to 95 and are grouped in categories, so that not all integers in this range are 
+used.  The NOAA NLCD integer classification values simply range from 0 to 28. It is possible to 
+map the NOAA NLCD classes to equivalent or similar USGS NLCD classes (see  
+Table 16).   
+
+
+--- Page 71 ---
+6 GHz Committee Functional Specification WG 
+Functional Requirements for the U.S. 6 GHz Band 
+WINNF-TS-1014-V1.5.0 
+ 
+Copyright © 2025 The Software Defined Radio Forum Inc. 
+Page 70 
+All Rights Reserved 
+Table 15: USGS NLCD Classifications 
+NLCD Class Environment 
+0 
+Unclassified 
+11 
+Open Water 
+12 
+Perennial Ice/Snow 
+21 
+Developed, Open Space 
+22 
+Developed, Low Intensity 
+23 
+Developed, Medium Intensity 
+24 
+Developed High Intensity 
+31 
+Barren Land (Rock/Sand/Clay) 
+41 
+Deciduous Forest 
+42 
+Evergreen Forest 
+43 
+Mixed Forest 
+51 
+Dwarf Scrub 
+52 
+Shrub/Scrub 
+71 
+Grassland/Herbaceous 
+72 
+Sedge/Herbaceous 
+73 
+Lichens 
+74 
+Moss 
+81 
+Pasture/Hay 
+82 
+Cultivated Crops 
+90 
+Woody Wetlands 
+95 
+Emergent Herbaceous Wetlands 
+ 
+
+
+--- Page 72 ---
+6 GHz Committee Functional Specification WG 
+Functional Requirements for the U.S. 6 GHz Band 
+WINNF-TS-1014-V1.5.0 
+ 
+Copyright © 2025 The Software Defined Radio Forum Inc. 
+Page 71 
+All Rights Reserved 
+Table 16: NOAA NLCD Class to USGS NLCD Class Mapping 
+NOAA Name 
+USGS Name 
+0 Background 
+127 Background value 
+1 Unclassified 
+0 Unclassified 
+2 Impervious 
+24 Developed, High Intensity 
+3 
+23 Developed, Medium Intensity 
+4 
+22 Developed, Low Intensity 
+5 Developed, Open Space 
+21 Developed, Open Space 
+6 Cultivated Crops 
+82 Cultivated Crops 
+7 Pasture/Hay 
+81 Pasture/Hay 
+8 Grassland/Herbaceous 
+71 Grassland/Herbaceous 
+9 Deciduous Forest 
+41 Deciduous Forest 
+10 Evergreen Forest 
+42 Evergreen Forest 
+11 Mixed Forest 
+43 Mixed Forest 
+12 Scrub/Shrub 
+52 Shrub/Scrub 
+13 Palustrine Forested Wetland 
+90 Woody Wetlands 
+14 Palustrine Scrub/Shrub Wetland 
+52 Shrub/Scrub 
+15 Palustrine Emergent Wetland 
+95 Emergent Herbaceous Wetlands 
+16 Estuarine Forested Wetland 
+90 Woody Wetlands 
+17 Estuarine Scrub/Shrub Wetland 
+52 Shrub/Scrub 
+18 Estuarine Emergent Wetland 
+95 Emergent Herbaceous Wetlands 
+19 Unconsolidated Shore 
+95 Emergent Herbaceous Wetlands 
+20 Bare Land 
+31 Barren Land (Rock/Sand/Clay) 
+21 Open Water 
+11 Open Water 
+22 Palustrine Aquatic Bed 
+11 Open Water 
+23 Estuarine Aquatic Bed 
+11 Open Water 
+24 Tundra 
+12 Perennial Ice/Snow 
+25 Perennial Ice/Snow 
+12 Perennial Ice/Snow 
+26 Dwarf Scrub - Alaska specific class 
+51 Dwarf Scrub - Alaska 
+27 Sedge/Herbaceous 
+72 Sedge/Herbaceous - Alaska 
+28 Moss - Alaska specific 
+74 Moss - Alaska 
+Consequently, this document will only be concerned with the USGS NLCD classification integer 
+values. 
+To use any of these data sets with latitude/longitude co-ordinates, those co-ordinates must first 
+be converted to the projection/datum of the data set. Then the pixel within the data set 
+corresponding to those new co-ordinates identified. Now in addition to the NLCD data, the 
+USGS also provides terrain elevation data for the same regions. Furthermore, the USGS terrain 
+elevation data uses a NAD83 latitude/longitude projection, specifying the average terrain 
+elevation in 1 arc-second × 1 arc-second pixels.  In order to simplify working with both the 
+USGS terrain data and the NLCD data, the Wi-Fi Alliance published re-pixelated NLCD data 
+
+
+--- Page 73 ---
+6 GHz Committee Functional Specification WG 
+Functional Requirements for the U.S. 6 GHz Band 
+WINNF-TS-1014-V1.5.0 
+ 
+Copyright © 2025 The Software Defined Radio Forum Inc. 
+Page 72 
+All Rights Reserved 
+also using the same 1 arc-second × 1 arc-second pixels. This data is available at their GitHub site 
+at: 
+https://github.com/Wi-FiTestSuite/6GHz-AFC/tree/main/NLCD_data  
+Note, as the 2021 CONUS NLCD data was only published recently in July 2023, the Wi-Fi 
+Alliance re-pixelated data is based on the 2019 CONUS NLCD data. 
+F.2 Land Clutter Classifications 
+When making propagation loss calculations in a 6 GHz AFC System, the NLCD data values 
+come into play in two situations. For propagation paths less than 1 km using the WINNER II 
+model, the NLCD class determines if the urban, suburban or rural version of the model should be 
+used.  For propagation paths over 1 km using the ITM model, the NLCD class determines if the 
+ITU-R P.2108 or P.452 clutter model should be used. Furthermore, if the P.452 model is used, 
+the NLCD class also determines which row of P.452 table 4 to draw the model parameters from. 
+When computing loss due to clutter, either for ITM or within WINNER II, there is a hierarchy to 
+the NLCD classifications, ranging from minimum loss to maximum loss. This hierarchy is 
+shown in the table below. As one moves down the rows in the table, more clutter loss will be 
+predicted in the propagation calculation.  Hence the higher rows in the table are more 
+conservative with less clutter loss, and lower rows are less conservative with more clutter loss 
+predicted.   
+Table 17: Clutter Classification Hierarchy 
+NLCD Classes 
+ITM 
+WINNER II 
+Environment 
+11, 12, 31, 51, 71, 
+72, 73, 74, 81, 95 
+No clutter loss 
+Rural 
+Open area 
+52, 82 
+P.452 row 1 
+Rural 
+High crop fields 
+0 (unknown) 
+P.452 row 2 
+Rural 
+Village center 
+41, 43, 90 
+P.452 row 3 
+Rural 
+Deciduous trees 
+42 
+P.452 row 4 
+Rural 
+Coniferous trees 
+21, 22 
+ITU-R P.2108-0 
+Suburban 
+Suburban 
+23, 24 
+ITU-R P.2108-0 
+Urban 
+Urban 
+F.3 Roads in Rural Areas 
+A careful review of the USGS NLCD data has shown that many of the NLCD re-pixelation 
+problems occurred around roads in rural areas. The USGS typically classifies paved roads as 
+suburban (21 or 22) or urban (23 or 24). This is problematic since roads are not above ground 
+structures that hinder the propagation of radio waves and cause the clutter loss assumed in 
+suburban or urban environments. And where roads run through rural areas, there are 
+suburban/urban pixels adjacent to rural pixels where re-pixelation issues may arise.  
+It is much more realistic to treat roads running through rural areas as having the clutter loss 
+associated with the surrounding rural environment.  However, the challenge is to identify the 
+
+
+--- Page 74 ---
+6 GHz Committee Functional Specification WG 
+Functional Requirements for the U.S. 6 GHz Band 
+WINNF-TS-1014-V1.5.0 
+ 
+Copyright © 2025 The Software Defined Radio Forum Inc. 
+Page 73 
+All Rights Reserved 
+suburban/urban pixels that are roads in rural areas compared to those pixels that are within actual 
+towns and cities with buildings and ground structures. 
+After some experimentation a simple technique has been devised that, although not perfect, 
+seems to work reasonably well with the road pixels in rural areas. This technique will be 
+described next.   
+F.3.1 Data Adjustment Technique 
+The technique identifies suburban or urban pixels that are on roads in rural areas and then 
+demotes them from their suburban or urban classification to the surrounding rural classification. 
+After this modification, the data can be re-pixelated into square arc-second pixels aligned to 
+latitude and longitude.  The original NLCD pixels are identified as being on roads by looking for 
+thin paths of suburban/urban pixels that are surrounded on both sides by rural pixels.  
+This identification is accomplished by looking at a 5 by 5 grid of pixels and considering how to 
+treat the center pixel. If the center pixel is not a suburban/urban classification, there is nothing to 
+do, and it is left unmodified. If the center pixel is suburban or urban the eight pixels immediately 
+surrounding it are examined. If none of the eight are rural, again there is nothing to do, and 
+center pixel is left unmodified. However, if one or more of the surrounding eight pixels is rural, 
+the center pixel under consideration becomes a candidate to be demoted to that rural 
+classification.  If there are different rural classes in the surrounding eight pixels, one of the most 
+conservative classes from the set will be used, according to the hierarchy in Table 17. To 
+determine if a candidate should be demoted, the 16 outer edge pixels are examined. Traversing 
+this ring of pixels in a clockwise direction, the number of transitions from rural to 
+suburban/urban pixels and back again are counted. If there are at least two transitions in both 
+directions in a complete loop around the outer edge of pixels, this implies rural pixels are on 
+either side of a path of suburban/urban pixels within the 5 by 5 grid.  In this situation the center 
+pixel would be demoted to the rural classification. If there are fewer than two transitions in each 
+direction, the center pixel is left unchanged. 
+This technique is applied to every pixel in the NLCD data by looking at the 5 × 5 grid where it 
+is the center pixel.  Note that the NLCD pixels in the 48 contiguous United States and Alaska are 
+30 m × 30 m in size and so, the width of most roads is roughly one or two pixels. This method 
+would likely not be as effective with significantly different sized pixels.   
+F.3.2 Example Calculations 
+Consider the 5 × 5 grid of NLCD pixels along a road shown in Figure 1. The yellow pixels 
+represent rural, while the red pixels are urban. 
+
+
+--- Page 75 ---
+6 GHz Committee Functional Specification WG 
+Functional Requirements for the U.S. 6 GHz Band 
+WINNF-TS-1014-V1.5.0 
+ 
+Copyright © 2025 The Software Defined Radio Forum Inc. 
+Page 74 
+All Rights Reserved 
+ 
+Figure 1: Example 1 – NLCD pixels 
+The center pixel is urban (red) so the surrounding eight pixels are examined.  Of these, three are 
+rural (yellow), so the center pixel becomes a candidate to be demoted to the rural (yellow) 
+classification.  So next the ring of 16 outer pixels is examined along the path shown by the grey 
+line.  Starting in the upper left corner and heading right, there is a transition from rural to urban.  
+Then heading down along the right side, a transition from urban to rural.  And heading to the left 
+along the bottom row of pixels a transition back to urban.  Finally heading up along the left side 
+of the grid there is one more transition from urban to rural.  As there are two transitions from 
+rural to urban and two transitions from urban back to rural, the center pixel is demoted to the 
+rural classification. 
+Consider now the 5 × 5 grid of pixels centered on an urban pixel at the edge of a city as shown in 
+Figure 2. 
+ 
+Figure 2: Example 2 – NLCD pixels 
+The center pixel is urban (red) so the surrounding eight pixels are examined. Of these, two are 
+rural (yellow), so the center pixel becomes a candidate to be demoted to the rural (yellow) 
+classification.  So next the ring of 16 outer pixels is examined along the path shown by the grey 
+
+
+--- Page 76 ---
+6 GHz Committee Functional Specification WG 
+Functional Requirements for the U.S. 6 GHz Band 
+WINNF-TS-1014-V1.5.0 
+ 
+Copyright © 2025 The Software Defined Radio Forum Inc. 
+Page 75 
+All Rights Reserved 
+line.  Starting in the upper left corner and heading right, there is a transition from rural to urban.  
+Then heading down along the right side and left along the bottom, no transitions. Finally heading 
+up along the left side of the grid there is a transition from urban to rural. As there is only one 
+transition from rural to urban and one transition from urban back to rural, the center pixel is left 
+unmodified. 
+F.3.3 Example Results 
+The following figures show a rural area around the town of Newton, Illinois. Here there are several 
+roads through the rural countryside. In the original 2019 NLCD data these road pixels are color 
+coded pink (suburban) and red (urban). The cluster of pink and red pixels in the central northern 
+portion of the figures is the town of Newton. Pixels of other colors are different rural classifications 
+as described in Figure 5.  As can be seen in these figures, the roads in the original data are demoted 
+to their surrounding rural classification, while the pixels in the town of Newton remain essentially 
+unchanged. 
+ 
+Figure 3: Original 2019 NLCD Data Near Newton, IL 
+
+
+--- Page 77 ---
+6 GHz Committee Functional Specification WG 
+Functional Requirements for the U.S. 6 GHz Band 
+WINNF-TS-1014-V1.5.0 
+ 
+Copyright © 2025 The Software Defined Radio Forum Inc. 
+Page 76 
+All Rights Reserved 
+ 
+Figure 4: Processed 2019 NLCD Data Near Newton, IL 
+ 
+Figure 5: NLCD pixel color legend 
+Urban pixels (Developed, high/medium intensity) are red and dark red. Suburban pixels 
+(Developed, open space/low intensity) are pink and light pink. All other pixels are different rural 
+classifications. 
+ 
+ 
+
+
+--- Page 78 ---
+6 GHz Committee Functional Specification WG 
+Functional Requirements for the U.S. 6 GHz Band 
+WINNF-TS-1014-V1.5.0 
+ 
+Copyright © 2025 The Software Defined Radio Forum Inc. 
+Page 77 
+All Rights Reserved 
+Annex G (Informative): Revision History 
+Document History 
+V1.0.0 
+15 December, 2021 
+Initial version. 
+V1.1.0 
+25 May, 2022 
+New revision incorporating the following features: 
+▪ 
+Formula for I/N determination 
+▪ 
+Propagation model parameters 
+▪ 
+Fixed Service receiver primary and diversity antenna RPE, and 
+polarization mismatch 
+▪ 
+Feeder loss 
+▪ 
+Use of location uncertainty 
+▪ 
+Query methods for a list of available frequencies 
+V1.2.0 
+31 October, 2022 
+New revision incorporating the following features: 
+▪ 
+Technical clarifications to the existing requirements 
+▪ 
+Determination of fixed service receiver parameters (bandwidth, effective 
+antenna gain, etc.) 
+▪ 
+Propagation model parameters 
+▪ 
+Building entry loss 
+▪ 
+Passive repeaters and reflectors 
+▪ 
+New structure of section 9.1 for better readability. 
+▪ 
+Minor editorial changes. 
+V1.2.1 
+10 November 2022 
+Editorial revision to page 54 to address the following: 
+ 
+▪ 
+Item iii) GVRx, Disc to GVRx-j, Disc (Agreed resolution included this, but 
+missing to add “-j”.) 
+▪ 
+Item iii-1) GVRx, Disc to GVRx-j, Disc (Same as above. Two places in this 
+item.) 
+▪ 
+Item 
+iii-2) 
+D0 
+= 
+–10log10[4pAcos(θIN/2)] 
+to 
+D0 
+= 
+–
+10log10[4pAcosθIN/2] (Agreed resolution did not include circle 
+brackets, but accidentally added circle brackets before θIN and after 
+2 .) 
+ 
+V1.3.0 
+9 March 2023 
+New revision incorporating the following changes: 
+▪ 
+Clarification of R2-AIP-29 and R2-AIP-30 
+▪ 
+New footnote in R2-AIP-16 for protection of both primary and diversity 
+antennas 
+▪ 
+Addition of WINNER II model to the scope of R2-AIP-33 
+▪ 
+Clarification of the definition of “Proxy”  
+▪ 
+Clarification of Feeder Loss value for IDU and ODU (R2-AIP-10) 
+V1.4.0 
+6 October 2023 
+New revision incorporating the following changes: 
+▪ 
+WINNF-22-I-00129 CR for Fixed Service Diversity Receive Antenna 
+Gain and Diameter IITG Approved 
+▪ 
+WINNF-23-I-00023 Change Request to Bandwidth determination from 
+Emission Designator 
+▪ 
+WINNF-23-I-00037 CR to TS-1014 V1.2.1 
+▪ 
+WINNF-23-I-00065-r1 CR – Addressing Network Element Security 
+V1.5.0-
+r3.0  
+29 April 2025 
+New revision incorporating the following changes: 
+▪ 
+Technical Clarification changes by “WINNF-23-I-00095 CR – GitHub 
+Feedback on TS-1014” 
+▪ 
+Extension to the requirement ID format applied to Post First Wave 
+Certification according to “WINNF-24-I-00037 Requirement ID format 
+for Post-First Wave Certification” 
+
+
+--- Page 79 ---
+6 GHz Committee Functional Specification WG 
+Functional Requirements for the U.S. 6 GHz Band 
+WINNF-TS-1014-V1.5.0 
+ 
+Copyright © 2025 The Software Defined Radio Forum Inc. 
+Page 78 
+All Rights Reserved 
+▪ 
+Technical changes by “WINNF-25-I-00002 Considerations for NLCD” 
+with some minor editorial changes. 
+▪ 
+WINNF-25-I-00008-r1 CR – Treatment of NLCD Data in TS-1014 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+

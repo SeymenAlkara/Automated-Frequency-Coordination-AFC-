@@ -1,0 +1,796 @@
+Signaling Protocols and Procedures for 6 GHz Band;  
+AFC System - Standard Power Device Interface 
+Technical Specification 
+
+Document WINNF-TS-3007 
+
+Version V1.2.0 
+
+14 June 2023 
+
+Copyright © 2023 The Software Defined Radio Forum Inc. – All Rights Reserved 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+6 GHz Committee Protocols WG 
+AFC System - SPD Interface Technical Specification 
+WINNF-TS-3007-V1.2.0 
+
+TERMS, CONDITIONS & NOTICES 
+This document has been prepared by the 6 GHz Committee Protocols WG to assist The Software Defined Radio Forum Inc. (or its successors or assigns, hereafter “the Forum”). It may be amended 
+or withdrawn at a later time and it is not binding on any member of the Forum or of the 6 GHz Committee Protocols WG. 
+
+Contributors to this document that have submitted copyrighted materials (the Submission) to the Forum for use in this document  retain copyright ownership of their original work, while at the same  time  granting  the  Forum  a  non-exclusive,  irrevocable,  worldwide,  perpetual,  royalty-free license  under  the  Submitter’s  copyrights  in  the  Submission  to  reproduce,  distribute,  publish, display, perform, and create derivative works of the Submission based on that original work for the purpose of developing this document under the Forum's own copyright. 
+
+Permission  is  granted  to  the  Forum’s  participants  to  copy  any  portion  of  this  document  for legitimate  purposes  of  the  Forum.    Copying  for  monetary  gain  or  for  other  non-Forum  related purposes is prohibited. 
+
+THIS  DOCUMENT  IS  BEING  OFFERED  WITHOUT  ANY  WARRANTY  WHATSOEVER, AND  IN  PARTICULAR,  ANY  WARRANTY  OF  NON-INFRINGEMENT  IS  EXPRESSLY DISCLAIMED.    ANY  USE  OF  THIS  SPECIFICATION  SHALL  BE  MADE  ENTIRELY  AT THE  IMPLEMENTER'S  OWN  RISK,  AND  NEITHER  THE  FORUM,  NOR  ANY  OF  ITS MEMBERS OR SUBMITTERS, SHALL HAVE ANY LIABILITY WHATSOEVER TO ANY IMPLEMENTER  OR  THIRD  PARTY  FOR  ANY  DAMAGES  OF  ANY  NATURE WHATSOEVER,  DIRECTLY  OR  INDIRECTLY,  ARISING  FROM  THE  USE  OF  THIS DOCUMENT. 
+
+Recipients  of  this  document  are  requested  to  submit,  with  their  comments,  notification  of  any relevant patent claims or other intellectual property rights of which they may be aware that might be infringed by any implementation of the specification set forth in this document, and to provide supporting documentation. 
+
+This document was developed following the Forum's policy on restricted or controlled information (Policy  009)  to  ensure  that  that  the  document  can  be  shared  openly  with  other  member organizations  around  the  world.  Additional  Information  on  this  policy  can  be  found  here: http://www.wirelessinnovation.org/page/Policies_and_Procedures  
+
+Although  this  document  contains  no  restricted  or  controlled  information,  the  specific implementation  of concepts  contain herein  may  be controlled under the laws of the  country of origin  for  that  implementation.  Readers  are  encouraged,  therefore,  to  consult  with  a  cognizant authority prior to any further development.    
+
+Wireless Innovation Forum ™ and SDR Forum ™ are trademarks of the Software Defined Radio Forum Inc.  
+
+Copyright © 2023 The Software Defined Radio Forum Inc  
+All Rights Reserved 
+
+Page  i 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+6 GHz Committee Protocols WG 
+AFC System - SPD Interface Technical Specification 
+WINNF-TS-3007-V1.2.0 
+
+Table of Contents 
+
+5.1 
+
+TERMS, CONDITIONS & NOTICES ............................................................................................ i 
+Table of Contents ............................................................................................................................ ii 
+Contributors ................................................................................................................................... iv 
+1  Introduction .................................................................................................................................1 
+2  Scope ...........................................................................................................................................1 
+3  References ...................................................................................................................................1 
+3.1  Normative References ......................................................................................................1 
+Informative References ....................................................................................................2 
+3.2 
+4  Definitions and Abbreviations ....................................................................................................2 
+4.1  Definitions........................................................................................................................2 
+4.2  Abbreviations ...................................................................................................................2 
+5  Architecture of AFC System – Standard Power Device Interface ..............................................3 
+Baseline Architecture .......................................................................................................3 
+6  Compliance with WInnForum 6 GHz Requirements ..................................................................3 
+6.1  General .............................................................................................................................3 
+6.2  Device Registration (Mandatory) ....................................................................................3 
+  General .....................................................................................................................3 
+Protocol-Specific Requirements for Standard Power Devices ................................4 
+Protocol-Specific Requirements for AFC System ...................................................4 
+Frequency Availability Query Methods (Mandatory) .....................................................4 
+  General .....................................................................................................................4 
+Support of Frequency Availability Query Methods .................................................5 
+Protocol-Specific Requirements for Frequency-Based Query .................................5 
+Protocol-Specific Requirements for Channel-Based Query ....................................6 
+Protocol-Specific Requirements Common to All Query Methods ..........................7 
+3GPP Specific Features (Optional) ..................................................................................7 
+  NRU1 Feature ..........................................................................................................7 
+
+6.4 
+
+6.3 
+
+Annex A (Normative) Extensions to Global Operating Classes and CFI for 3GPP 6 GHz 
+Channelization .................................................................................................................................9 
+Annex B (Normative): Cross References for International Support ..............................................11 
+Annex C (Informative): Revision History .....................................................................................12 
+
+Copyright © 2023 The Software Defined Radio Forum Inc  
+All Rights Reserved 
+
+Page  ii 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+6 GHz Committee Protocols WG 
+AFC System - SPD Interface Technical Specification 
+WINNF-TS-3007-V1.2.0 
+
+List of Tables 
+
+Table A-1: Mapping among the global operating classes, channel bandwidth and CFIs for 3GPP 
+6 GHz channelization .............................................................................................................. 9 
+Table B-2: Cross References for International Support ................................................................ 11 
+
+Figure 1: Protocol Interface ............................................................................................................ 3 
+
+List of Figures 
+
+Copyright © 2023 The Software Defined Radio Forum Inc  
+All Rights Reserved 
+
+Page  iii 
+
+ 
+ 
+ 
+ 
+6 GHz Committee Protocols WG 
+AFC System - SPD Interface Technical Specification 
+WINNF-TS-3007-V1.2.0 
+
+Contributors 
+
+The following individuals made significant contributions to this document: 
+
+Group Chair: Naotaka Sato (Sony) 
+
+Editor: Sho Furuichi (Sony) 
+
+Other Member Representatives: 
+
+  Nokia: Navin Hathiramani 
+
+  WISPA: Richard Bernhardt 
+
+Copyright © 2023 The Software Defined Radio Forum Inc  
+All Rights Reserved 
+
+Page  iv 
+
+ 
+ 
+6 GHz Committee Protocols WG 
+AFC System - SPD Interface Technical Specification 
+WINNF-TS-3007-V1.2.0 
+
+Signaling Protocols and Procedures for 6 GHz Band;  
+AFC System - Standard Power Device Interface Technical 
+Specification 
+
+1  Introduction 
+
+This document is the technical specification of signaling protocols and procedures for the interface between the AFC System and Standard Power Access Point (SPAP)/Fixed Client 
+Device (FCD) (collectively referred to as “Standard Power Device” or “SPD”) and, where present, between the AFC System and Proxy on behalf of one or more SPDs.  
+
+As a prerequisite or foundation, any readers are encouraged to use this technical specification together with “AFC System to AFC Device Interface Technical Specification” produced by Wi-
+Fi Alliance (hereinafter called “the WFA SDI document”) [n.1]. As per WINNF-RC-3006 [n.2], support for the WFA SDI document is non-exclusive and the Wireless Innovation Forum 
+(WInnForum) may endorse additional interfaces for application areas where the WFA SDI document is not an ideal match. 
+
+2  Scope 
+
+The scope of this technical specification is to specify the signaling protocols and procedures for compliance with the functional requirements specified by the WInnForum when using the WFA 
+SDI document [n.1]. The references for the technical specifications of the WInnForum-specified requirements can be found in Annex B of this technical specification. The interface between the Proxy and SPD is outside the scope of this document.  
+
+Unless otherwise stated, “requirement(s)” and “functional requirement(s)” refer to the requirements specified by the WInnForum referenced in Annex B of this technical specification.  
+
+The key words “required”, “shall”, “shall not”, “should”, “should not”, “recommended”, “may”, and “optional” in this document are to be interpreted as described in RFC-2119 [n.4]. In addition, the key word “conditional” shall be interpreted to mean that the definition is an absolute requirement of this specification only if the stated condition is met. 
+
+3  References 
+
+3.1  Normative References 
+The following referenced documents are necessary for the application of the present document. 
+
+[n.1]  AFC System to AFC Device Interface Specification v1.5, Wi-Fi Alliance, available at: 
+
+https://www.wi-fi.org/file/afc-system-to-afc-device-interface-specification 
+
+[n.2]  WINNF-RC-3006, “Endorsement of Wi-Fi Alliance AFC System to AFC Device 
+
+Interface Specification”, Wireless Innovation Forum 
+
+[n.3]  WINNF-TS-1014, “Functional Requirements for the 6 GHz Band under Control of the 
+
+AFC System”, Wireless Innovation Forum 
+
+Copyright © 2023 The Software Defined Radio Forum Inc  
+All Rights Reserved 
+
+Page  1 
+
+ 
+6 GHz Committee Protocols WG 
+AFC System - SPD Interface Technical Specification 
+WINNF-TS-3007-V1.2.0 
+
+[n.4]  RFC-2119, “Key words for use in RFCs to Indicate Requirement Levels”, March 1997. 
+
+[n.5]  3GPP TS 38.101-1, “NR; User Equipment (UE) radio transmission and reception; Part 1: 
+
+Range 1 Standalone”, available at: 
+https://portal.3gpp.org/desktopmodules/Specifications/SpecificationDetails.aspx?specific
+ationId=3283  
+
+[n.6]  3GPP TS 38.104, “NR; Base Station (BS) radio transmission and reception”, available at: 
+https://portal.3gpp.org/desktopmodules/Specifications/SpecificationDetails.aspx?specific
+ationId=3202  
+
+Informative References 
+
+3.2 
+The following referenced documents are not necessary for the application of the present 
+document, but they assist the reader with regard to a particular subject area. 
+
+Not applicable for this version of this technical specification 
+
+4  Definitions and Abbreviations 
+
+4.1  Definitions 
+For the purposes of the present document, the definitions given in [n.3] and the following apply.  
+
+AFC-Managed Sub-band: A sub-band of 6 GHz band that is under the control of the AFC System (or  the  equivalent  system)  for  operation  of  Standard  Power  Device  designated  by  the  national regulatory authority of the country applied. 
+
+EXAMPLE:  U-NII-5 (5925 – 6425 MHz) is one AFC-Managed Sub-band in US 
+and U-NII-7 (6525 – 6875 MHz) is another AFC-Managed Sub-band 
+in US. 
+
+Certified Equipment Authorization ID List: A list of the certified Equipment Authorization IDs for SPAPs and FCDs. 
+
+Channel-Based Query: Query for availability of Channel(s) identified in a manner specific to an air interface. 
+
+Disallowed Device List: A list of the disallowed Equipment Authorization IDs and the disallowed combination of the Equipment Authorization ID and the device serial number. 
+
+Frequency-Based  Query:  Query  for  availability  of  frequency  range(s)  without  specifying  a Channel size across which the Standard Power Device will operate. 
+
+4.2  Abbreviations 
+For the purposes of the present document, the abbreviations given in [n.3] and the following apply.  
+
+ARFCN 
+
+Absolute Radio Frequency Channel Number 
+
+CFI 
+
+FCD 
+
+NR 
+
+Channel Center Frequency Index 
+
+Fixed Client Device 
+
+New Radio 
+
+Copyright © 2023 The Software Defined Radio Forum Inc  
+All Rights Reserved 
+
+Page  2 
+
+ 
+6 GHz Committee Protocols WG 
+AFC System - SPD Interface Technical Specification 
+WINNF-TS-3007-V1.2.0 
+
+SPAP 
+
+SPD 
+
+Standard Power Access Point 
+
+Standard Power Device 
+
+5  Architecture of AFC System – Standard Power Device Interface 
+
+5.1  Baseline Architecture 
+This section provides the interfaces related to the protocols that are defined in this technical specification. The figure below is a subset of the architecture described in [n.1], where SPD may be SPAP or FCD. 
+
+Figure 1: Protocol Interface 
+
+6  Compliance with WInnForum 6 GHz Requirements 
+
+6.1  General 
+
+This section specifies the protocol-specific requirements for compliance with the functional requirements when using the protocol specified by the WFA SDI document [n.1]. 
+
+6.2  Device Registration (Mandatory) 
+
+  General 
+
+This section provides the protocol-specific requirements for compliance with the device registration requirements when using the WFA SDI-based protocol. In addition, this section 
+provides clarification for handling of non-zero response code (i.e., the responseCode field) in certain situations. 
+
+Copyright © 2023 The Software Defined Radio Forum Inc  
+All Rights Reserved 
+
+Page  3 
+
+In-scopeOut of scopeAFC SystemProxySPDSPD(s) 
+ 
+ 
+6 GHz Committee Protocols WG 
+AFC System - SPD Interface Technical Specification 
+WINNF-TS-3007-V1.2.0 
+
+  Protocol-Specific Requirements for Standard Power Devices 
+
+All the registration parameters required by the functional requirements shall be provided by the SPD or the Proxy on behalf of the SPD to the AFC System by following the format of the 
+AvailableSpectrumInquiryRequest object specified in the WFA SDI document [n.1].  
+
+  Protocol-Specific Requirements for AFC System  
+
+According to the format of the AvailableSpectrumInquiryRequest object specified in the WFA SDI document [n.1], the AFC System shall assess if all the required registration parameters are 
+provided with valid values.  
+
+If the field of at least one mandatory parameter is missing, the AFC System shall return the responseCode 102 (MISSING_PARAM). The AFC System may additionally include the 
+supplementalInfo field (data type: object: SupplementalInfo) containing the missingParams field (data type: array of string) to indicate a list of names of missing parameters. 
+
+If the value of at least one parameter does not follow the format or the allowed range of the values according to the definitions specified in the WFA SDI document [n.1], the AFC System 
+shall return the responseCode 103 (INVALID_VALUE). The AFC System may additionally include the supplementalInfo field containing the invalidParams field (data type: array of string) 
+to indicate a list of names of parameters with invalid values. 
+
+The AFC System shall return the responseCode 106 (UNEXPECTED_PARAM) if the location field (data type: object: Location) includes two or more fields indicating horizontal area of 
+location uncertainty (i.e., the ellipse field, the linearPolygon field and the radialPolygon field). The AFC System may additionally include the supplementalInfo field containing the 
+unexpectedParams field (data type: array of string) to indicate a list of names of unexpected parameters. 
+
+The AFC System shall maintain the Certified Equipment Authorization ID List obtained as per R1-AGR-01-a [n.3] (for US) or as per its equivalent (for the country other than US). The AFC 
+System shall return the responseCode 103 (INVALID_VALUE) if the value of the id field in the CertificationId object is not included in the Certified Equipment Authorization ID List 
+corresponding to the rulesetId field value. 
+
+The AFC System shall maintain the Disallowed Device List as per R1-AGR-05 [n.3] (for US) or as  per  its  equivalent  (for  the  country  other  than  US).  If  the  AFC  System  finds  that  either  the Equipment Authorization ID or the combination of the Equipment Authorization ID and the serial number (i.e., the serialNumber field) provided in the AvailableSpectrumInquiryRequest object is included  in  the  Disallowed  Device  List,  the  AFC  System  shall  return  the  responseCode  101 (DEVICE_DISALLOWED). 
+
+6.3  Frequency Availability Query Methods (Mandatory) 
+
+  General 
+
+This section provides the protocol-specific requirements for compliance with the frequency 
+availability query requirements when using the WFA SDI-based protocol [n.1]. 
+
+Copyright © 2023 The Software Defined Radio Forum Inc  
+All Rights Reserved 
+
+Page  4 
+
+ 
+6 GHz Committee Protocols WG 
+AFC System - SPD Interface Technical Specification 
+WINNF-TS-3007-V1.2.0 
+
+  Support of Frequency Availability Query Methods 
+
+The functional requirements allows the following two methods for frequency availability query: 
+
+▪  Frequency-Based Query (R2-DGR-02-a and R2-AGR-03-a) 
+
+▪  Channel-Based Query (R2-DGR-02-b and R2-AGR-03-b) 
+
+For the Frequency-Based Query, this specification leverages the inquiredFrequencyRange field (data type: array of object: FrequencyRange) in the AvailableSpectrumInquiryRequest object and 
+the availableFrequencyInfo field (data type: array of object: AvailableFrequencyInfo) in the AvailableSpectrumInquiryResponse object.  
+
+For the Channel-Based Query, this specification leverages the inquiredChannels field (data type: array of object: Channels) in the AvailableSpectrumInquiryRequest object and the 
+availableChannelInfo field (data type: array of object: AvailableChannelInfo) in the AvailableSpectrumInquiryResponse object. Specifically, this specification defines the references 
+to the allowed values of the globalOperatingClass field in the Channels object for support of air-interface specific channelization, where the allowed values of the globalOperatingClass field are defined to be associated with a single Channel bandwidth and a set of the corresponding Channel Center Frequency Indices (CFIs).  
+
+NOTE:   The WFA SDI document allows vendors to define and use their 
+
+proprietary references to the allowed values of the 
+globalOperatingClass field.  
+
+According to R2-AGR-02 [n.3], the AFC System and the SPD can employ either or both of the above methods. If the AFC System finds none of the query methods which the AFC System does 
+support is used by the SPD in the AvailableSpectrumInquiryRequest object, the AFC System shall return the responseCode 301 (UNSUPPORTED_BASIS) in the AvailableSpectrumInquiryResponse object. The AFC System may additionally include the shortDescription field (data type: string) to indicate that the failure has been caused by the use of 
+the method unsupported by the AFC System. 
+
+NOTE:  This failure is caused only when either of the inquiredFrequencyRange field and the inquiredChannels field is included in the AvailableSpectrumInquiryRequest object and the AFC System does not support the query method corresponding to the included field. 
+
+  Protocol-Specific Requirements for Frequency-Based Query 
+
+In the AvailableSpectrumInquiryRequest object corresponding to the SPD employing the Frequency-Based Query, the inquiredFrequencyRange field shall be included. As per R2-DGR-
+02-a-i [n.3], each of the FrequencyRange objects in the inquiredFrequencyRange field shall include a frequency range up to one and one-half times the SPD’s intended operating Channel 
+bandwidth away from the center frequency of the SPD’s intended operating Channel to the extent that such frequencies are within the AFC-Managed Sub-band(s). If the minDesiredPower 
+
+Copyright © 2023 The Software Defined Radio Forum Inc  
+All Rights Reserved 
+
+Page  5 
+
+ 
+6 GHz Committee Protocols WG 
+AFC System - SPD Interface Technical Specification 
+WINNF-TS-3007-V1.2.0 
+
+field (data type: number) is included in the AvailableSpectrumInquiryRequest object intending 
+only the Frequency-Based Query, the AFC System shall return the responseCode 106 
+(UNEXPECTED_PARAM).  
+
+The AFC System shall determine the maximum allowed Power Spectral Density (PSD) in 
+dBm/MHz for each 1 MHz interval across the queried frequency range(s) in accordance with all 
+the functional requirements for incumbent protection. When generating the 
+AvailableFrequencyInfo object, the frequencyRange field in the AvailableFrequencyInfo object 
+shall represent the frequency range across which the determined maximum allowed PSD in 
+dBm/MHz (i.e., the maxPsd field in the AvailableFrequencyInfo object) for each 1 MHz interval 
+is exactly the same. The value of the maxPsd field in the AvailableFrequencyInfo object shall not 
+exceed the maximum PSD limit in dBm/MHz of Standard Power Devices specified by the 
+functional requirements. 
+
+  Protocol-Specific Requirements for Channel-Based Query 
+
+In the AvailableSpectrumInquiryRequest object corresponding to the SPD employing the 
+Channel-Based Query, the inquiredChannels field shall be included. In each element (i.e., the 
+Channels object) of the inquiredChannels field, the SPD shall specify its queried Channel(s) by 
+using the globalOperatingClass field and optionally the channelCfi field (data type: array of 
+number) to the extent that such Channels are within the AFC-Managed Sub-band(s). The AFC 
+System shall determine the maximum allowed e.i.r.p in dBm (i.e., the maxEirp field in the 
+AvailableChannelInfo object) for each queried Channel in accordance with all the functional 
+requirements for incumbent protection. If the channelCfi field is included in the Channels object, 
+the AFC System shall determine the maximum allowed e.i.r.p in dBm as per the functional 
+requirements for only the Channels corresponding to the globalOperatingClass field and the 
+channelCfi field. Otherwise, the AFC System shall determine the maximum allowed e.i.r.p in 
+dBm for the Channels corresponding to the globalOperatingClass field and all the CFIs defined 
+for the value of the globalOperatingClass field to the extent that such Channels are within the 
+AFC-Managed Sub-band(s).  
+
+When generating the AvailableChannelInfo object, the size of the channelCfi field and the 
+maxEirp field within the AvailableChannelInfo object shall be the same, and the order of the 
+elements of the maxEirp field shall be exactly matched to the order of the elements of the 
+channelCfi field. If the minDesiredPower field was included in the 
+AvailableSpectrumInquiryRequest object, the AFC System shall exclude the pairs of the Channel 
+CFI and the maximum allowed e.i.r.p less than the value of the minDesiredPower field from the 
+channelCfi field and the maxEirp field, respectively. Otherwise, the AFC System shall exclude 
+the pairs of the Channel CFI and the maximum allowed e.i.r.p less than its minimum e.i.r.p limit 
+for frequency availability determination from the channelCfi field and the maxEirp field, 
+respectively. 
+
+NOTE:  For US, default value of the minimum e.i.r.p limit for frequency 
+
+availability determination is 21 dBm according to R0-AGR-01 (CFR 
+15.407(k)(2)) [n.3]. The AFC System is allowed to set the minimum 
+e.i.r.p limit to the value less than 21 dBm. For other countries, the 
+
+Copyright © 2023 The Software Defined Radio Forum Inc  
+All Rights Reserved 
+
+Page  6 
+
+ 
+6 GHz Committee Protocols WG 
+AFC System - SPD Interface Technical Specification 
+WINNF-TS-3007-V1.2.0 
+
+minimum e.i.r.p limit can be found in the corresponding functional 
+requirements. 
+
+In this version of this specification, the following air interface-specific channelization are 
+supported for references to the allowed values of the globalOperatingClass field: 
+
+▪ 
+
+▪ 
+
+IEEE 802.11 channelization (see the WFA SDI document [n.1]) 
+
+3GPP 6 GHz channelization [n.5][n.6] (i.e., NRU1 feature. See section 6.4.) 
+
+Support of any air interface-specific channelization listed above is optional for AFC Systems and 
+SPDs but at least one air-interface specific channelization (one from the above list or reference 
+for other air interface specific channelization defined outside the WInnForum) shall be supported 
+for the Channel-Based Query. If the AFC System supporting the Channel-Based Query does not 
+support the value of the globalOperatingClass field specified by the SPD in the 
+AvailableSpectrumInquiryRequest object, the AFC System shall return the responseCode 103 
+(INVALID_VALUE).  
+
+  Protocol-Specific Requirements Common to All Query Methods 
+
+When generating the AvailableSpectrumInquiryResponse object, the AFC System shall set the 
+availabilityExpireTime field (data type: string) if and only if the responseCode is 0 (SUCCESS). 
+The SPD shall not continue to operate on the obtained available frequencies or Channels 
+exceeding the expiry time indicated by the availabilityExpireTime field, except the SPD fails to 
+successfully obtain a new list of available frequencies or Channels at the next timing of the 
+access to the AFC System (see R0-DGR-04 [n.3]).  
+
+In the following situations, the SPD shall consider it failed to successfully obtain a new list of 
+available frequencies or Channels and shall follow R0-DGR-04 [n.3]. 
+
+▪  The SPD could not reach to the AFC System. 
+
+▪  The SPD has received HTTP response with non-200 HTTP status code. 
+
+6.4  3GPP Specific Features (Optional) 
+
+  NRU1 Feature  
+
+6.4.1.1  General 
+
+This feature enables the SPD and the AFC System to employ 3GPP 6 GHz channelization [n.5] 
+[n.6] for the Channel-Based Query.  
+
+6.4.1.2  Feature Dependencies and Interworking 
+The support of this feature requires the SPD and the AFC System to support the Channel-Based 
+Query (see section 6.3.4). 
+
+Copyright © 2023 The Software Defined Radio Forum Inc  
+All Rights Reserved 
+
+Page  7 
+
+ 
+6 GHz Committee Protocols WG 
+AFC System - SPD Interface Technical Specification 
+WINNF-TS-3007-V1.2.0 
+
+6.4.1.3  Description 
+
+In this specification, the Channel CFI values (the channelCfi field) for 3GPP 6 GHz Channels are 
+equivalent to the NR Absolute Radio Frequency Channel Numbers (NR-ARFCNs) of the 6 GHz 
+band(s) specified in 3GPP TS 38.101-1 [n.5] and TS 38.104 [n.6] for shared-spectrum access 
+use. Annex A of this specification provides the reference table for the mapping among the 
+allowed global operating classes, a single Channel bandwidth and a set of the corresponding 
+Channel CFIs. 
+
+For the purpose of determining the maximum allowed e.i.r.p of a queried 3GPP 6 GHz Channel, 
+the AFC System shall derive the center, the lower and the upper frequencies of the queried 3GPP 
+6 GHz Channel by using the following formulas:  
+
+Fc, GOC(n) = 3000 + 15∙
+
+CFIGOC(n) - 600000
+1000
+
+Flower, GOC(n) = Fc, GOC(n) – BWGOC/2 
+
+Fupper, GOC(n) = Fc, GOC(n) + BWGOC/2 
+
+where: 
+
+▪  CFIGOC(n): The n-th Channel CFI corresponding to the queried global operating class (the 
+
+globalOperatingClass field) 
+
+▪  Fc, GOC(n): The center frequency (in MHz) of the 3GPP 6 GHz Channel corresponding to 
+
+CFIGOC(n)  
+
+▪  Flower, GOC(n): The lower frequency (in MHz) of the 3GPP 6 GHz Channel corresponding to 
+
+CFIGOC(n) 
+
+▪  Fupper, GOC(n): The upper frequency (in MHz) of the 3GPP 6 GHz Channel corresponding to 
+
+CFIGOC(n) 
+
+▪  BWGOC: The Channel bandwidth (in MHz) corresponding to the queried global operating 
+
+class (the globalOperatingClass field) 
+
+Copyright © 2023 The Software Defined Radio Forum Inc  
+All Rights Reserved 
+
+Page  8 
+
+ 
+ 
+ 
+ 
+6 GHz Committee Protocols WG 
+AFC System - SPD Interface Technical Specification 
+WINNF-TS-3007-V1.2.0 
+
+Annex A (Normative) Extensions to Global Operating Classes and CFI for 
+
+3GPP 6 GHz Channelization 
+
+This annex provides the extensions to global operating class and CFI for 3GPP 6 GHz 
+channelization. Table A-1 shows the mapping among the 3GPP 6 GHz global operating classes, 
+Channel bandwidth and Channel CFIs.  
+
+Table A-1: Mapping among the global operating classes, channel bandwidth and CFIs for 
+3GPP 6 GHz channelization 
+
+Global 
+Operating Class 
+
+Channel 
+Bandwidth (MHz) 
+
+300 
+
+20 
+
+301 
+
+40 
+
+302 
+
+60 
+
+303 
+
+80 
+
+Channel CFIs 
+
+797000(*1), 798332(*1), 799668(*1), 801000(*1), 
+802332(*1), 803668(*1), 805000(*1), 806332(*1), 
+807668(*1), 809000(*1), 810332(*1), 811668(*1), 
+813000(*1), 814332(*1), 815668(*1), 817000(*1), 
+818332(*1), 819668(*1), 821000(*1), 822332(*1), 
+823668(*1), 825000(*1), 826332(*1), 827668, 
+829000, 830332, 831668, 833000, 834332, 
+835668(*1), 837000(*1), 838332(*1), 839668(*1), 
+841000(*1), 842332(*1), 843668(*1), 845000(*1), 
+846332(*1), 847668(*1), 849000(*1), 850332(*1), 
+851668(*1), 853000(*1), 854332(*1), 855668(*1), 
+857000(*1), 858332, 859668, 861000, 862332, 
+863668, 865000, 866332, 867668, 869000, 
+870332, 871668, 873000, 874332 
+
+797668(*1), 800332(*1), 803000(*1), 805668(*1), 
+808332(*1), 811000(*1), 813668(*1), 816332(*1), 
+819000(*1), 821668(*1), 824332(*1), 827000(*1), 
+829668, 832332, 835000, 837668(*1), 840332(*1), 
+843000(*1), 845668(*1), 848332(*1), 851000(*1), 
+853668(*1), 856332(*1), 859000, 861668, 864332, 
+867000, 869668, 872332 
+
+798332(*1), 799668(*1), 803668(*1), 805000(*1), 
+809000(*1), 810332(*1), 814332(*1), 815668(*1), 
+819668(*1), 821000(*1), 825000(*1), 826332(*1), 
+830332, 831668, 835668, 837000(*1), 841000(*1), 
+842332(*1), 846332(*1), 847668(*1), 851668(*1), 
+853000(*1), 857000, 858332, 862332, 863668, 
+867668, 869000, 873000 
+
+799000(*1), 804332(*1), 809668(*1), 815000(*1), 
+820332(*1), 825668, 831000, 836332, 841668(*1), 
+847000(*1), 852332(*1), 857668, 863000, 868332 
+
+Copyright © 2023 The Software Defined Radio Forum Inc  
+All Rights Reserved 
+
+Page  9 
+
+ 
+6 GHz Committee Protocols WG 
+AFC System - SPD Interface Technical Specification 
+WINNF-TS-3007-V1.2.0 
+
+Global 
+Operating Class 
+
+Channel 
+Bandwidth (MHz) 
+
+304 
+
+100 
+
+Channel CFIs 
+
+799668(*1), 803668(*1), 810332(*1), 814332(*1), 
+821000(*1), 825000(*1), 831668, 835668, 
+842332(*1), 846332(*1), 853000(*1), 857000, 
+863668, 867668, 869000, 870332, 871668 
+
+305-306 
+
+Reserved 
+
+NOTE 1: For the AFC-Managed Sub-bands of the United States (i.e., U-NII-5 and U-NII-7 
+bands), these Channel CFI values are available.  
+
+Copyright © 2023 The Software Defined Radio Forum Inc  
+All Rights Reserved 
+
+Page  10 
+
+ 
+ 
+ 
+ 
+6 GHz Committee Protocols WG 
+AFC System - SPD Interface Technical Specification 
+WINNF-TS-3007-V1.2.0 
+
+Annex B (Normative): Cross References for International Support 
+
+This annex provides the information about the cross references for use of this technical 
+specification for international support. 
+
+Table B-2: Cross References for International Support 
+
+Country/Region  Regulatory Information 
+
+Functional 
+Requirements 
+
+AFC-Managed 
+Sub-band(s) 
+
+United States 
+
+NRA: FCC 
+Rule: C.F.R Part 15 Subpart E  
+
+WINNF-TS-1014 
+[n.3] 
+
+5925 – 6425 MHz, 
+6525 – 6875 MHz  
+
+Copyright © 2023 The Software Defined Radio Forum Inc  
+All Rights Reserved 
+
+Page  11 
+
+ 
+ 
+ 
+ 
+6 GHz Committee Protocols WG 
+AFC System - SPD Interface Technical Specification 
+WINNF-TS-3007-V1.2.0 
+
+Annex C (Informative): Revision History 
+
+V1.0.0 
+
+V1.1.0 
+
+1 September 
+2022 
+12 January 
+2023 
+
+V1.2.0 
+
+14 June 2023 
+
+Document History 
+
+Initial Release 
+
+New technical revision adding NR-U 100 MHz channels and revising 
+the architecture. 
+
+New technical revision addressing the followings: 
+▪  Alignment with changes in the WFA SDI document (the 
+
+document version was updated to v1.5) 
+International support 
+
+▪ 
+
+Copyright © 2023 The Software Defined Radio Forum Inc  
+All Rights Reserved 
+
+Page  12 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
