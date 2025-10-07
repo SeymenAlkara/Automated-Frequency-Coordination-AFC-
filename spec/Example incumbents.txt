@@ -1,0 +1,49 @@
+Example incumbent A — point-to-point backhaul (short link):
+{
+  "link_id": "EX-ULS-0001",
+  "call_sign": "EXMW1001",
+  "licensee": "Example Backhaul Co.",
+  "service_code": "MW",
+  "status": "Active",
+  "freq_center_mhz": 6025,
+  "bandwidth_mhz": 20,
+  "tx_lat": 40.983456,
+  "tx_lon": 28.814321,
+  "rx_lat": 40.972100,
+  "rx_lon": 28.826200,
+  "tx_antenna_gain_dbi": 28.0,
+  "rx_antenna_gain_dbi": 30.0,
+  "tx_eirp_dbm": 42.0,            // ~42 dBm EIRP (typical PtP)
+  "tx_antenna_height_m": 35.0,
+  "rx_antenna_height_m": 40.0,
+  "tx_antenna_azimuth_deg": 145,
+  "rx_antenna_azimuth_deg": 325,
+  "polarization": "H",
+  "antenna_model": "Parabolic-0.6m-ModelX",
+  "license_expiry": "2029-11-05"
+}
+
+Example incumbent B — receive site / high-gain earth-point (receiver dominance case):
+{
+  "link_id": "EX-ULS-0002",
+  "call_sign": "EXMW2001",
+  "licensee": "Example Broadcast Links LLC",
+  "service_code": "MW",
+  "status": "Active",
+  "freq_center_mhz": 6350,
+  "bandwidth_mhz": 40,
+  "tx_lat": 40.995000,
+  "tx_lon": 29.010000,
+  "rx_lat": 41.030000,
+  "rx_lon": 29.050000,
+  "tx_antenna_gain_dbi": 20.0,
+  "rx_antenna_gain_dbi": 34.0,    // very high gain receive antenna (narrow)
+  "tx_eirp_dbm": 38.0,
+  "tx_antenna_height_m": 28.0,
+  "rx_antenna_height_m": 60.0,
+  "tx_antenna_azimuth_deg": 210,
+  "rx_antenna_azimuth_deg": 30,
+  "polarization": "V",
+  "antenna_model": "HighGain-1m-ModelY",
+  "license_expiry": "2027-06-01"
+}
