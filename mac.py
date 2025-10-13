@@ -7,7 +7,7 @@ CWmin, and backoff stages. Extensions for Wi‑Fi 6/6E OFDMA can be layered on t
 import math
 
 
-def bianchi_fixed_point(n_stations: int, cwmin: int, m_max_backoff: int, tol: float = 1e-10, max_iter: int = 1000) -> tuple[float, float]:
+def bianchi_fixed_point(n_stations: int, cwmin: int, m_max_backoff: int, tol: float = 1e-10, max_iter: int = 2000) -> tuple[float, float]:
     """Solve Bianchi saturated DCF fixed point for (tau, p).
 
     p = 1 - (1 - tau)^{N-1}
@@ -18,8 +18,15 @@ def bianchi_fixed_point(n_stations: int, cwmin: int, m_max_backoff: int, tol: fl
 
     p = 0.1
     for _ in range(max_iter):
+        # Clamp p to avoid overflow in (2p)^m
+        p = min(max(p, 1e-12), 0.499999999)
         numerator = 2.0 * (1.0 - 2.0 * p)
-        denom = (1.0 - 2.0 * p) * (cwmin + 1.0) + p * cwmin * (1.0 - (2.0 * p) ** m_max_backoff)
+        # Use exp/log to compute (2p)^m robustly
+        if m_max_backoff == 0:
+            pow_term = 1.0
+        else:
+            pow_term = math.exp(m_max_backoff * math.log(max(2.0 * p, 1e-12)))
+        denom = (1.0 - 2.0 * p) * (cwmin + 1.0) + p * cwmin * (1.0 - pow_term)
         if denom <= 0:
             denom = 1e-12
         tau = numerator / denom

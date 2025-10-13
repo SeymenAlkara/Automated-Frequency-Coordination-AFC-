@@ -1,0 +1,57 @@
+[
+  {
+    "fs_id": "FS_IST_6025_A",
+    "description": "Istanbul FS microwave link A – conservative high‑gain Rx",
+    "center_mhz": 6025.0,
+    "bandwidth_mhz": 20.0,
+    "emission_designator": "20M0F7W",
+    "lat": 41.0500,
+    "lon": 28.9800,
+    "rx_gain_dbi": 38.0,
+    "rx_azimuth_deg": 210.0,
+    "rx_height_m": 35.0,
+    "noise_figure_db": 4.0,
+    "polarization": "H",
+    "passive_sites": []
+  },
+  {
+    "fs_id": "FS_IST_6350_B",
+    "description": "Istanbul FS microwave link B – conservative high‑gain Rx",
+    "center_mhz": 6350.0,
+    "bandwidth_mhz": 40.0,
+    "emission_designator": "40M0F7W",
+    "lat": 41.0300,
+    "lon": 28.9600,
+    "rx_gain_dbi": 40.0,
+    "rx_azimuth_deg": 120.0,
+    "rx_height_m": 40.0,
+    "noise_figure_db": 3.5,
+    "polarization": "V",
+    "passive_sites": []
+  },
+  {
+    "fs_id": "FS_IST_6180_C",
+    "description": "Istanbul FS microwave link C – with passive site",
+    "center_mhz": 6180.0,
+    "bandwidth_mhz": 20.0,
+    "emission_designator": "20M0F7W",
+    "lat": 41.0200,
+    "lon": 28.9950,
+    "rx_gain_dbi": 37.0,
+    "rx_azimuth_deg": 300.0,
+    "rx_height_m": 32.0,
+    "noise_figure_db": 4.5,
+    "polarization": "H",
+    "passive_sites": [
+      {
+        "site_id": "PASSIVE_REFLECTOR_1",
+        "lat": 41.0185,
+        "lon": 28.9905,
+        "height_m": 25.0,
+        "extra_loss_db": 2.0
+      }
+    ]
+  }
+]
+
+
