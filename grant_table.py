@@ -250,7 +250,7 @@ def build_grant_table_both_blocks(
 def build_grant_table_with_incumbents(
     spec: SpecParameters,
     incumbents: Iterable[dict],
-    distance_m: float | None,
+    distance_m: float | None = None,
     ap_lat: float | None = None,
     ap_lon: float | None = None,
     lower_mhz: float = 5925.0,
@@ -272,12 +272,18 @@ def build_grant_table_with_incumbents(
     center frequency offset using mask interpolation.
     """
     # Precompute incumbents derived params
+    def _v(d: dict, keys: list[str], default=None):
+        for k in keys:
+            if k in d and d[k] is not None:
+                return d[k]
+        return default
+
     inc_params: List[tuple[float, float, float, float, float, float, str, list | None, list | None, float | None, str]] = []
     # (fs_center_mhz, fs_bw_mhz, fs_rx_gain, rx_lat, rx_lon, rx_az_deg, pol, rpe_az, rpe_el, rx_h_m, link_id)
     for inc in incumbents:
-        fs_center_mhz = float(inc["freq_center_mhz"])
-        fs_bw_mhz = float(inc["bandwidth_mhz"])
-        link_id_root = str(inc.get("link_id", "unknown"))
+        fs_center_mhz = float(_v(inc, ["freq_center_mhz", "center_mhz", "fs_center_mhz"]))
+        fs_bw_mhz = float(_v(inc, ["bandwidth_mhz", "fs_bandwidth_mhz", "rx_bw_mhz"]))
+        link_id_root = str(_v(inc, ["link_id", "fs_id", "id"], "unknown"))
 
         # Helper to add one receiver site (primary or passive)
         def _add_site(rx_lat_val, rx_lon_val, rx_gain_val, rx_az_val, pol_val, rpe_az_val, rpe_el_val, rx_h_val, suffix=""):
@@ -297,14 +303,14 @@ def build_grant_table_with_incumbents(
 
         # Primary FS receiver
         _add_site(
-            rx_lat_val=inc.get("rx_lat", 0.0),
-            rx_lon_val=inc.get("rx_lon", 0.0),
-            rx_gain_val=inc.get("rx_antenna_gain_dbi", spec.incumbent.antenna_gain_dbi),
-            rx_az_val=inc.get("rx_antenna_azimuth_deg", 0.0),
-            pol_val=inc.get("polarization", ""),
+            rx_lat_val=_v(inc, ["rx_lat", "lat"], 0.0),
+            rx_lon_val=_v(inc, ["rx_lon", "lon"], 0.0),
+            rx_gain_val=_v(inc, ["rx_antenna_gain_dbi", "rx_gain_dbi"], spec.incumbent.antenna_gain_dbi),
+            rx_az_val=_v(inc, ["rx_antenna_azimuth_deg", "rx_azimuth_deg", "az_deg"], 0.0),
+            pol_val=_v(inc, ["polarization"], ""),
             rpe_az_val=inc.get("rx_rpe_az"),
             rpe_el_val=inc.get("rx_rpe_el"),
-            rx_h_val=inc.get("rx_antenna_height_m"),
+            rx_h_val=_v(inc, ["rx_antenna_height_m", "rx_height_m", "height_m"]),
             suffix="",
         )
 
@@ -313,20 +319,26 @@ def build_grant_table_with_incumbents(
         if isinstance(passive_sites, list):
             for idx, ps in enumerate(passive_sites, start=1):
                 _add_site(
-                    rx_lat_val=ps.get("lat", inc.get("rx_lat", 0.0)),
-                    rx_lon_val=ps.get("lon", inc.get("rx_lon", 0.0)),
-                    rx_gain_val=ps.get("gain_dbi", inc.get("rx_antenna_gain_dbi", spec.incumbent.antenna_gain_dbi)),
-                    rx_az_val=ps.get("az_deg", inc.get("rx_antenna_azimuth_deg", 0.0)),
-                    pol_val=ps.get("polarization", inc.get("polarization", "")),
+                    rx_lat_val=ps.get("lat", _v(inc, ["rx_lat", "lat"], 0.0)),
+                    rx_lon_val=ps.get("lon", _v(inc, ["rx_lon", "lon"], 0.0)),
+                    rx_gain_val=ps.get("gain_dbi", _v(inc, ["rx_antenna_gain_dbi", "rx_gain_dbi"], spec.incumbent.antenna_gain_dbi)),
+                    rx_az_val=ps.get("az_deg", _v(inc, ["rx_antenna_azimuth_deg", "rx_azimuth_deg", "az_deg"], 0.0)),
+                    pol_val=ps.get("polarization", _v(inc, ["polarization"], "")),
                     rpe_az_val=ps.get("rpe_az", inc.get("rx_rpe_az")),
                     rpe_el_val=ps.get("rpe_el", inc.get("rx_rpe_el")),
-                    rx_h_val=ps.get("height_m", inc.get("rx_antenna_height_m")),
+                    rx_h_val=ps.get("height_m", _v(inc, ["rx_antenna_height_m", "rx_height_m", "height_m"])),
                     suffix=f":PS{idx}",
                 )
 
     rows: List[GrantRow] = []
     for bw in bandwidths_mhz:
-        for center in enumerate_centers_mhz(lower_mhz, upper_mhz, bw):
+        # If the requested band is exactly one channel wide, force the center to the midpoint
+        band_width = upper_mhz - lower_mhz
+        if abs(band_width - bw) < 1e-6:
+            centers_iter = [(lower_mhz + upper_mhz) / 2.0]
+        else:
+            centers_iter = enumerate_centers_mhz(lower_mhz, upper_mhz, bw)
+        for center in centers_iter:
             f_hz = center * 1e6
             # If a per-incumbent geographic distance is intended, pass None here and compute per FS below
             pl_db = None
@@ -336,6 +348,9 @@ def build_grant_table_with_incumbents(
             # Evaluate per incumbent and keep the minimum allowed EIRP
             best_eirp = spec.wifi_limits.max_eirp_dbm
             best_pl_db = None
+            limiting = None
+            limiting_mode = None
+            limiting_acir = None
             for fs_center_mhz, fs_bw_mhz, fs_rx_gain, rx_lat, rx_lon, rx_az, pol, rpe_az, rpe_el, rx_h_m, link_id in inc_params:
                 offset = abs(center - fs_center_mhz)
                 ch_lo = center - bw / 2.0
@@ -419,6 +434,7 @@ def build_grant_table_with_incumbents(
                 d_fallback = distance_m if distance_m is not None else 3000.0
                 best_pl_db = select_pathloss_db(distance_m=d_fallback, frequency_hz=f_hz, environment=environment)
 
+            # If no incumbent limited the channel, keep limiting fields as None
             psd_dbm_mhz = psd_dbm_per_mhz_from_eirp(best_eirp, bw)
             if device_constraints is not None:
                 is_ok = apply_constraints_to_decision(best_eirp, psd_dbm_mhz, device_constraints)
