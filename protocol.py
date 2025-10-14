@@ -1,14 +1,19 @@
-"""WINNF-TS-3007 AFC–SPD messaging (minimal handler).
+"""WINNF-TS-3007 AFC–SPD messaging (handler).
 
-Implements a minimal subset aligned with sections 6.2–6.3:
-- Validates AvailableSpectrumInquiryRequest-like dicts
-- Supports Channel-Based Query for 802.11 (via spectrum_inquiry) and NR-U when
-  channel CFIs are provided using Annex A mapping (GOC→BW, CFI→center MHz)
-- Returns response codes (SUCCESS, MISSING_PARAM, INVALID_VALUE,
-  UNEXPECTED_PARAM, UNSUPPORTED_BASIS) and availabilityExpireTime
+Implements section 6.2–6.3 request/response shape with validation and returns
+standard response codes. Supported query modes:
+- Channel-Based (NR‑U): accepts globalOperatingClass/channelCfi or bandwidthMHz
+  fallback; maps CFIs to center MHz via Annex A. Builds availableChannelInfo
+  with maxEirp arrays. Location may be provided as request.location or
+  request.device.location.
+- Frequency-Based: accepts inquiredFrequencyRange as list or single dict, with
+  keys {lowMHz, highMHz} or {startMHz, endMHz}. Computes 1 MHz bins and, by
+  default, merges adjacent bins that have identical PSD (configurable via
+  mergeBins/mergeToleranceDb). Builds availableFrequencyInfo with per-range
+  maxPsd.
 
-This module focuses on correctness and leaves frequency-based queries as
-UNSUPPORTED_BASIS unless implemented by the caller.
+Also supports optional overrides via keywords (environment, path_model,
+protection_margin_db) that are threaded into the request for convenience.
 """
 
 from __future__ import annotations

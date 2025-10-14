@@ -13,12 +13,17 @@ We keep it simple and very explicit so it is easy to follow:
 - We compute path loss (AP -> FS) and the FS receiver noise, then derive the
   allowed EIRP for the AP on that channel.
 
-IMPORTANT: This is a first, educational pass. Real AFCs also consider:
-- Exact FS bandwidth from ULS (not assumed),
-- Antenna radiation patterns and geometry (bearings, down-tilt, etc.),
-- Terrain/ITM with site-specific parameters,
-- Aggregate interference from multiple APs.
-We will add those later; the structure below is prepared for those inputs.
+Scope notes (what is included vs. pluggable):
+- Exact FS bandwidth: supported. We honor incumbent field variants and the
+  R2‑AIP‑19 precedence via fs_bandwidth.py when needed.
+- Antenna radiation patterns and geometry: supported. We compute per‑incumbent
+  distances/bearings and apply off‑axis discrimination; optional RPE tables are
+  supported via antenna_rpe.py.
+- Aggregate interference: handled in afc_new/aggregate.py (not within this
+  per‑AP grant generator). Use that module for multi‑AP INR evaluation.
+- Terrain/ITM: partial. ITM scaffolding exists (afc_new/itm.py) and can be
+  selected via path_model='itm', but a certified Longley–Rice with terrain and
+  reliability inputs should replace the scaffold for production.
 
 WINNF-TS-1014 references:
 - 9.1.1 Interference Protection Criteria and evaluation across co/adjacent channels
@@ -103,7 +108,7 @@ class GrantRow:
 	acir_db_used: float | None = None
 
 
-def build_grant_table_for_hypothetical_fs(
+def build_grant_table_for_hypothetical_fs(    
 	spec: SpecParameters,
 	distance_m: float,
 	lower_mhz: float = 5925.0,
@@ -121,6 +126,7 @@ def build_grant_table_for_hypothetical_fs(
 	protection_margin_db: float = 0.0,
 ) -> List[GrantRow]:
 	"""Create a grant table for the given distance using a hypothetical FS at fs_center_mhz.
+    This function is the main calculator. It takes all the technical inputs and produces a table of which channels are allowed and at what power levels. 
 
 	Args:
 		spec: parsed spec parameters (NF, bandwidth, antenna gain, ACIR, limits)
